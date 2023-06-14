@@ -20,7 +20,6 @@ import (
 	"time"
 
 	"github.com/oliverpool/unipdf/v3/common"
-	"github.com/oliverpool/unipdf/v3/common/license"
 	"github.com/oliverpool/unipdf/v3/core"
 	"github.com/oliverpool/unipdf/v3/core/security"
 	"github.com/oliverpool/unipdf/v3/core/security/crypt"
@@ -589,7 +588,7 @@ func (w *PdfWriter) addObjects(obj core.PdfObject) error {
 
 // AddPage adds a page to the PDF file. The new page should be an indirect object.
 func (w *PdfWriter) AddPage(page *PdfPage) error {
-	procPage(page)
+	// addLicenseText(page) // when uncommented, TestOptimizeImagePPI succeeds...
 	obj := page.ToPdfObject()
 
 	common.Log.Trace("==========")
@@ -680,12 +679,7 @@ func (w *PdfWriter) AddPage(page *PdfPage) error {
 	return nil
 }
 
-func procPage(p *PdfPage) {
-	lk := license.GetLicenseKey()
-	if lk != nil && lk.IsLicensed() {
-		return
-	}
-
+func addLicenseText(p *PdfPage) {
 	// Add font, if needed.
 	fontName := core.PdfObjectName("UF1")
 	if !p.Resources.HasFontByName(fontName) {
