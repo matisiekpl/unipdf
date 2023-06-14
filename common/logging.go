@@ -217,7 +217,7 @@ func (l WriterLogger) Trace(format string, args ...interface{}) {
 
 // logToWriter writes `format`, `args` log message prefixed by the source file name, line and `prefix`
 func (l WriterLogger) logToWriter(f io.Writer, prefix string, format string, args ...interface{}) {
-	logToWriter(f, prefix, format, args)
+	logToWriter(f, prefix, format, args...)
 }
 
 func logToWriter(f io.Writer, prefix string, format string, args ...interface{}) {
