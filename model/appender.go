@@ -312,7 +312,6 @@ func (a *PdfAppender) MergePageWith(pageNum int, page *PdfPage) error {
 	}
 
 	page = page.Duplicate()
-	procPage(page)
 
 	srcResources := getPageResources(srcPage)
 	pageResources := getPageResources(page)
@@ -411,7 +410,6 @@ func (a *PdfAppender) MergePageWith(pageNum int, page *PdfPage) error {
 func (a *PdfAppender) AddPages(pages ...*PdfPage) {
 	for _, page := range pages {
 		page = page.Duplicate()
-		procPage(page)
 		a.pages = append(a.pages, page)
 	}
 	return
@@ -457,7 +455,6 @@ func (a *PdfAppender) ReplacePage(pageNum int, page *PdfPage) {
 	for i := range a.pages {
 		if i == pageIndex {
 			p := page.Duplicate()
-			procPage(p)
 			a.pages[i] = p
 		}
 	}

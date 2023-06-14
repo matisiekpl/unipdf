@@ -13,7 +13,6 @@ import (
 	"bytes"
 	"encoding/binary"
 	"errors"
-	"flag"
 	"fmt"
 	"io"
 	"sort"
@@ -97,13 +96,12 @@ func SetPdfModifiedDate(modifiedDate time.Time) {
 }
 
 func getPdfProducer() string {
-	licenseKey := license.GetLicenseKey()
-	if len(pdfProducer) > 0 && (licenseKey.IsLicensed() || flag.Lookup("test.v") != nil) {
+	if len(pdfProducer) > 0 {
 		return pdfProducer
 	}
 
 	// Return default.
-	return fmt.Sprintf("UniDoc v%s (%s) - http://unidoc.io", getUniDocVersion(), licenseKey.TypeToString())
+	return fmt.Sprintf("UniDoc v%s (%s) - http://unidoc.io", getUniDocVersion(), "AGPLv3 Open Source Community License")
 }
 
 // SetPdfProducer sets the Producer attribute of the output PDF.
@@ -978,12 +976,6 @@ func (w *PdfWriter) writeBytes(bb []byte) {
 // Write writes out the PDF.
 func (w *PdfWriter) Write(writer io.Writer) error {
 	common.Log.Trace("Write()")
-
-	lk := license.GetLicenseKey()
-	if lk == nil || !lk.IsLicensed() {
-		fmt.Printf("Unlicensed copy of unidoc\n")
-		fmt.Printf("To get rid of the watermark - Please get a license on https://unidoc.io\n")
-	}
 
 	// Outlines.
 	if w.outlineTree != nil {
