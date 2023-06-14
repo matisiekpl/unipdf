@@ -10,15 +10,18 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/unidoc/unipdf/v3/core"
+	"github.com/oliverpool/unipdf/v3/core"
 )
 
 // IdentityEncoder represents an 2-byte identity encoding.
 // NOTE: In many cases this is just used to encode/decode to glyph index and does not have a unicode
-//  meaning, except via the ToUnicode maps.
+//
+//	meaning, except via the ToUnicode maps.
+//
 // TODO: The use of runes as indicators for glyph indices and not-utf8 runes is not good and confusing.
-//  Might be better to combine the Identity encoder with a ToUnicode map and keep track of the actual
-//  runes and character codes, CMaps together.
+//
+//	Might be better to combine the Identity encoder with a ToUnicode map and keep track of the actual
+//	runes and character codes, CMaps together.
 type IdentityEncoder struct {
 	baseName string
 

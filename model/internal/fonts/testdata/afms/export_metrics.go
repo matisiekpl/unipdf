@@ -1,3 +1,4 @@
+//go:build unidev
 // +build unidev
 
 // Parse character metrics from an AFM file to convert into a static go code declaration.
@@ -17,9 +18,9 @@ import (
 
 	"flag"
 
-	pdfcommon "github.com/unidoc/unipdf/v3/common"
-	"github.com/unidoc/unipdf/v3/internal/fonts"
-	"github.com/unidoc/unipdf/v3/model"
+	pdfcommon "github.com/oliverpool/unipdf/v3/common"
+	"github.com/oliverpool/unipdf/v3/internal/fonts"
+	"github.com/oliverpool/unipdf/v3/model"
 )
 
 func main() {

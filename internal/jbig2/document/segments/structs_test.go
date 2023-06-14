@@ -6,8 +6,8 @@
 package segments
 
 import (
-	"github.com/unidoc/unipdf/v3/internal/jbig2/bitmap"
-	"github.com/unidoc/unipdf/v3/internal/jbig2/errors"
+	"github.com/oliverpool/unipdf/v3/internal/jbig2/bitmap"
+	"github.com/oliverpool/unipdf/v3/internal/jbig2/errors"
 )
 
 // document is a testing structure that implements Documenter interface.

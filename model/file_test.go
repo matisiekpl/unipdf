@@ -6,8 +6,8 @@
 package model
 
 import (
+	"github.com/oliverpool/unipdf/v3/core"
 	"github.com/stretchr/testify/require"
-	"github.com/unidoc/unipdf/v3/core"
 	"strings"
 	"testing"
 )

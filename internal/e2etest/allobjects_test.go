@@ -12,14 +12,15 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/unidoc/unipdf/v3/core"
-	"github.com/unidoc/unipdf/v3/model"
+	"github.com/oliverpool/unipdf/v3/core"
+	"github.com/oliverpool/unipdf/v3/model"
 )
 
 // The allobjects test probes through all objects in PDF files of a specified corpus, decoding streams.
 // Set environment variables:
-//		UNIDOC_E2E_FORCE_TESTS to "1" to force the tests to execute.
-//		UNIDOC_ALLOBJECTS_TESTDATA to the path of the corpus folder.
+//
+//	UNIDOC_E2E_FORCE_TESTS to "1" to force the tests to execute.
+//	UNIDOC_ALLOBJECTS_TESTDATA to the path of the corpus folder.
 var (
 	allObjectsCorpusFolder = os.Getenv("UNIDOC_ALLOBJECTS_TESTDATA")
 )

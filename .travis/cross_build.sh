@@ -28,33 +28,33 @@ cd bin
 # Create go.mod
 cat <<EOF > go.mod
 module cross_build
-require github.com/unidoc/unipdf/v3 v3.0.0
+require github.com/oliverpool/unipdf/v3 v3.0.0
 EOF
 
-echo "replace github.com/unidoc/unipdf/v3 => $TRAVIS_BUILD_DIR" >> go.mod
+echo "replace github.com/oliverpool/unipdf/v3 => $TRAVIS_BUILD_DIR" >> go.mod
 
 # Create Go file.
 cat <<EOF > main.go
 package main
 
 import (
-	_ "github.com/unidoc/unipdf/v3/annotator"
-	_ "github.com/unidoc/unipdf/v3/common"
-	_ "github.com/unidoc/unipdf/v3/common/license"
-	_ "github.com/unidoc/unipdf/v3/contentstream"
-	_ "github.com/unidoc/unipdf/v3/contentstream/draw"
-	_ "github.com/unidoc/unipdf/v3/core"
-	_ "github.com/unidoc/unipdf/v3/core/security"
-	_ "github.com/unidoc/unipdf/v3/core/security/crypt"
-	_ "github.com/unidoc/unipdf/v3/creator"
-	_ "github.com/unidoc/unipdf/v3/extractor"
-	_ "github.com/unidoc/unipdf/v3/fdf"
-	_ "github.com/unidoc/unipdf/v3/fjson"
-	_ "github.com/unidoc/unipdf/v3/model"
-	_ "github.com/unidoc/unipdf/v3/model/optimize"
-	_ "github.com/unidoc/unipdf/v3/model/sighandler"
-	_ "github.com/unidoc/unipdf/v3/ps"
-	_ "github.com/unidoc/unipdf/v3/render"
+	_ "github.com/oliverpool/unipdf/v3/annotator"
+	_ "github.com/oliverpool/unipdf/v3/common"
+	_ "github.com/oliverpool/unipdf/v3/common/license"
+	_ "github.com/oliverpool/unipdf/v3/contentstream"
+	_ "github.com/oliverpool/unipdf/v3/contentstream/draw"
+	_ "github.com/oliverpool/unipdf/v3/core"
+	_ "github.com/oliverpool/unipdf/v3/core/security"
+	_ "github.com/oliverpool/unipdf/v3/core/security/crypt"
+	_ "github.com/oliverpool/unipdf/v3/creator"
+	_ "github.com/oliverpool/unipdf/v3/extractor"
+	_ "github.com/oliverpool/unipdf/v3/fdf"
+	_ "github.com/oliverpool/unipdf/v3/fjson"
+	_ "github.com/oliverpool/unipdf/v3/model"
+	_ "github.com/oliverpool/unipdf/v3/model/optimize"
+	_ "github.com/oliverpool/unipdf/v3/model/sighandler"
+	_ "github.com/oliverpool/unipdf/v3/ps"
+	_ "github.com/oliverpool/unipdf/v3/render"
 )
 
 func main() {}

@@ -9,14 +9,14 @@ import (
 	"image"
 	"image/color"
 
-	"github.com/unidoc/unipdf/v3/common"
-	"github.com/unidoc/unipdf/v3/internal/imageutil"
+	"github.com/oliverpool/unipdf/v3/common"
+	"github.com/oliverpool/unipdf/v3/internal/imageutil"
 
-	"github.com/unidoc/unipdf/v3/internal/jbig2"
-	"github.com/unidoc/unipdf/v3/internal/jbig2/bitmap"
-	"github.com/unidoc/unipdf/v3/internal/jbig2/decoder"
-	"github.com/unidoc/unipdf/v3/internal/jbig2/document"
-	"github.com/unidoc/unipdf/v3/internal/jbig2/errors"
+	"github.com/oliverpool/unipdf/v3/internal/jbig2"
+	"github.com/oliverpool/unipdf/v3/internal/jbig2/bitmap"
+	"github.com/oliverpool/unipdf/v3/internal/jbig2/decoder"
+	"github.com/oliverpool/unipdf/v3/internal/jbig2/document"
+	"github.com/oliverpool/unipdf/v3/internal/jbig2/errors"
 )
 
 // JBIG2CompressionType defines the enum compression type used by the JBIG2Encoder.
@@ -395,7 +395,8 @@ func (j *JBIG2Image) toBitmap() (b *bitmap.Bitmap, err error) {
 // is greater or smaller than 'bwThreshold' * 255. Pixels inside the range will be white, and the others will be black.
 // If the 'bwThreshold' is equal to -1.0 - JB2ImageAutoThreshold then it's value would be set on the base of
 // it's histogram using Triangle method. For more information go to:
-// 	https://www.mathworks.com/matlabcentral/fileexchange/28047-gray-image-thresholding-using-the-triangle-method
+//
+//	https://www.mathworks.com/matlabcentral/fileexchange/28047-gray-image-thresholding-using-the-triangle-method
 func GoImageToJBIG2(i image.Image, bwThreshold float64) (*JBIG2Image, error) {
 	const processName = "GoImageToJBIG2"
 	if i == nil {

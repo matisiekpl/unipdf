@@ -8,10 +8,10 @@ package bitmap
 import (
 	"math"
 
-	"github.com/unidoc/unipdf/v3/common"
+	"github.com/oliverpool/unipdf/v3/common"
 
-	"github.com/unidoc/unipdf/v3/internal/jbig2/basic"
-	"github.com/unidoc/unipdf/v3/internal/jbig2/errors"
+	"github.com/oliverpool/unipdf/v3/internal/jbig2/basic"
+	"github.com/oliverpool/unipdf/v3/internal/jbig2/errors"
 )
 
 // CorrelationScore computes the correlation score between the bitmaps: 'bm1' and 'bm2'.
@@ -396,13 +396,15 @@ func CorrelationScoreThresholded(bm1, bm2 *Bitmap, area1, area2 int, delX, delY 
 
 // HausTest does the Hausdorff 2-way check for the provided bitmaps.
 // Parameters:
-//	p1			- new not dilated bitmap
-//	p2			- new dilated bitmap
-//  p3			- exemplar not dilated bitmap
-//	p4			- exemplar dilated bitmap
-//	delX, delY	- component centroid difference for 'x' and 'y' coordinates.
-//	maxDiffW	- maximum width difference of 'p1' and 'p2'
-// 	maxDiffH	- maximum height difference of 'p1' and 'p2'
+//
+//		p1			- new not dilated bitmap
+//		p2			- new dilated bitmap
+//	 p3			- exemplar not dilated bitmap
+//		p4			- exemplar dilated bitmap
+//		delX, delY	- component centroid difference for 'x' and 'y' coordinates.
+//		maxDiffW	- maximum width difference of 'p1' and 'p2'
+//		maxDiffH	- maximum height difference of 'p1' and 'p2'
+//
 // The centroid difference is used to align two images to the nearest integer for each check.
 // It checks if the dilated image of one contains all the pixels of the undilated image of the other.
 func HausTest(p1, p2, p3, p4 *Bitmap, delX, delY float32, maxDiffW, maxDiffH int) (bool, error) {
@@ -448,17 +450,19 @@ func HausTest(p1, p2, p3, p4 *Bitmap, delX, delY float32, maxDiffW, maxDiffH int
 
 // RankHausTest does the test of the Hausdorff ranked check.
 // Parameters:
+//
 //	p1			- new bitmap, not dilated
 //	p2			- new bitmap, dilated
 //	p3			-u exemplar bitmap, not dilated
 //	p4			- exemplar bitmap, dilated
 //	delX, delY	- component centroid difference for 'x' and 'y' coordinates
 //	maxDiffW	- maximum Width difference of 'p1' and 'p2'
-// 	maxDiffH	- maximum Height difference of 'p1' and 'p2'
+//	maxDiffH	- maximum Height difference of 'p1' and 'p2'
 //	area1		- 'ON' - fg - pixels area of the 'p1' bitmap
-// 	area3		- 'ON' - fg - pixels area of the 'p3' bitmap
+//	area3		- 'ON' - fg - pixels area of the 'p3' bitmap
 //	rank		- rank value of the test
 //	tab8		- table of the pixel sums for a single byte.
+//
 // The 'rank' value is being converted to a number of pixels by multiplication with the number of undilated images.
 // The centroid difference is used for alignment of the images.
 // The rank Hausdorff checks if dilated image of one contains the rank fraction pixels of the undilated image of the other in both directions.

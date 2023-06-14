@@ -10,10 +10,10 @@ import (
 	"fmt"
 	"image/color"
 
-	"github.com/unidoc/unipdf/v3/common"
-	"github.com/unidoc/unipdf/v3/common/license"
-	"github.com/unidoc/unipdf/v3/core"
-	"github.com/unidoc/unipdf/v3/model"
+	"github.com/oliverpool/unipdf/v3/common"
+	"github.com/oliverpool/unipdf/v3/common/license"
+	"github.com/oliverpool/unipdf/v3/core"
+	"github.com/oliverpool/unipdf/v3/model"
 )
 
 // RenderMode specifies the text rendering mode (Tmode), which determines whether showing text shall cause

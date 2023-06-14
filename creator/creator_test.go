@@ -27,14 +27,14 @@ import (
 	"github.com/boombuler/barcode/qr"
 	"github.com/stretchr/testify/require"
 
-	"github.com/unidoc/unipdf/v3/common"
-	"github.com/unidoc/unipdf/v3/contentstream/draw"
-	"github.com/unidoc/unipdf/v3/core"
-	"github.com/unidoc/unipdf/v3/extractor"
-	"github.com/unidoc/unipdf/v3/model"
-	"github.com/unidoc/unipdf/v3/model/optimize"
+	"github.com/oliverpool/unipdf/v3/common"
+	"github.com/oliverpool/unipdf/v3/contentstream/draw"
+	"github.com/oliverpool/unipdf/v3/core"
+	"github.com/oliverpool/unipdf/v3/extractor"
+	"github.com/oliverpool/unipdf/v3/model"
+	"github.com/oliverpool/unipdf/v3/model/optimize"
 
-	"github.com/unidoc/unipdf/v3/internal/testutils"
+	"github.com/oliverpool/unipdf/v3/internal/testutils"
 )
 
 func init() {
@@ -61,8 +61,9 @@ const testWts11TTFFile = "./testdata/wts11.ttf"
 const testImageFileCCITT = "./testdata/p3_0.png"
 
 // TODO(peterwilliams97): /tmp/2_p_multi.pdf which is created in this test gives an error message
-//      when opened in Adobe Reader: The font FreeSans contains bad Widths.
-//      This problem did not occur when I replaced FreeSans.ttf with LiberationSans-Regular.ttf
+//
+//	when opened in Adobe Reader: The font FreeSans contains bad Widths.
+//	This problem did not occur when I replaced FreeSans.ttf with LiberationSans-Regular.ttf
 const testFreeSansTTFFile = "./testdata/FreeSans.ttf"
 
 func tempFile(name string) string {

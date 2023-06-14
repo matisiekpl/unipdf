@@ -8,9 +8,9 @@ package bitmap
 import (
 	"encoding/binary"
 
-	"github.com/unidoc/unipdf/v3/common"
+	"github.com/oliverpool/unipdf/v3/common"
 
-	"github.com/unidoc/unipdf/v3/internal/jbig2/errors"
+	"github.com/oliverpool/unipdf/v3/internal/jbig2/errors"
 )
 
 // reduceBinaryCascade performs up to four cascades 2x rank reductions.

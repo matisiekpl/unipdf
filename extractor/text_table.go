@@ -9,8 +9,8 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/unidoc/unipdf/v3/common"
-	"github.com/unidoc/unipdf/v3/model"
+	"github.com/oliverpool/unipdf/v3/common"
+	"github.com/oliverpool/unipdf/v3/model"
 )
 
 // textTable is a table of `w` x `h` textPara cells.
@@ -81,15 +81,18 @@ func (paras paraList) findTables() []*textTable {
 // isAtom atempts to build the smallest possible table fragment of 2 x 2 cells.
 // If a table can be built then it is returned. Otherwise nil is returned.
 // The smallest possible table is
-//   a b
-//   c d
+//
+//	a b
+//	c d
+//
 // where
-//   a is `para`.
-//   b is immediately to the right of a and overlaps it in the y axis.
-//   c is immediately below a and overlaps it in the x axis.
-//   d is immediately to the right of c and overlaps it in the y axis and
-//        immediately below b and ooverlaps it in the s axis.
-//   None of a, b, c or d are cells in existing tables.
+//
+//	a is `para`.
+//	b is immediately to the right of a and overlaps it in the y axis.
+//	c is immediately below a and overlaps it in the x axis.
+//	d is immediately to the right of c and overlaps it in the y axis and
+//	     immediately below b and ooverlaps it in the s axis.
+//	None of a, b, c or d are cells in existing tables.
 func (para *textPara) isAtom() *textTable {
 	a := para
 	b := para.right
@@ -120,9 +123,9 @@ func newTableAtom(a, b, c, d *textPara) *textTable {
 
 // growTable grows `t` to the largest w x h it can while remaining a valid table.
 // It repeatedly tries to extend by one row and/or column
-//    - down and right, then
-//    - down, then
-//    - right.
+//   - down and right, then
+//   - down, then
+//   - right.
 func (t *textTable) growTable() {
 	growDown := func(down paraList) {
 		t.h++
@@ -204,7 +207,7 @@ func (t *textTable) getRight() paraList {
 }
 
 // applyTables replaces the paras that are cells in `tables` with paras containing the tables in
-//`tables`. This, of course, reduces the number of paras.
+// `tables`. This, of course, reduces the number of paras.
 func (paras paraList) applyTables(tables []*textTable) paraList {
 	consumed := map[*textPara]struct{}{}
 	var tabled paraList

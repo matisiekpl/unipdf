@@ -16,7 +16,7 @@ jobs:
           More information can be found on https://unidoc.io/
         pr-message: >
           Thanks for posting your first PR. Please be sure to sign the CLA and make sure that the
-          the Developer Guidelines https://github.com/unidoc/unipdf/wiki/UniPDF-Developer-Guide were followed.
+          the Developer Guidelines https://github.com/oliverpool/unipdf/wiki/UniPDF-Developer-Guide were followed.
           You can expect that we will review the PR and post comments. The timeframe fpr this can vary depending
           on various factors, including which issue(s) the PR addresses and where it fits in the roadmap.
           Note also that customer PRs are prioritized.

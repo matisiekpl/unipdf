@@ -11,8 +11,8 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/unidoc/unipdf/v3/common"
-	"github.com/unidoc/unipdf/v3/model"
+	"github.com/oliverpool/unipdf/v3/common"
+	"github.com/oliverpool/unipdf/v3/model"
 )
 
 // wordBag is just a list of textWords in a rectangular region. It is needed for efficient
@@ -68,9 +68,11 @@ func (b *wordBag) String() string {
 }
 
 // scanBand scans the bins for words w:
-//     `minDepth` <= w.depth <= `maxDepth` &&  // in the depth diraction
-//    `readingOverlap`(`para`, w) &&  // in the reading directon
-//     math.Abs(w.fontsize-fontsize) > `fontTol`*fontsize // font size tolerance
+//
+//	 `minDepth` <= w.depth <= `maxDepth` &&  // in the depth diraction
+//	`readingOverlap`(`para`, w) &&  // in the reading directon
+//	 math.Abs(w.fontsize-fontsize) > `fontTol`*fontsize // font size tolerance
+//
 // and applies `moveWord`(depthIdx, s,para w) to them.
 // If `detectOnly` is true, moveWord is not applied.
 // If `freezeDepth` is true, minDepth and maxDepth are not updated in scan as words are added.

@@ -6,29 +6,30 @@
 package bitmap
 
 import (
-	"github.com/unidoc/unipdf/v3/common"
+	"github.com/oliverpool/unipdf/v3/common"
 
-	"github.com/unidoc/unipdf/v3/internal/jbig2/errors"
+	"github.com/oliverpool/unipdf/v3/internal/jbig2/errors"
 )
 
 // RasterOperator is the raster operation flag operator.
 // There are following raster operations:
-//      PixClr                      	0000   0x0
-//      PixSet                      	1111   0xf
-//      PixSrc              s        	1100   0xc
-//      PixDst              d        	1010   0xa
-//      PixNotSrc		    ~s        	0011   0x3
-//      PixNotDst		    ~d        	0101   0x5
-//      PixSrcOrDst		    s | d       1110   0xe
-//      PixSrcAndDst	    s & d       1000   0x8
-//      PixSrcXorDst	    s ^ d       0110   0x6
-//      PixNotSrcOrDst		~s | d 	    1011   0xb
-//      PixNotSrcAndDst		~s & d		0010   0x2
-//      PixSrcOrNotDst		s | ~d		1101   0xd
-//      PixSrcAndNotDst		s & ~d		0100   0x4
-//      PixNotPixSrcOrDst	~(s | d)	0001   0x1
-//      PixNotPixSrcAndDst	~(s & d)	0111   0x7
-//      PixNotPixSrcXorDst	~(s ^ d)	1001   0X9
+//
+//	PixClr                      	0000   0x0
+//	PixSet                      	1111   0xf
+//	PixSrc              s        	1100   0xc
+//	PixDst              d        	1010   0xa
+//	PixNotSrc		    ~s        	0011   0x3
+//	PixNotDst		    ~d        	0101   0x5
+//	PixSrcOrDst		    s | d       1110   0xe
+//	PixSrcAndDst	    s & d       1000   0x8
+//	PixSrcXorDst	    s ^ d       0110   0x6
+//	PixNotSrcOrDst		~s | d 	    1011   0xb
+//	PixNotSrcAndDst		~s & d		0010   0x2
+//	PixSrcOrNotDst		s | ~d		1101   0xd
+//	PixSrcAndNotDst		s & ~d		0100   0x4
+//	PixNotPixSrcOrDst	~(s | d)	0001   0x1
+//	PixNotPixSrcAndDst	~(s & d)	0111   0x7
+//	PixNotPixSrcXorDst	~(s ^ d)	1001   0X9
 type RasterOperator int
 
 // Raster operator constant definitions.
@@ -67,7 +68,8 @@ const (
 // both 'src' and 'dest'.
 // Out of these 14 operators there are only 12 unique logical combinations. ~(s) ^ d) == ~(s ^ d) == s ^ ~(d).
 // Parameters:
-// 	'dest'	 	'dest' bitmap
+//
+//	'dest'	 	'dest' bitmap
 //	'dx'		x val of UL corner of 'dest' bitmap
 //	'dy'		y val of UL corner of 'dest' bitmap
 //	'dw'		is the width of the operational rectangle on the bitmap 'dest'

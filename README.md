@@ -1,14 +1,14 @@
 # UniPDF - PDF for Go
 
 [UniDoc](http://unidoc.io)'s UniPDF (formerly unidoc) is a PDF library for Go (golang) with capabilities for
-creating and reading, processing PDF files. The library is written and supported by 
-[FoxyUtils.com](https://foxyutils.com), where the library is used to power many of its services. 
+creating and reading, processing PDF files. The library is written and supported by
+[FoxyUtils.com](https://foxyutils.com), where the library is used to power many of its services.
 
 [![Build Status](https://app.wercker.com/status/22b50db125a6d376080f3f0c80d085fa/s/master "wercker status")](https://app.wercker.com/project/bykey/22b50db125a6d376080f3f0c80d085fa)
-[![GitHub (pre-)release](https://img.shields.io/github/release/unidoc/unipdf/all.svg)](https://github.com/unidoc/unipdf/releases)
+[![GitHub (pre-)release](https://img.shields.io/github/release/unidoc/unipdf/all.svg)](https://github.com/oliverpool/unipdf/releases)
 [![License: AGPL v3](https://img.shields.io/badge/License-Dual%20AGPL%20v3/Commercial-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
-[![Go Report Card](https://goreportcard.com/badge/github.com/unidoc/unipdf)](https://goreportcard.com/report/github.com/unidoc/unipdf)
-[![GoDoc](https://godoc.org/github.com/unidoc/unipdf?status.svg)](https://godoc.org/github.com/unidoc/unipdf)
+[![Go Report Card](https://goreportcard.com/badge/github.com/oliverpool/unipdf)](https://goreportcard.com/report/github.com/oliverpool/unipdf)
+[![GoDoc](https://godoc.org/github.com/oliverpool/unipdf?status.svg)](https://godoc.org/github.com/oliverpool/unipdf)
 
 ## Features
 
@@ -45,12 +45,12 @@ Contact us if you need any specific examples.
 ## Installation
 With modules:
 ~~~
-go get github.com/unidoc/unipdf/v3
+go get github.com/oliverpool/unipdf/v3
 ~~~
 
 With GOPATH:
 ~~~
-go get github.com/unidoc/unipdf/...
+go get github.com/oliverpool/unipdf/...
 ~~~
 
 
@@ -60,7 +60,7 @@ The choice is yours. There are multiple respectable efforts out there that can d
 
 In UniDoc, we work hard to provide production quality builds taking every detail into consideration and providing excellent support to our customers.  See our [testimonials](https://unidoc.io) for example.
 
-Security.  We take security very seriously and we restrict access to github.com/unidoc/unipdf repository with protected branches and only the founders have access and every commit is reviewed prior to being accepted.
+Security.  We take security very seriously and we restrict access to github.com/oliverpool/unipdf repository with protected branches and only the founders have access and every commit is reviewed prior to being accepted.
 
 The profits are invested back into making unipdf better. We want to make the best possible product and in order to do that we need the best people to contribute. A large fraction of the profits made goes back into developing unipdf.  That way we have been able to get many excellent people to work and contribute to unipdf that would not be able to contribute their work for free.
 

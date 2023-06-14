@@ -14,12 +14,12 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/unidoc/unipdf/v3/common"
-	"github.com/unidoc/unipdf/v3/contentstream"
-	"github.com/unidoc/unipdf/v3/core"
-	"github.com/unidoc/unipdf/v3/internal/textencoding"
-	"github.com/unidoc/unipdf/v3/internal/transform"
-	"github.com/unidoc/unipdf/v3/model"
+	"github.com/oliverpool/unipdf/v3/common"
+	"github.com/oliverpool/unipdf/v3/contentstream"
+	"github.com/oliverpool/unipdf/v3/core"
+	"github.com/oliverpool/unipdf/v3/internal/textencoding"
+	"github.com/oliverpool/unipdf/v3/internal/transform"
+	"github.com/oliverpool/unipdf/v3/model"
 	"golang.org/x/xerrors"
 )
 
@@ -48,7 +48,8 @@ func (e *Extractor) ExtractTextWithStats() (extracted string, numChars int, numM
 
 // ExtractPageText returns the text contents of `e` (an Extractor for a page) as a PageText.
 // TODO(peterwilliams97): The stats complicate this function signature and aren't very useful.
-//                        Replace with a function like Extract() (*PageText, error)
+//
+//	Replace with a function like Extract() (*PageText, error)
 func (e *Extractor) ExtractPageText() (*PageText, int, int, error) {
 	pt, numChars, numMisses, err := e.extractPageText(e.contents, e.resources, transform.IdentityMatrix(), 0)
 	if err != nil {
@@ -395,8 +396,9 @@ func (to *textObject) moveText(tx, ty float64) {
 // Move to the start of the next line, offset from the start of the current line by (tx, ty). As a
 // side effect, this operator shall set the leading parameter in the text state. This operator shall
 // have the same effect as this code:
-//  −ty TL
-//  tx ty Td
+//
+//	−ty TL
+//	tx ty Td
 func (to *textObject) moveTextSetLeading(tx, ty float64) {
 	to.state.tl = -ty
 	to.moveTo(tx, ty)
@@ -404,7 +406,9 @@ func (to *textObject) moveTextSetLeading(tx, ty float64) {
 
 // nextLine "T*"" Moves start of text line to next text line
 // Move to the start of the next line. This operator has the same effect as the code
-//    0 -Tl Td
+//
+//	0 -Tl Td
+//
 // where Tl denotes the current leading parameter in the text state. The negative of Tl is used
 // here because Tl is the text leading expressed as a positive number. Going to the next line
 // entails decreasing the y coordinate. (page 250)
@@ -1055,19 +1059,19 @@ func (ma *TextMarkArray) BBox() (model.PdfRectangle, bool) {
 // The following code extracts the text on PDF page `page` into `text` then finds the bounding box
 // `bbox` of substring `term` in `text`.
 //
-//     ex, _ := New(page)
-//     // handle errors
-//     pageText, _, _, err := ex.ExtractPageText()
-//     // handle errors
-//     text := pageText.Text()
-//     textMarks := pageText.Marks()
+//	ex, _ := New(page)
+//	// handle errors
+//	pageText, _, _, err := ex.ExtractPageText()
+//	// handle errors
+//	text := pageText.Text()
+//	textMarks := pageText.Marks()
 //
-//     	start := strings.Index(text, term)
-//      end := start + len(term)
-//      spanMarks, err := textMarks.RangeOffset(start, end)
-//      // handle errors
-//      bbox, ok := spanMarks.BBox()
-//      // handle errors
+//		start := strings.Index(text, term)
+//	 end := start + len(term)
+//	 spanMarks, err := textMarks.RangeOffset(start, end)
+//	 // handle errors
+//	 bbox, ok := spanMarks.BBox()
+//	 // handle errors
 type TextMark struct {
 	// Text is the extracted text.
 	Text string

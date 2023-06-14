@@ -13,11 +13,11 @@ import (
 	"os"
 	"strings"
 
-	"github.com/unidoc/unipdf/v3/common"
-	"github.com/unidoc/unipdf/v3/core"
+	"github.com/oliverpool/unipdf/v3/common"
+	"github.com/oliverpool/unipdf/v3/core"
 
-	"github.com/unidoc/unipdf/v3/internal/textencoding"
-	"github.com/unidoc/unipdf/v3/model/internal/fonts"
+	"github.com/oliverpool/unipdf/v3/internal/textencoding"
+	"github.com/oliverpool/unipdf/v3/model/internal/fonts"
 )
 
 // pdfFontSimple implements pdfFont
@@ -28,17 +28,17 @@ var _ pdfFont = (*pdfFontSimple)(nil)
 // 9.6 Simple Fonts (page 254)
 // 9.6.1 General
 // There are several types of simple fonts, all of which have these properties:
-// • Glyphs in the font shall be selected by single-byte character codes obtained from a string that
-//   is shown by the text-showing operators. Logically, these codes index into a table of 256 glyphs;
-//   the mapping from codes to glyphs is called the font’s encoding. Under some circumstances, the
-//   encoding may be altered by means described in 9.6.6, "Character Encoding".
-// • Each glyph shall have a single set of metrics, including a horizontal displacement or width,
-//   as described in 9.2.4, "Glyph Positioning and Metrics"; that is, simple fonts support only
-//   horizontal writing mode.
-// • Except for Type 0 fonts, Type 3 fonts in non-Tagged PDF documents, and certain standard Type 1
-//   fonts, every font dictionary shall contain a subsidiary dictionary, the font descriptor,
-//   containing font-wide metrics and other attributes of the font.
-//   Among those attributes is an optional font filestream containing the font program.
+//   - Glyphs in the font shall be selected by single-byte character codes obtained from a string that
+//     is shown by the text-showing operators. Logically, these codes index into a table of 256 glyphs;
+//     the mapping from codes to glyphs is called the font’s encoding. Under some circumstances, the
+//     encoding may be altered by means described in 9.6.6, "Character Encoding".
+//   - Each glyph shall have a single set of metrics, including a horizontal displacement or width,
+//     as described in 9.2.4, "Glyph Positioning and Metrics"; that is, simple fonts support only
+//     horizontal writing mode.
+//   - Except for Type 0 fonts, Type 3 fonts in non-Tagged PDF documents, and certain standard Type 1
+//     fonts, every font dictionary shall contain a subsidiary dictionary, the font descriptor,
+//     containing font-wide metrics and other attributes of the font.
+//     Among those attributes is an optional font filestream containing the font program.
 type pdfFontSimple struct {
 	fontCommon
 	container *core.PdfIndirectObject
@@ -138,9 +138,9 @@ func (font pdfFontSimple) GetRuneMetrics(r rune) (fonts.CharMetrics, bool) {
 // GetCharMetrics returns the character metrics for the specified character code.  A bool flag is
 // returned to indicate whether or not the entry was found in the glyph to charcode mapping.
 // How it works:
-//  1) Return a value the /Widths array (charWidths) if there is one.
-//  2) If the font has the same name as a standard 14 font then return width=250.
-//  3) Otherwise return no match and let the caller substitute a default.
+//  1. Return a value the /Widths array (charWidths) if there is one.
+//  2. If the font has the same name as a standard 14 font then return width=250.
+//  3. Otherwise return no match and let the caller substitute a default.
 func (font pdfFontSimple) GetCharMetrics(code textencoding.CharCode) (fonts.CharMetrics, bool) {
 	if width, ok := font.charWidths[code]; ok {
 		return fonts.CharMetrics{Wx: width}, true
@@ -159,7 +159,6 @@ func (font pdfFontSimple) GetCharMetrics(code textencoding.CharCode) (fonts.Char
 //
 // The value of Encoding is subject to limitations that are described in 9.6.6, "Character Encoding".
 // • The value of BaseFont is derived differently.
-//
 func newSimpleFontFromPdfObject(d *core.PdfObjectDictionary, base *fontCommon,
 	std14Encoder textencoding.TextEncoder) (*pdfFontSimple, error) {
 	font := pdfFontSimpleFromSkeleton(base)

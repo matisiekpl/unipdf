@@ -18,8 +18,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/unidoc/unipdf/v3/common"
-	"github.com/unidoc/unipdf/v3/core/security"
+	"github.com/oliverpool/unipdf/v3/common"
+	"github.com/oliverpool/unipdf/v3/core/security"
 )
 
 // Regular Expressions for parsing and identifying object signatures.
@@ -1169,7 +1169,6 @@ func (parser *PdfParser) seekToEOFMarker(fSize int64) error {
 	return errors.New("EOF not found")
 }
 
-//
 // Load the xrefs from the bottom of file prior to parsing the file.
 // 1. Look for %%EOF marker, then
 // 2. Move up to find startxref
@@ -1187,7 +1186,6 @@ func (parser *PdfParser) seekToEOFMarker(fSize int64) error {
 //
 // The earlier xrefs have higher precedence.  If objects already
 // loaded will ignore older versions.
-//
 func (parser *PdfParser) loadXrefs() (*PdfObjectDictionary, error) {
 	parser.xrefs.ObjectMap = make(map[int]XrefObject)
 	parser.objstms = make(objectStreams)

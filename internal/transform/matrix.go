@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"math"
 
-	"github.com/unidoc/unipdf/v3/common"
+	"github.com/oliverpool/unipdf/v3/common"
 )
 
 // Matrix is a linear transform matrix in homogenous coordinates.
@@ -44,9 +44,10 @@ func ShearMatrix(x, y float64) Matrix {
 }
 
 // NewMatrix returns an affine transform matrix laid out in homogenous coordinates as
-//      a  b  0
-//      c  d  0
-//      tx ty 1
+//
+//	a  b  0
+//	c  d  0
+//	tx ty 1
 func NewMatrix(a, b, c, d, tx, ty float64) Matrix {
 	m := Matrix{
 		a, b, 0,
@@ -73,9 +74,10 @@ func (m *Matrix) Set(a, b, c, d, tx, ty float64) {
 
 // Concat sets `m` to `b` × `m`.
 // `b` needs to be created by newMatrix. i.e. It must be an affine transform.
-//    b00 b01 0     m00 m01 0     b00*m00 + b01*m01        b00*m10 + b01*m11        0
-//    b10 b11 0  ×  m10 m11 0  ➔  b10*m00 + b11*m01        b10*m10 + b11*m11        0
-//    b20 b21 1     m20 m21 1     b20*m00 + b21*m10 + m20  b20*m01 + b21*m11 + m21  1
+//
+//	b00 b01 0     m00 m01 0     b00*m00 + b01*m01        b00*m10 + b01*m11        0
+//	b10 b11 0  ×  m10 m11 0  ➔  b10*m00 + b11*m01        b10*m10 + b11*m11        0
+//	b20 b21 1     m20 m21 1     b20*m00 + b21*m10 + m20  b20*m01 + b21*m11 + m21  1
 func (m *Matrix) Concat(b Matrix) {
 	*m = Matrix{
 		b[0]*m[0] + b[1]*m[3], b[0]*m[1] + b[1]*m[4], 0,

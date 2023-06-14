@@ -11,33 +11,37 @@ import (
 	"math"
 	"sort"
 
-	"github.com/unidoc/unipdf/v3/common"
-	"github.com/unidoc/unipdf/v3/model"
+	"github.com/oliverpool/unipdf/v3/common"
+	"github.com/oliverpool/unipdf/v3/model"
 )
 
 // makeTextPage builds a paraList from `marks`, the textMarks on a page.
 // The paraList contains the page arranged as
-//  - a list of texPara in reading order
-//  - each textPara contains list of textLine (text lines or parts of text lines) in reading order
-//  - each textLine contains a list of textWord (words or parts of words) in reading order
+//   - a list of texPara in reading order
+//   - each textPara contains list of textLine (text lines or parts of text lines) in reading order
+//   - each textLine contains a list of textWord (words or parts of words) in reading order
+//
 // The paraList is thus an ordering of words on a page.
 //   - Users of the paraList are expected to work with words. This should be adequate for most uses
 //     as words are the basic unit of meaning in written language.
 //   - However we provide links back from the extracted text to the textMarks as follows.
-//        * paraList.writeText() returns the extracted text for a page
-//        * paras.toTextMarks() returns a TextMarkArray containing the marks
-//        * TextMarkArray.RangeOffset(lo, hi) return the marks corresponding offsets [lo:hi] in the
-//          extracted text.
+//   - paraList.writeText() returns the extracted text for a page
+//   - paras.toTextMarks() returns a TextMarkArray containing the marks
+//   - TextMarkArray.RangeOffset(lo, hi) return the marks corresponding offsets [lo:hi] in the
+//     extracted text.
+//
 // NOTE: The "parts of words" occur because of hyphenation. We do some weak coordinate based
-//        dehypenation. Caller who need strong dehypenation should use NLP librarie.
-//       The "parts of lines" are an implementation detail. Line fragments are combined in
-//        paraList.writeText()
+//
+//	 dehypenation. Caller who need strong dehypenation should use NLP librarie.
+//	The "parts of lines" are an implementation detail. Line fragments are combined in
+//	 paraList.writeText()
+//
 // ALGORITHM:
-// 1) Group the textMarks into textWords based on their bounding boxes.
-// 2) Group the textWords into textParas based on their bounding boxes.
-// 3) Detect textParas arranged as cells in a table and convert each one to a textPara containing a
-//    textTable.
-// 4) Sort the textParas in reading order.
+//  1. Group the textMarks into textWords based on their bounding boxes.
+//  2. Group the textWords into textParas based on their bounding boxes.
+//  3. Detect textParas arranged as cells in a table and convert each one to a textPara containing a
+//     textTable.
+//  4. Sort the textParas in reading order.
 func makeTextPage(marks []*textMark, pageSize model.PdfRectangle) paraList {
 	common.Log.Trace("makeTextPage: %d elements pageSize=%.2f", len(marks), pageSize)
 	if len(marks) == 0 {
@@ -281,11 +285,12 @@ func (paras paraList) topoOrder() []int {
 // readBefore returns true if paras[`i`] comes before paras[`j`].
 // readBefore defines an ordering over `paras`.
 // a = paras[i],  b= paras[j]
-// 1. Line segment `a` comes before line segment `b` if their ranges of x-coordinates overlap and if
-//    line segment `a` is above line segment `b` on the page.
-// 2. Line segment `a` comes before line segment `b` if `a` is entirely to the left of `b` and if
-//    there does not exist a line segment `c` whose y-coordinates are between `a` and `b` and whose
-//    range of x coordinates overlaps both `a` and `b`.
+//  1. Line segment `a` comes before line segment `b` if their ranges of x-coordinates overlap and if
+//     line segment `a` is above line segment `b` on the page.
+//  2. Line segment `a` comes before line segment `b` if `a` is entirely to the left of `b` and if
+//     there does not exist a line segment `c` whose y-coordinates are between `a` and `b` and whose
+//     range of x coordinates overlaps both `a` and `b`.
+//
 // From Thomas M. Breuel "High Performance Document Layout Analysis"
 func (paras paraList) readBefore(ordering []int, i, j int) bool {
 	a, b := paras[i], paras[j]

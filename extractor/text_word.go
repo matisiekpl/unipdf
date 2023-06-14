@@ -10,8 +10,8 @@ import (
 	"math"
 	"strings"
 
-	"github.com/unidoc/unipdf/v3/common"
-	"github.com/unidoc/unipdf/v3/model"
+	"github.com/oliverpool/unipdf/v3/common"
+	"github.com/oliverpool/unipdf/v3/model"
 	"golang.org/x/text/unicode/norm"
 )
 
@@ -19,9 +19,10 @@ import (
 // makeTextWords() shows how textWords are created.
 // We don't see whole words until textWords are eventually sorted into textLines  in
 // wordBag.arrangeText(). textLines are slices of textWord that define whole words by the
-//  newWord marker on those fragments that start whole words.
-//  - A textLine is the textWords at similar depths sorted in reading order.
-//  - All textWords, w, in the textLine that start whole words have w.newWord = true
+//
+//	newWord marker on those fragments that start whole words.
+//	- A textLine is the textWords at similar depths sorted in reading order.
+//	- All textWords, w, in the textLine that start whole words have w.newWord = true
 type textWord struct {
 	model.PdfRectangle             // Bounding box (union of `marks` bounding boxes).
 	depth              float64     // Distance from bottom of this word to the top of the page.
@@ -36,12 +37,14 @@ type textWord struct {
 // Algorithm:
 //  1. `marks` are in the order they were rendered in the PDF.
 //  2. Successive marks are combined into a word fragment unless
-//      One mark is a space character.
-//      They are separated by more than maxWordAdvanceR*fontsize in the reading direction
-//      They are not within the location allowed by horizontal and vertical variations allowed by
-//       reasonable kerning and leading.
+//     One mark is a space character.
+//     They are separated by more than maxWordAdvanceR*fontsize in the reading direction
+//     They are not within the location allowed by horizontal and vertical variations allowed by
+//     reasonable kerning and leading.
+//
 // TODO(peterwilliams97): Check for overlapping textWords for cases such as diacritics, bolding by
-//                       repeating and others.
+//
+//	repeating and others.
 func makeTextWords(marks []*textMark, pageSize model.PdfRectangle) []*textWord {
 	var words []*textWord // The words.
 	var newWord *textWord // The word being built.

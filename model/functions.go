@@ -9,10 +9,10 @@ import (
 	"errors"
 	"math"
 
-	"github.com/unidoc/unipdf/v3/common"
-	"github.com/unidoc/unipdf/v3/core"
-	"github.com/unidoc/unipdf/v3/internal/sampling"
-	"github.com/unidoc/unipdf/v3/ps"
+	"github.com/oliverpool/unipdf/v3/common"
+	"github.com/oliverpool/unipdf/v3/core"
+	"github.com/oliverpool/unipdf/v3/internal/sampling"
+	"github.com/oliverpool/unipdf/v3/ps"
 )
 
 // PdfFunction interface represents the common methods of a function in PDF.
@@ -368,7 +368,9 @@ func (f *PdfFunctionType0) processSamples() error {
 
 // PdfFunctionType2 defines an exponential interpolation of one input value and n
 // output values:
-//      f(x) = y_0, ..., y_(n-1)
+//
+//	f(x) = y_0, ..., y_(n-1)
+//
 // y_j = C0_j + x^N * (C1_j - C0_j); for 0 <= j < n
 // When N=1 ; linear interpolation between C0 and C1.
 type PdfFunctionType2 struct {

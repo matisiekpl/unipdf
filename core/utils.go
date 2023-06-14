@@ -15,11 +15,12 @@ import (
 	"sort"
 	"strconv"
 
-	"github.com/unidoc/unipdf/v3/common"
+	"github.com/oliverpool/unipdf/v3/common"
 )
 
 // Check slice range to make sure within bounds for accessing:
-//    slice[a:b] where sliceLen=len(slice).
+//
+//	slice[a:b] where sliceLen=len(slice).
 func checkBounds(sliceLen, a, b int) error {
 	if a < 0 || a > sliceLen {
 		return errors.New("slice index a out of bounds")
