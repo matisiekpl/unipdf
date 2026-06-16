@@ -148,35 +148,50 @@ func (pt PageText) contentMarks(stripPageNumbers bool, repeatedLabels map[string
 }
 
 // blocks returns the page content as an ordered list of text and table blocks.
+// Tables drawn with ruling lines are reconstructed; text that sits above, below
+// or between them (including prose that ended up inside a grid) is emitted as
+// text blocks in reading order.
 func (pt PageText) blocks(stripPageNumbers bool, repeatedLabels map[string]bool) []mdBlock {
 	marks := pt.contentMarks(stripPageNumbers, repeatedLabels)
 	strokes := pt.cleanStrokes()
-	t := pt.lineTable(marks)
-	if t == nil {
+	tables, consumed := pt.lineTables(marks)
+	if len(tables) == 0 {
 		if txt := mdReconstructText(marks, strokes); txt != "" {
 			return []mdBlock{{text: txt}}
 		}
 		return nil
 	}
 
-	var above, below []TextMark
-	for _, m := range marks {
-		cy := (m.BBox.Lly + m.BBox.Ury) / 2
-		if cy > t.top()+2 {
-			above = append(above, m)
-		} else if cy < t.bottom()-2 {
-			below = append(below, m)
+	var leftover []TextMark
+	for i, m := range marks {
+		if !consumed[i] {
+			leftover = append(leftover, m)
 		}
 	}
+	sort.Slice(tables, func(i, j int) bool { return tables[i].top() > tables[j].top() })
 
 	var blocks []mdBlock
-	if txt := mdReconstructText(above, strokes); txt != "" {
-		blocks = append(blocks, mdBlock{text: txt})
+	used := make([]bool, len(leftover))
+	collect := func(limit float64, hasLimit bool) {
+		var ms []TextMark
+		for i, m := range leftover {
+			if used[i] {
+				continue
+			}
+			if !hasLimit || (m.BBox.Lly+m.BBox.Ury)/2 > limit-2 {
+				ms = append(ms, m)
+				used[i] = true
+			}
+		}
+		if txt := mdReconstructText(ms, strokes); txt != "" {
+			blocks = append(blocks, mdBlock{text: txt})
+		}
 	}
-	blocks = append(blocks, mdBlock{table: t})
-	if txt := mdReconstructText(below, strokes); txt != "" {
-		blocks = append(blocks, mdBlock{text: txt})
+	for _, table := range tables {
+		collect(table.top(), true)
+		blocks = append(blocks, mdBlock{table: table})
 	}
+	collect(0, false)
 	return blocks
 }
 
@@ -366,7 +381,12 @@ type mdLineTable struct {
 	cells  [][]string
 }
 
-func (t *mdLineTable) cols() int       { return len(t.xs) - 1 }
+func (t *mdLineTable) cols() int {
+	if len(t.cells) > 0 {
+		return len(t.cells[0])
+	}
+	return len(t.xs) - 1
+}
 func (t *mdLineTable) top() float64    { return t.ys[0] }
 func (t *mdLineTable) bottom() float64 { return t.ys[len(t.ys)-1] }
 
@@ -386,7 +406,7 @@ type mdHSeg struct{ y, x0, x1 float64 }
 
 // lineTable reconstructs the table drawn with ruling lines on the page, or
 // returns nil if no such table is found.
-func (pt PageText) lineTable(marks []TextMark) *mdLineTable {
+func (pt PageText) lineTables(marks []TextMark) (tables []*mdLineTable, consumed map[int]bool) {
 	var vxs []float64
 	var vsegs []mdVSeg
 	var hsegs []mdHSeg
@@ -411,11 +431,11 @@ func (pt PageText) lineTable(marks []TextMark) *mdLineTable {
 		}
 	}
 	if len(vxs) == 0 {
-		return nil
+		return nil, nil
 	}
 	xs := mdCluster(vxs, 8)
 	if len(xs) < 3 {
-		return nil
+		return nil, nil
 	}
 	tableWidth := xs[len(xs)-1] - xs[0]
 
@@ -447,21 +467,19 @@ func (pt PageText) lineTable(marks []TextMark) *mdLineTable {
 		}
 	}
 	if len(ys) < 2 {
-		return nil
+		return nil, nil
 	}
 	sort.Sort(sort.Reverse(sort.Float64Slice(ys)))
 
 	cols := len(xs) - 1
 	rows := len(ys) - 1
-	t := &mdLineTable{xs: xs, ys: ys, cells: make([][]string, rows)}
-	for r := range t.cells {
-		t.cells[r] = make([]string, cols)
-	}
 
 	// For each row band determine which column borders actually exist (a vertical
 	// segment covers most of the band). Consecutive present borders define a cell
-	// that may span several columns (colspan).
+	// that may span several columns (colspan). verticalCount records how many
+	// column verticals cross the band before any fallback.
 	rowBorders := make([][]float64, rows)
+	verticalCount := make([]int, rows)
 	for r := 0; r < rows; r++ {
 		top, bot := ys[r], ys[r+1]
 		height := top - bot
@@ -477,6 +495,7 @@ func (pt PageText) lineTable(marks []TextMark) *mdLineTable {
 				}
 			}
 		}
+		verticalCount[r] = len(present)
 		if len(present) < 2 {
 			present = []float64{xs[0], xs[len(xs)-1]}
 		}
@@ -484,7 +503,11 @@ func (pt PageText) lineTable(marks []TextMark) *mdLineTable {
 	}
 
 	cellMarks := make(map[[2]int][]mdCellMark)
-	for _, m := range marks {
+	markRow := make([]int, len(marks))
+	for i := range markRow {
+		markRow[i] = -1
+	}
+	for i, m := range marks {
 		if strings.TrimSpace(m.Text) == "" {
 			continue
 		}
@@ -504,14 +527,51 @@ func (pt PageText) lineTable(marks []TextMark) *mdLineTable {
 		for r > 0 && !mdHasHBorder(hsegs, ys[r], xs[gc], rowBorders[r][c+1]) {
 			r--
 		}
+		markRow[i] = r
 		cellMarks[[2]int{r, gc}] = append(cellMarks[[2]int{r, gc}],
 			mdCellMark{m.BBox.Llx, m.BBox.Urx, cy, m.Text})
 	}
-	for key, cms := range cellMarks {
-		t.cells[key[0]][key[1]] = mdJoinCell(cms)
+	fullCells := make([][]string, rows)
+	for r := range fullCells {
+		fullCells[r] = make([]string, cols)
 	}
-	t.dropEmptyRows()
-	return t
+	for key, cms := range cellMarks {
+		fullCells[key[0]][key[1]] = mdJoinCell(cms)
+	}
+
+	// A row band with fewer than two crossing column verticals has no tabular
+	// structure: it is absorbed prose (a footnote, caption or paragraph that sits
+	// between table grids). Split the grid into contiguous tabular segments at
+	// such rows and leave their marks for text reconstruction.
+	consumed = make(map[int]bool)
+	r := 0
+	for r < rows {
+		if verticalCount[r] < 2 {
+			r++
+			continue
+		}
+		start := r
+		for r < rows && verticalCount[r] >= 2 {
+			r++
+		}
+		segCells := make([][]string, r-start)
+		for k := range segCells {
+			segCells[k] = fullCells[start+k]
+		}
+		seg := &mdLineTable{xs: xs, ys: ys[start : r+1], cells: segCells}
+		seg.dropEmptyRows()
+		seg.dropEmptyColumns()
+		if len(seg.cells) == 0 {
+			continue
+		}
+		tables = append(tables, seg)
+		for i, mr := range markRow {
+			if mr >= start && mr < r {
+				consumed[i] = true
+			}
+		}
+	}
+	return tables, consumed
 }
 
 // dropEmptyRows removes rows whose cells are all empty. Such rows come from
@@ -531,6 +591,38 @@ func (t *mdLineTable) dropEmptyRows() {
 		}
 	}
 	t.cells = kept
+}
+
+// dropEmptyColumns removes columns that are empty in every row. These come from
+// spurious vertical rules to the side of the table.
+func (t *mdLineTable) dropEmptyColumns() {
+	if len(t.cells) == 0 {
+		return
+	}
+	cols := len(t.cells[0])
+	keep := make([]bool, cols)
+	kept := 0
+	for c := 0; c < cols; c++ {
+		for _, row := range t.cells {
+			if strings.TrimSpace(row[c]) != "" {
+				keep[c] = true
+				kept++
+				break
+			}
+		}
+	}
+	if kept == cols {
+		return
+	}
+	for r, row := range t.cells {
+		trimmed := make([]string, 0, kept)
+		for c, cell := range row {
+			if keep[c] {
+				trimmed = append(trimmed, cell)
+			}
+		}
+		t.cells[r] = trimmed
+	}
 }
 
 type mdCellMark struct {
