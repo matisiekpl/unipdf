@@ -32,10 +32,11 @@ type Extractor struct {
 	// textCount is an incrementing number used to identify XYTest objects.
 	textCount int
 
-	// siblingPool maps a BaseFont subset name to a Type0 font that uses that
-	// subset, gathered from the page and all nested form XObjects. It is used to
-	// recover text from sibling fonts whose ToUnicode CMap is incomplete.
-	siblingPool map[string]*model.PdfFont
+	// siblingPool maps a typeface key (BaseFont with the subset tag stripped) to
+	// the fonts that use it, gathered from the page and all nested form XObjects.
+	// It is used to recover text from sibling fonts whose ToUnicode/encoding is
+	// incomplete or wrong.
+	siblingPool map[string][]*model.PdfFont
 }
 
 // New returns an Extractor instance for extracting content from the input PDF page.

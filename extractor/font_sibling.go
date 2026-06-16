@@ -6,19 +6,15 @@
 package extractor
 
 import (
-	"strings"
-
-	"github.com/matisiekpl/unipdf/v3/common"
 	"github.com/matisiekpl/unipdf/v3/core"
 	"github.com/matisiekpl/unipdf/v3/model"
 )
 
-// siblingDecoder returns a font that shares `font`'s embedded subset (same
-// BaseFont) but is more likely to decode its character codes — typically a
-// Type0 (CID) sibling carrying a complete ToUnicode CMap. It returns nil when no
-// such sibling exists. Some PDFs draw the same text with two font objects for
-// one embedded subset, only one of which has a usable ToUnicode map.
-func (to *textObject) siblingDecoder(font *model.PdfFont) *model.PdfFont {
+// siblingCandidates returns fonts that share `font`'s underlying typeface (same
+// BaseFont once the subset tag is stripped) and could decode its character codes
+// better. Some PDFs draw the same text with several font objects for one
+// typeface, only some of which carry a usable ToUnicode/encoding.
+func (to *textObject) siblingCandidates(font *model.PdfFont) []*model.PdfFont {
 	if font == nil {
 		return nil
 	}
@@ -26,39 +22,28 @@ func (to *textObject) siblingDecoder(font *model.PdfFont) *model.PdfFont {
 	if key == "" {
 		return nil
 	}
-	sibling := to.e.fontSiblingPool()[key]
-	if sibling == nil || sibling == font {
-		return nil
+	var out []*model.PdfFont
+	for _, candidate := range to.e.fontSiblingPool()[key] {
+		if candidate != font {
+			out = append(out, candidate)
+		}
 	}
-	return sibling
+	return out
 }
 
-// fontSubsetKey strips the 6-letter subset tag (e.g. "RCNWUK+") from a BaseFont
-// name so that differently subsetted instances of the same underlying font
-// share a key. Returns the name unchanged when there is no subset tag.
-func fontSubsetKey(baseFont string) string {
-	if len(baseFont) > 7 && baseFont[6] == '+' {
-		return baseFont[7:]
-	}
-	return baseFont
-}
-
-// fontSiblingPool returns (building once) a map from BaseFont subset name to a
-// Type0 font that uses that subset, gathered from the page resources and every
-// nested form XObject. Type0 fonts read multi-byte codes and tend to carry the
-// complete ToUnicode CMap, so they can decode codes that a sibling simple font
-// fails on.
-func (e *Extractor) fontSiblingPool() map[string]*model.PdfFont {
+// fontSiblingPool returns (building once) a map from typeface key to the fonts
+// that use it, gathered from the page resources and every nested form XObject.
+func (e *Extractor) fontSiblingPool() map[string][]*model.PdfFont {
 	if e.siblingPool != nil {
 		return e.siblingPool
 	}
-	pool := map[string]*model.PdfFont{}
+	pool := map[string][]*model.PdfFont{}
 	collectFontSiblings(e.resources, pool, map[*model.PdfPageResources]bool{})
 	e.siblingPool = pool
 	return pool
 }
 
-func collectFontSiblings(resources *model.PdfPageResources, pool map[string]*model.PdfFont, visited map[*model.PdfPageResources]bool) {
+func collectFontSiblings(resources *model.PdfPageResources, pool map[string][]*model.PdfFont, visited map[*model.PdfPageResources]bool) {
 	if resources == nil || visited[resources] {
 		return
 	}
@@ -71,25 +56,45 @@ func collectFontSiblings(resources *model.PdfPageResources, pool map[string]*mod
 				continue
 			}
 			key := fontSubsetKey(font.BaseFont())
-			if key == "" || !strings.HasPrefix(font.Subtype(), "Type0") {
-				continue
-			}
-			if _, exists := pool[key]; !exists {
-				pool[key] = font
+			if key != "" {
+				pool[key] = append(pool[key], font)
 			}
 		}
 	}
 
-	xobjectDict, ok := core.GetDict(resources.XObject)
-	if !ok {
-		return
-	}
-	for _, name := range xobjectDict.Keys() {
-		form, err := resources.GetXObjectFormByName(name)
-		if err != nil || form == nil || form.Resources == nil {
-			continue
+	if xobjectDict, ok := core.GetDict(resources.XObject); ok {
+		for _, name := range xobjectDict.Keys() {
+			form, err := resources.GetXObjectFormByName(name)
+			if err != nil || form == nil || form.Resources == nil {
+				continue
+			}
+			collectFontSiblings(form.Resources, pool, visited)
 		}
-		collectFontSiblings(form.Resources, pool, visited)
 	}
-	common.Log.Trace("collectFontSiblings: pool size=%d", len(pool))
+}
+
+// fontSubsetKey strips the 6-letter subset tag (e.g. "RCNWUK+") from a BaseFont
+// name so that differently subsetted instances of the same underlying font
+// share a key. Returns the name unchanged when there is no subset tag.
+func fontSubsetKey(baseFont string) string {
+	if len(baseFont) > 7 && baseFont[6] == '+' {
+		return baseFont[7:]
+	}
+	return baseFont
+}
+
+// decodeBadness scores how garbled a decode is: unmapped codes plus characters
+// in the CJK (and beyond) Unicode ranges, which never legitimately appear in
+// these Latin-script documents and signal a font whose code->unicode mapping is
+// wrong.
+func decodeBadness(texts []string, numMisses int) int {
+	bad := numMisses
+	for _, text := range texts {
+		for _, r := range text {
+			if r >= 0x2C00 {
+				bad++
+			}
+		}
+	}
+	return bad
 }

@@ -758,17 +758,18 @@ func (to *textObject) renderText(data []byte) error {
 	font := to.getCurrentFont()
 	charcodes := font.BytesToCharcodes(data)
 	texts, numChars, numMisses := font.CharcodesToStrings(charcodes)
-	if numMisses > 0 {
-		// Some PDFs draw text with a "simple" font whose ToUnicode CMap is
-		// incomplete, while a sibling font (same embedded subset) carries the full
-		// mapping. When decoding misses, retry with such a sibling and keep the
-		// result if it decodes more of the bytes.
-		if sibling := to.siblingDecoder(font); sibling != nil {
+	if badness := decodeBadness(texts, numMisses); badness > 0 {
+		// Some PDFs draw text with a font whose ToUnicode/encoding is incomplete or
+		// wrong (unmapped codes, or codes mapped into the CJK range), while a
+		// sibling font for the same typeface decodes correctly. Retry with each
+		// sibling and keep the least garbled result.
+		for _, sibling := range to.siblingCandidates(font) {
 			siblingCodes := sibling.BytesToCharcodes(data)
 			siblingTexts, siblingChars, siblingMisses := sibling.CharcodesToStrings(siblingCodes)
-			if siblingMisses < numMisses {
+			if siblingBadness := decodeBadness(siblingTexts, siblingMisses); siblingBadness < badness {
 				font = sibling
 				charcodes, texts, numChars, numMisses = siblingCodes, siblingTexts, siblingChars, siblingMisses
+				badness = siblingBadness
 			}
 		}
 		common.Log.Debug("renderText: numChars=%d numMisses=%d", numChars, numMisses)
