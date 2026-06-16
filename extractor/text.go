@@ -20,7 +20,6 @@ import (
 	"github.com/matisiekpl/unipdf/v3/internal/textencoding"
 	"github.com/matisiekpl/unipdf/v3/internal/transform"
 	"github.com/matisiekpl/unipdf/v3/model"
-	"golang.org/x/xerrors"
 )
 
 // maxFormStack is the maximum form stack recursion depth. It has to be low enough to avoid a stack
@@ -247,10 +246,13 @@ func (e *Extractor) extractPageText(contents string, resources *model.PdfPageRes
 					common.Log.Debug("ERROR: Tf op=%s GetFloatVal failed. err=%v", op, err)
 					return err
 				}
+				// Skip the text of any font that fails to load (unsupported type,
+				// bad encoding, malformed dictionary) rather than failing the whole
+				// page. The rest of the page still extracts.
 				err = to.setFont(name, size)
-				to.invalidFont = xerrors.Is(err, core.ErrNotSupported)
-				if err != nil && !to.invalidFont {
-					return err
+				to.invalidFont = err != nil
+				if to.invalidFont {
+					common.Log.Debug("Tf: ignoring font %q that failed to load. err=%v", name, err)
 				}
 			case "Tm": // Set text matrix.
 				if ok, err := to.checkOp(op, 6, true); !ok {
