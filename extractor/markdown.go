@@ -51,29 +51,20 @@ func (pt PageText) marginBand(cy float64) bool {
 	return cy < pt.pageSize.Lly+pageHeight*0.08 || cy > pt.pageSize.Ury-pageHeight*0.08
 }
 
-func mdIsDigits(s string) bool {
-	s = strings.TrimSpace(s)
-	if s == "" {
-		return false
-	}
-	for _, r := range s {
-		if r < '0' || r > '9' {
-			return false
-		}
-	}
-	return true
+// mdMarginLine is a text line located entirely in a top or bottom margin band,
+// where running headers/footers and page numbers live.
+type mdMarginLine struct {
+	text    string
+	indices []int
 }
 
-// mdMarginNumberLines finds text lines that lie entirely in a margin band and
-// consist only of digit marks — i.e. page numbers. A page number split by the
-// extractor into several single-digit marks (e.g. "1","1") still qualifies,
-// while a date like "15.04.2023 r." does not, because its line also contains
-// "." and "r" marks. It returns the page-number value of each such line and the
-// indices (into pt.Marks()) of the marks to drop.
-func (pt PageText) mdMarginNumberLines() (values []int, stripIndices map[int]bool) {
+// marginLines groups the marks in the page's margin bands into lines (marks at
+// the same vertical position), returning each line's text and the indices of
+// its marks in pt.Marks().
+func (pt PageText) marginLines() []mdMarginLine {
 	marks := pt.Marks().Elements()
-	stripIndices = make(map[int]bool)
 	used := make(map[int]bool)
+	var lines []mdMarginLine
 	for i := range marks {
 		if used[i] || strings.TrimSpace(marks[i].Text) == "" {
 			continue
@@ -82,68 +73,83 @@ func (pt PageText) mdMarginNumberLines() (values []int, stripIndices map[int]boo
 		if !pt.marginBand(cy) {
 			continue
 		}
-		var line []int
-		allDigits := true
+		var idx []int
 		for j := range marks {
 			if strings.TrimSpace(marks[j].Text) == "" {
 				continue
 			}
 			cyj := (marks[j].BBox.Lly + marks[j].BBox.Ury) / 2
 			if mdAbs(cyj-cy) <= 6 {
-				line = append(line, j)
-				if !mdIsDigits(marks[j].Text) {
-					allDigits = false
-				}
+				idx = append(idx, j)
+				used[j] = true
 			}
 		}
-		for _, j := range line {
-			used[j] = true
+		sort.Slice(idx, func(a, b int) bool { return marks[idx[a]].BBox.Llx < marks[idx[b]].BBox.Llx })
+		var b strings.Builder
+		for _, j := range idx {
+			b.WriteString(strings.TrimSpace(marks[j].Text))
 		}
-		if !allDigits {
-			continue
-		}
-		sort.Slice(line, func(a, b int) bool { return marks[line[a]].BBox.Llx < marks[line[b]].BBox.Llx })
-		value, digits := 0, ""
-		for _, j := range line {
-			digits += strings.TrimSpace(marks[j].Text)
-		}
-		if len(digits) > 4 {
-			continue
-		}
-		for _, r := range digits {
-			value = value*10 + int(r-'0')
-		}
-		values = append(values, value)
-		for _, j := range line {
-			stripIndices[j] = true
-		}
+		lines = append(lines, mdMarginLine{text: b.String(), indices: idx})
 	}
-	return values, stripIndices
+	return lines
 }
 
-// contentMarks returns the page text marks. When stripMargins is true (the
-// document-level detector confirmed the document uses incrementing page numbers
-// in the margins), digit-only margin lines (page numbers) are dropped.
-func (pt PageText) contentMarks(stripMargins bool) []TextMark {
+// mdPageNumberRegexp matches a page number, optionally in "N/total" form.
+var mdPageNumberRegexp = regexp.MustCompile(`^(\d{1,4})(/\d{1,4})?$`)
+
+// mdPageNumberValue returns the (leading) page-number value of a margin line if
+// it is a page number such as "7" or "2/21", and false otherwise. "15.04.2023"
+// or "PT/H/026" do not match.
+func mdPageNumberValue(text string) (int, bool) {
+	m := mdPageNumberRegexp.FindStringSubmatch(text)
+	if m == nil {
+		return 0, false
+	}
+	value := 0
+	for _, r := range m[1] {
+		value = value*10 + int(r-'0')
+	}
+	return value, true
+}
+
+// mdLabelRegexp masks digit runs so that a running label with a varying page
+// number (e.g. "PT/H/0653/001/IA/026 19") normalizes to a stable form.
+var mdLabelRegexp = regexp.MustCompile(`\d+`)
+
+func mdNormalizeLabel(text string) string {
+	return mdLabelRegexp.ReplaceAllString(text, "#")
+}
+
+// contentMarks returns the page text marks with page-number footers/headers and
+// recurring running labels removed. stripPageNumbers is set when the document
+// was found to number its pages; repeatedLabels holds normalized margin lines
+// that recur on most pages.
+func (pt PageText) contentMarks(stripPageNumbers bool, repeatedLabels map[string]bool) []TextMark {
 	marks := pt.Marks().Elements()
-	if !stripMargins {
+	strip := make(map[int]bool)
+	for _, line := range pt.marginLines() {
+		_, isPageNumber := mdPageNumberValue(line.text)
+		if (stripPageNumbers && isPageNumber) || repeatedLabels[mdNormalizeLabel(line.text)] {
+			for _, j := range line.indices {
+				strip[j] = true
+			}
+		}
+	}
+	if len(strip) == 0 {
 		return marks
 	}
-	_, strip := pt.mdMarginNumberLines()
 	out := make([]TextMark, 0, len(marks))
 	for i, m := range marks {
-		if strip[i] {
-			continue
+		if !strip[i] {
+			out = append(out, m)
 		}
-		out = append(out, m)
 	}
 	return out
 }
 
 // blocks returns the page content as an ordered list of text and table blocks.
-// stripMargins drops page-number footers/headers when true.
-func (pt PageText) blocks(stripMargins bool) []mdBlock {
-	marks := pt.contentMarks(stripMargins)
+func (pt PageText) blocks(stripPageNumbers bool, repeatedLabels map[string]bool) []mdBlock {
+	marks := pt.contentMarks(stripPageNumbers, repeatedLabels)
 	strokes := pt.cleanStrokes()
 	t := pt.lineTable(marks)
 	if t == nil {
@@ -179,7 +185,7 @@ func (pt PageText) blocks(stripMargins bool) []mdBlock {
 // drawn with ruling lines are reconstructed as Markdown tables (cell line
 // breaks are encoded as <br>).
 func (pt PageText) Markdown() string {
-	return mdRenderBlocks(pt.blocks(false))
+	return mdRenderBlocks(pt.blocks(false, nil))
 }
 
 // DocumentMarkdown returns the Markdown for a whole document given its pages in
@@ -192,13 +198,14 @@ func (pt PageText) Markdown() string {
 // most one newline away) starts with a lower case letter or a digit, the two
 // lines are joined.
 func DocumentMarkdown(pages []*PageText, joinSentences bool) string {
-	stripMargins := mdDetectPageNumbers(pages)
+	stripPageNumbers := mdDetectPageNumbers(pages)
+	repeatedLabels := mdDetectRepeatedLabels(pages)
 	var blocks []mdBlock
 	for _, pt := range pages {
 		if pt == nil {
 			continue
 		}
-		for _, blk := range pt.blocks(stripMargins) {
+		for _, blk := range pt.blocks(stripPageNumbers, repeatedLabels) {
 			if blk.table != nil && len(blocks) > 0 {
 				if prev := &blocks[len(blocks)-1]; prev.table != nil && prev.table.cols() == blk.table.cols() {
 					prev.table.cells = append(prev.table.cells, blk.table.cells...)
@@ -279,7 +286,11 @@ func mdDetectPageNumbers(pages []*PageText) bool {
 		if pt == nil {
 			continue
 		}
-		pageValues[i], _ = pt.mdMarginNumberLines()
+		for _, line := range pt.marginLines() {
+			if v, ok := mdPageNumberValue(line.text); ok {
+				pageValues[i] = append(pageValues[i], v)
+			}
+		}
 	}
 	bestCount := 0
 	for k := -4; k <= 4; k++ {
@@ -300,6 +311,41 @@ func mdDetectPageNumbers(pages []*PageText) bool {
 	// A run of margin numbers that increments page-to-page on at least a third
 	// of the pages (and at least 3) confirms the document numbers its pages.
 	return bestCount >= 3 && bestCount*3 >= len(pages)
+}
+
+// mdDetectRepeatedLabels returns the set of normalized margin lines (digit runs
+// masked) that recur in the margins of most pages — i.e. running headers and
+// footers such as "PT/H/0653/001/IA/026". Requiring a strong majority avoids
+// pruning ordinary content. A pure page number is excluded here because it is
+// handled separately and would otherwise always qualify.
+func mdDetectRepeatedLabels(pages []*PageText) map[string]bool {
+	nonNil := 0
+	counts := make(map[string]int)
+	for _, pt := range pages {
+		if pt == nil {
+			continue
+		}
+		nonNil++
+		seen := make(map[string]bool)
+		for _, line := range pt.marginLines() {
+			if _, isPageNumber := mdPageNumberValue(line.text); isPageNumber {
+				continue
+			}
+			norm := mdNormalizeLabel(line.text)
+			if len(norm) < 4 || seen[norm] {
+				continue
+			}
+			seen[norm] = true
+			counts[norm]++
+		}
+	}
+	repeated := make(map[string]bool)
+	for norm, count := range counts {
+		if count >= 3 && count*2 >= nonNil {
+			repeated[norm] = true
+		}
+	}
+	return repeated
 }
 
 func mdRenderBlocks(blocks []mdBlock) string {
