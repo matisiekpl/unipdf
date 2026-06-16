@@ -19,11 +19,133 @@ type mdBlock struct {
 	table *mdLineTable
 }
 
-// blocks returns the page content as an ordered list of text and table blocks.
-func (pt PageText) blocks() []mdBlock {
+// cleanStrokes returns the page strokes with exact duplicates removed and with
+// page-spanning strokes (clipping rectangles and page borders/backgrounds that
+// some PDFs draw repeatedly) dropped, so they don't pollute table detection.
+func (pt PageText) cleanStrokes() []Stroke {
+	pageWidth := pt.pageSize.Urx - pt.pageSize.Llx
+	pageHeight := pt.pageSize.Ury - pt.pageSize.Lly
+	seen := make(map[[4]int]bool)
+	var out []Stroke
+	for _, s := range pt.strokes {
+		if s.IsVertical() && mdAbs(s.Y2-s.Y1) > pageHeight*0.8 {
+			continue
+		}
+		if s.IsHorizontal() && mdAbs(s.X2-s.X1) > pageWidth*0.8 {
+			continue
+		}
+		key := [4]int{int(s.X1), int(s.Y1), int(s.X2), int(s.Y2)}
+		if seen[key] {
+			continue
+		}
+		seen[key] = true
+		out = append(out, s)
+	}
+	return out
+}
+
+// marginBand reports whether device-y `cy` is inside the top or bottom margin
+// band of the page, where running headers and page numbers live.
+func (pt PageText) marginBand(cy float64) bool {
+	pageHeight := pt.pageSize.Ury - pt.pageSize.Lly
+	return cy < pt.pageSize.Lly+pageHeight*0.08 || cy > pt.pageSize.Ury-pageHeight*0.08
+}
+
+func mdIsDigits(s string) bool {
+	s = strings.TrimSpace(s)
+	if s == "" {
+		return false
+	}
+	for _, r := range s {
+		if r < '0' || r > '9' {
+			return false
+		}
+	}
+	return true
+}
+
+// mdMarginNumberLines finds text lines that lie entirely in a margin band and
+// consist only of digit marks — i.e. page numbers. A page number split by the
+// extractor into several single-digit marks (e.g. "1","1") still qualifies,
+// while a date like "15.04.2023 r." does not, because its line also contains
+// "." and "r" marks. It returns the page-number value of each such line and the
+// indices (into pt.Marks()) of the marks to drop.
+func (pt PageText) mdMarginNumberLines() (values []int, stripIndices map[int]bool) {
 	marks := pt.Marks().Elements()
-	strokes := pt.strokes
-	t := pt.lineTable()
+	stripIndices = make(map[int]bool)
+	used := make(map[int]bool)
+	for i := range marks {
+		if used[i] || strings.TrimSpace(marks[i].Text) == "" {
+			continue
+		}
+		cy := (marks[i].BBox.Lly + marks[i].BBox.Ury) / 2
+		if !pt.marginBand(cy) {
+			continue
+		}
+		var line []int
+		allDigits := true
+		for j := range marks {
+			if strings.TrimSpace(marks[j].Text) == "" {
+				continue
+			}
+			cyj := (marks[j].BBox.Lly + marks[j].BBox.Ury) / 2
+			if mdAbs(cyj-cy) <= 6 {
+				line = append(line, j)
+				if !mdIsDigits(marks[j].Text) {
+					allDigits = false
+				}
+			}
+		}
+		for _, j := range line {
+			used[j] = true
+		}
+		if !allDigits {
+			continue
+		}
+		sort.Slice(line, func(a, b int) bool { return marks[line[a]].BBox.Llx < marks[line[b]].BBox.Llx })
+		value, digits := 0, ""
+		for _, j := range line {
+			digits += strings.TrimSpace(marks[j].Text)
+		}
+		if len(digits) > 4 {
+			continue
+		}
+		for _, r := range digits {
+			value = value*10 + int(r-'0')
+		}
+		values = append(values, value)
+		for _, j := range line {
+			stripIndices[j] = true
+		}
+	}
+	return values, stripIndices
+}
+
+// contentMarks returns the page text marks. When stripMargins is true (the
+// document-level detector confirmed the document uses incrementing page numbers
+// in the margins), digit-only margin lines (page numbers) are dropped.
+func (pt PageText) contentMarks(stripMargins bool) []TextMark {
+	marks := pt.Marks().Elements()
+	if !stripMargins {
+		return marks
+	}
+	_, strip := pt.mdMarginNumberLines()
+	out := make([]TextMark, 0, len(marks))
+	for i, m := range marks {
+		if strip[i] {
+			continue
+		}
+		out = append(out, m)
+	}
+	return out
+}
+
+// blocks returns the page content as an ordered list of text and table blocks.
+// stripMargins drops page-number footers/headers when true.
+func (pt PageText) blocks(stripMargins bool) []mdBlock {
+	marks := pt.contentMarks(stripMargins)
+	strokes := pt.cleanStrokes()
+	t := pt.lineTable(marks)
 	if t == nil {
 		if txt := mdReconstructText(marks, strokes); txt != "" {
 			return []mdBlock{{text: txt}}
@@ -57,7 +179,7 @@ func (pt PageText) blocks() []mdBlock {
 // drawn with ruling lines are reconstructed as Markdown tables (cell line
 // breaks are encoded as <br>).
 func (pt PageText) Markdown() string {
-	return mdRenderBlocks(pt.blocks())
+	return mdRenderBlocks(pt.blocks(false))
 }
 
 // DocumentMarkdown returns the Markdown for a whole document given its pages in
@@ -70,12 +192,13 @@ func (pt PageText) Markdown() string {
 // most one newline away) starts with a lower case letter or a digit, the two
 // lines are joined.
 func DocumentMarkdown(pages []*PageText, joinSentences bool) string {
+	stripMargins := mdDetectPageNumbers(pages)
 	var blocks []mdBlock
 	for _, pt := range pages {
 		if pt == nil {
 			continue
 		}
-		for _, blk := range pt.blocks() {
+		for _, blk := range pt.blocks(stripMargins) {
 			if blk.table != nil && len(blocks) > 0 {
 				if prev := &blocks[len(blocks)-1]; prev.table != nil && prev.table.cols() == blk.table.cols() {
 					prev.table.cells = append(prev.table.cells, blk.table.cells...)
@@ -145,6 +268,40 @@ func mdShouldJoin(prev, cur string) bool {
 	return unicode.IsDigit(first) || unicode.IsLower(first)
 }
 
+// mdDetectPageNumbers reports whether the document numbers its pages in the
+// margins. It looks for an offset k such that, on most pages, a digit-only
+// margin line equal to (pageIndex+1+k) appears — i.e. a number that increments
+// by one from page to page. Random integers that happen to sit in a margin do
+// not form such a run and are left untouched.
+func mdDetectPageNumbers(pages []*PageText) bool {
+	pageValues := make([][]int, len(pages))
+	for i, pt := range pages {
+		if pt == nil {
+			continue
+		}
+		pageValues[i], _ = pt.mdMarginNumberLines()
+	}
+	bestCount := 0
+	for k := -4; k <= 4; k++ {
+		count := 0
+		for i := range pages {
+			expected := i + 1 + k
+			for _, v := range pageValues[i] {
+				if v == expected {
+					count++
+					break
+				}
+			}
+		}
+		if count > bestCount {
+			bestCount = count
+		}
+	}
+	// A run of margin numbers that increments page-to-page on at least a third
+	// of the pages (and at least 3) confirms the document numbers its pages.
+	return bestCount >= 3 && bestCount*3 >= len(pages)
+}
+
 func mdRenderBlocks(blocks []mdBlock) string {
 	var parts []string
 	for _, blk := range blocks {
@@ -183,16 +340,24 @@ type mdHSeg struct{ y, x0, x1 float64 }
 
 // lineTable reconstructs the table drawn with ruling lines on the page, or
 // returns nil if no such table is found.
-func (pt PageText) lineTable() *mdLineTable {
+func (pt PageText) lineTable(marks []TextMark) *mdLineTable {
 	var vxs []float64
 	var vsegs []mdVSeg
 	var hsegs []mdHSeg
-	for _, s := range pt.strokes {
-		if s.IsVertical() && mdAbs(s.Y2-s.Y1) > 20 {
+	for _, s := range pt.cleanStrokes() {
+		if s.IsVertical() {
 			x := (s.X1 + s.X2) / 2
 			lo, hi := mdMinMax(s.Y1, s.Y2)
-			vxs = append(vxs, x)
-			vsegs = append(vsegs, mdVSeg{x, lo, hi})
+			length := hi - lo
+			// Long verticals are column-border candidates. Short ones (e.g. a
+			// single-line header row separator) are kept only as vsegs so they can
+			// still establish the table extent and per-row column structure.
+			if length > 20 {
+				vxs = append(vxs, x)
+			}
+			if length > 5 {
+				vsegs = append(vsegs, mdVSeg{x, lo, hi})
+			}
 		}
 		if s.IsHorizontal() {
 			lo, hi := mdMinMax(s.X1, s.X2)
@@ -212,8 +377,20 @@ func (pt PageText) lineTable() *mdLineTable {
 	for _, h := range hsegs {
 		hys = append(hys, h.y)
 	}
-	vmin, vmax := vsegs[0].ylo, vsegs[0].yhi
+	// The table vertical extent is determined only by verticals that sit on a
+	// detected column border. This lets short header-row separators extend the
+	// extent (so the header row is kept) while ignoring stray rules and mid-cell
+	// ticks that are not aligned with any column.
+	vmin, vmax := 0.0, 0.0
+	haveExtent := false
 	for _, v := range vsegs {
+		if !mdNearAny(xs, v.x, 6) {
+			continue
+		}
+		if !haveExtent {
+			vmin, vmax, haveExtent = v.ylo, v.yhi, true
+			continue
+		}
 		vmin = mdMin(vmin, v.ylo)
 		vmax = mdMax(vmax, v.yhi)
 	}
@@ -261,7 +438,7 @@ func (pt PageText) lineTable() *mdLineTable {
 	}
 
 	cellMarks := make(map[[2]int][]mdCellMark)
-	for _, m := range pt.Marks().Elements() {
+	for _, m := range marks {
 		if strings.TrimSpace(m.Text) == "" {
 			continue
 		}
@@ -399,7 +576,7 @@ func mdReconstructText(marks []TextMark, strokes []Stroke) string {
 
 	var b strings.Builder
 	for i, line := range rendered {
-		bullet := strings.HasPrefix(line, "•")
+		content, bullet := mdBulletContent(line)
 		if i > 0 {
 			if bullet {
 				b.WriteString("\n")
@@ -410,12 +587,28 @@ func mdReconstructText(marks []TextMark, strokes []Stroke) string {
 			}
 		}
 		if bullet {
-			b.WriteString("- " + strings.TrimSpace(strings.TrimPrefix(line, "•")))
+			b.WriteString("- " + content)
 		} else {
 			b.WriteString(line)
 		}
 	}
 	return b.String()
+}
+
+// mdBulletContent reports whether a physical line begins with a bullet marker
+// (•, a dash, or an asterisk followed by a space) and returns the text after
+// the marker. A trailing-position dash (hyphenated word wrap) is not a bullet
+// because the marker must be at the very start of the line.
+func mdBulletContent(line string) (string, bool) {
+	if strings.HasPrefix(line, "•") {
+		return strings.TrimSpace(line[len("•"):]), true
+	}
+	for _, marker := range []string{"- ", "– ", "− ", "* "} {
+		if strings.HasPrefix(line, marker) {
+			return strings.TrimSpace(line[len(marker):]), true
+		}
+	}
+	return line, false
 }
 
 // mdRenderLine renders a single line, coalescing consecutive words that share
@@ -529,6 +722,15 @@ func mdFindCell(borders []float64, v float64, descending bool) int {
 		}
 	}
 	return -1
+}
+
+func mdNearAny(xs []float64, x, tol float64) bool {
+	for _, v := range xs {
+		if mdAbs(v-x) <= tol {
+			return true
+		}
+	}
+	return false
 }
 
 func mdNearestIndex(xs []float64, x float64) int {
