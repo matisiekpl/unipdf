@@ -714,7 +714,7 @@ func parseCIDFontWidthsArray(w core.PdfObject) (map[textencoding.CharCode]float6
 				return nil, fmt.Errorf("Bad font W array: arr2=%+v", wArr)
 			}
 
-			obj2 := wArr.Get(i)
+			obj2 := core.TraceToDirectObject(wArr.Get(i))
 			v, err := core.GetNumberAsFloat(obj2)
 			if err != nil {
 				return nil, fmt.Errorf("Bad font W int obj2: i=%d %#v", i, obj2)
