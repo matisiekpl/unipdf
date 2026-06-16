@@ -13,15 +13,26 @@ import (
 	"github.com/matisiekpl/unipdf/v3/model"
 )
 
-// symbolEncoder maps Adobe Symbol font character codes to Unicode. It is used to
-// recover symbols (≥, ≤, µ, α, β, …) that some PDFs encode in the Private Use
-// Area (U+F0xx = Symbol charcode 0xxx) via their ToUnicode CMap.
-var symbolEncoder = textencoding.NewSymbolEncoder()
+// symbolPUA maps Adobe Symbol font Private Use Area code points (U+F0xx =
+// Symbol charcode 0xxx) to their real Unicode characters (≥, ≤, µ, α, β, …),
+// which some PDFs encode in the PUA via their ToUnicode CMap. It is built once
+// at startup so that lookups are read-only and safe for concurrent use (the
+// Symbol encoder itself mutates internal state on each call).
+var symbolPUA = buildSymbolPUA()
 
-// dingbatPUA maps dingbat-font Private Use Area code points that the Symbol
-// encoder does not cover (e.g. a Wingdings list bullet) to a sensible character.
-var dingbatPUA = map[rune]rune{
-	0xF09F: '•',
+func buildSymbolPUA() map[rune]rune {
+	encoder := textencoding.NewSymbolEncoder()
+	out := make(map[rune]rune, 0x100)
+	for code := 0; code <= 0xFF; code++ {
+		// Skip codes the Symbol font itself maps into the Private Use Area
+		// (e.g. bracket pieces); those have no real Unicode and are dropped.
+		if mapped, ok := encoder.CharcodeToRune(textencoding.CharCode(code)); ok && mapped < 0xE000 {
+			out[rune(0xF000+code)] = mapped
+		}
+	}
+	// Dingbat (e.g. Wingdings) PUA code points the Symbol encoder does not cover.
+	out[0xF09F] = '•'
+	return out
 }
 
 // fixDecodedText repairs decoded strings that came from fonts with a broken
@@ -32,7 +43,7 @@ func fixDecodedText(texts []string) {
 	for i, text := range texts {
 		needsFix := false
 		for _, r := range text {
-			if (r >= 0xF000 && r <= 0xF0FF) || isAsciiPairGarble(r) {
+			if _, ok := repairRune(r); ok {
 				needsFix = true
 				break
 			}
@@ -42,19 +53,9 @@ func fixDecodedText(texts []string) {
 		}
 		var b strings.Builder
 		for _, r := range text {
-			switch {
-			case r >= 0xF000 && r <= 0xF0FF:
-				if mapped, ok := symbolEncoder.CharcodeToRune(textencoding.CharCode(r - 0xF000)); ok {
-					b.WriteRune(mapped)
-				} else if mapped, ok := dingbatPUA[r]; ok {
-					b.WriteRune(mapped)
-				} else {
-					b.WriteRune(r)
-				}
-			case isAsciiPairGarble(r):
-				b.WriteByte(byte(r >> 8))
-				b.WriteByte(byte(r & 0xFF))
-			default:
+			if repaired, ok := repairRune(r); ok {
+				b.WriteString(repaired)
+			} else {
 				b.WriteRune(r)
 			}
 		}
@@ -62,15 +63,64 @@ func fixDecodedText(texts []string) {
 	}
 }
 
-// isAsciiPairGarble reports whether `r` is a CJK code point whose high and low
-// bytes are both printable ASCII — a sign that an Identity ToUnicode CMap mapped
-// a two-byte character code straight to Unicode instead of decoding it.
-func isAsciiPairGarble(r rune) bool {
-	if r < 0x2E80 || r > 0xFFFF {
-		return false
+// repairRune returns the repaired text for a code point that came from a broken
+// font mapping, and whether a repair applies. It handles Symbol/dingbat Private
+// Use Area code points and CJK code points that are really one or two raw bytes
+// (the result of an Identity ToUnicode CMap reading character codes as Unicode).
+func repairRune(r rune) (string, bool) {
+	if r < 0x20 && r != '\t' && r != '\n' && r != '\r' {
+		// Control characters never legitimately appear in extracted display text;
+		// they come from a broken mapping. Drop them.
+		return "", true
 	}
-	hi, lo := byte(r>>8), byte(r&0xFF)
-	return hi >= 0x20 && hi <= 0x7E && lo >= 0x20 && lo <= 0x7E
+	if r >= 0xE000 && r <= 0xF8FF {
+		// Private Use Area: map the known Symbol-font code points to real
+		// characters; drop the rest (font-specific dingbat glyphs with no
+		// standard meaning) so they don't show up as broken boxes.
+		if mapped, ok := symbolPUA[r]; ok {
+			return string(mapped), true
+		}
+		return "", true
+	}
+	if r >= 0x2E80 && r <= 0xFFFF {
+		hi, hiOk := latinByteRune(byte(r >> 8))
+		lo, loOk := latinByteRune(byte(r & 0xFF))
+		hiNull := byte(r>>8) == 0
+		loNull := byte(r&0xFF) == 0
+		switch {
+		case hiOk && loOk:
+			return string(hi) + string(lo), true
+		case hiOk && loNull:
+			return string(hi), true
+		case loOk && hiNull:
+			return string(lo), true
+		}
+	}
+	return "", false
+}
+
+// winAnsiByte maps a raw byte to the WinAnsi character it encodes (covering the
+// 0x80–0x9F range that Latin-1 leaves as control characters, e.g. 0x96 = en
+// dash). Built once at startup for concurrency-safe, read-only lookups.
+var winAnsiByte = buildWinAnsiByte()
+
+func buildWinAnsiByte() map[byte]rune {
+	encoder := textencoding.NewWinAnsiEncoder()
+	out := make(map[byte]rune, 0x100)
+	for code := 0x20; code <= 0xFF; code++ {
+		if r, ok := encoder.CharcodeToRune(textencoding.CharCode(code)); ok && r != 0xFFFD {
+			out[byte(code)] = r
+		}
+	}
+	return out
+}
+
+// latinByteRune returns the character a byte encodes (WinAnsi) when it is
+// printable, used to recover text whose character codes an Identity ToUnicode
+// CMap merged into a single code point.
+func latinByteRune(b byte) (rune, bool) {
+	r, ok := winAnsiByte[b]
+	return r, ok
 }
 
 // siblingCandidates returns fonts that share `font`'s underlying typeface (same
@@ -147,14 +197,14 @@ func fontSubsetKey(baseFont string) string {
 }
 
 // decodeBadness scores how garbled a decode is: unmapped codes plus characters
-// in the CJK (and beyond) Unicode ranges, which never legitimately appear in
-// these Latin-script documents and signal a font whose code->unicode mapping is
-// wrong.
+// that never legitimately appear in these Latin-script documents — control
+// characters, the replacement rune and code points in the CJK (and beyond)
+// ranges — all of which signal a font whose code->unicode mapping is wrong.
 func decodeBadness(texts []string, numMisses int) int {
 	bad := numMisses
 	for _, text := range texts {
 		for _, r := range text {
-			if r >= 0x2C00 {
+			if r >= 0x2C00 || r == 0xFFFD || (r < 0x20 && r != '\t' && r != '\n') {
 				bad++
 			}
 		}
