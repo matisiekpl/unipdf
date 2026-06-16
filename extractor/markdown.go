@@ -464,7 +464,27 @@ func (pt PageText) lineTable(marks []TextMark) *mdLineTable {
 	for key, cms := range cellMarks {
 		t.cells[key[0]][key[1]] = mdJoinCell(cms)
 	}
+	t.dropEmptyRows()
 	return t
+}
+
+// dropEmptyRows removes rows whose cells are all empty. Such rows come from
+// spacer bands in the ruling grid and carry no content.
+func (t *mdLineTable) dropEmptyRows() {
+	kept := t.cells[:0]
+	for _, row := range t.cells {
+		empty := true
+		for _, cell := range row {
+			if strings.TrimSpace(cell) != "" {
+				empty = false
+				break
+			}
+		}
+		if !empty {
+			kept = append(kept, row)
+		}
+	}
+	t.cells = kept
 }
 
 type mdCellMark struct {
