@@ -774,6 +774,7 @@ func (to *textObject) renderText(data []byte) error {
 		}
 		common.Log.Debug("renderText: numChars=%d numMisses=%d", numChars, numMisses)
 	}
+	fixDecodedText(texts)
 
 	to.state.numChars += numChars
 	to.state.numMisses += numMisses
