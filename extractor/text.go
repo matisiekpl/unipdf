@@ -14,12 +14,12 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/oliverpool/unipdf/v3/common"
-	"github.com/oliverpool/unipdf/v3/contentstream"
-	"github.com/oliverpool/unipdf/v3/core"
-	"github.com/oliverpool/unipdf/v3/internal/textencoding"
-	"github.com/oliverpool/unipdf/v3/internal/transform"
-	"github.com/oliverpool/unipdf/v3/model"
+	"github.com/matisiekpl/unipdf/v3/common"
+	"github.com/matisiekpl/unipdf/v3/contentstream"
+	"github.com/matisiekpl/unipdf/v3/core"
+	"github.com/matisiekpl/unipdf/v3/internal/textencoding"
+	"github.com/matisiekpl/unipdf/v3/internal/transform"
+	"github.com/matisiekpl/unipdf/v3/model"
 	"golang.org/x/xerrors"
 )
 
@@ -92,6 +92,8 @@ func (e *Extractor) extractPageText(contents string, resources *model.PdfPageRes
 	}
 
 	processor := contentstream.NewContentStreamProcessor(*operations)
+
+	var paths pathBuilder
 
 	processor.AddHandler(contentstream.HandlerConditionEnumAllOperands, "",
 		func(op *contentstream.ContentStreamOperation, gs contentstream.GraphicsState,
@@ -352,6 +354,8 @@ func (e *Extractor) extractPageText(contents string, resources *model.PdfPageRes
 				}
 
 				pageText.marks = append(pageText.marks, formResult.pageText.marks...)
+				pageText.strokes = append(pageText.strokes, formResult.pageText.strokes...)
+				pageText.rects = append(pageText.rects, formResult.pageText.rects...)
 				state.numChars += formResult.numChars
 				state.numMisses += formResult.numMisses
 			case "rg", "g", "k", "cs", "sc", "scn":
@@ -362,6 +366,20 @@ func (e *Extractor) extractPageText(contents string, resources *model.PdfPageRes
 				// Set stroking color/colorspace.
 				to.gs.ColorspaceStroking = gs.ColorspaceStroking
 				to.gs.ColorStroking = gs.ColorStroking
+			case "m": // Begin new subpath.
+				if f, err := core.GetNumbersAsFloat(op.Params); err == nil && len(f) == 2 {
+					paths.moveTo(gs.CTM, f[0], f[1])
+				}
+			case "l": // Append straight line segment.
+				if f, err := core.GetNumbersAsFloat(op.Params); err == nil && len(f) == 2 {
+					paths.lineTo(gs.CTM, f[0], f[1])
+				}
+			case "re": // Append rectangle.
+				if f, err := core.GetNumbersAsFloat(op.Params); err == nil && len(f) == 4 {
+					paths.rect(gs.CTM, f[0], f[1], f[2], f[3])
+				}
+			case "h": // Close subpath.
+				paths.closePath()
 			}
 			return nil
 		})
@@ -370,6 +388,8 @@ func (e *Extractor) extractPageText(contents string, resources *model.PdfPageRes
 	if err != nil {
 		common.Log.Debug("ERROR: Processing: err=%v", err)
 	}
+	pageText.strokes = append(pageText.strokes, paths.strokes...)
+	pageText.rects = append(pageText.rects, paths.rects...)
 	return pageText, state.numChars, state.numMisses, err
 }
 
@@ -889,6 +909,20 @@ type PageText struct {
 	viewMarks  []TextMark         // Public view of text marks.
 	viewTables []TextTable        // Public view of text tables.
 	pageSize   model.PdfRectangle // Page size. Used to calculate depth.
+	strokes    []Stroke           // Axis aligned line segments drawn on the page (device coords).
+	rects      []Rect             // Axis aligned rectangles drawn on the page (device coords).
+}
+
+// Strokes returns the axis aligned line segments (ruling lines) drawn on the page in device
+// coordinates. These can be used to reconstruct tables that are drawn with lines.
+func (pt PageText) Strokes() []Stroke {
+	return pt.strokes
+}
+
+// Rects returns the axis aligned rectangles drawn on the page in device coordinates. When a table
+// is drawn as a set of rectangular cells these correspond to the table cells.
+func (pt PageText) Rects() []Rect {
+	return pt.rects
 }
 
 // String returns a string describing `pt`.

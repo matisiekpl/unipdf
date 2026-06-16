@@ -12,9 +12,9 @@ import (
 	"path/filepath"
 	"testing"
 
-	pdfcontent "github.com/oliverpool/unipdf/v3/contentstream"
-	"github.com/oliverpool/unipdf/v3/core"
-	pdf "github.com/oliverpool/unipdf/v3/model"
+	pdfcontent "github.com/matisiekpl/unipdf/v3/contentstream"
+	"github.com/matisiekpl/unipdf/v3/core"
+	pdf "github.com/matisiekpl/unipdf/v3/model"
 )
 
 const aes3Dir = `./testdata`

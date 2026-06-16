@@ -10,8 +10,8 @@ import (
 	"errors"
 	"time"
 
-	"github.com/oliverpool/unipdf/v3/common"
-	"github.com/oliverpool/unipdf/v3/core"
+	"github.com/matisiekpl/unipdf/v3/common"
+	"github.com/matisiekpl/unipdf/v3/core"
 )
 
 var _ core.PdfObject = &pdfSignDictionary{}

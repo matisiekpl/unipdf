@@ -10,9 +10,9 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/oliverpool/unipdf/v3/common"
-	"github.com/oliverpool/unipdf/v3/core"
-	"github.com/oliverpool/unipdf/v3/model"
+	"github.com/matisiekpl/unipdf/v3/common"
+	"github.com/matisiekpl/unipdf/v3/core"
+	"github.com/matisiekpl/unipdf/v3/model"
 )
 
 // TextChunk represents a chunk of text along with a particular style.

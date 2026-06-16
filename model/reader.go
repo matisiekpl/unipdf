@@ -11,9 +11,9 @@ import (
 	"io"
 	"strings"
 
-	"github.com/oliverpool/unipdf/v3/common"
-	"github.com/oliverpool/unipdf/v3/core"
-	"github.com/oliverpool/unipdf/v3/core/security"
+	"github.com/matisiekpl/unipdf/v3/common"
+	"github.com/matisiekpl/unipdf/v3/core"
+	"github.com/matisiekpl/unipdf/v3/core/security"
 )
 
 // PdfReader represents a PDF file reader. It is a frontend to the lower level parsing mechanism and provides

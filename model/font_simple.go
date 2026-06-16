@@ -13,11 +13,11 @@ import (
 	"os"
 	"strings"
 
-	"github.com/oliverpool/unipdf/v3/common"
-	"github.com/oliverpool/unipdf/v3/core"
+	"github.com/matisiekpl/unipdf/v3/common"
+	"github.com/matisiekpl/unipdf/v3/core"
 
-	"github.com/oliverpool/unipdf/v3/internal/textencoding"
-	"github.com/oliverpool/unipdf/v3/model/internal/fonts"
+	"github.com/matisiekpl/unipdf/v3/internal/textencoding"
+	"github.com/matisiekpl/unipdf/v3/model/internal/fonts"
 )
 
 // pdfFontSimple implements pdfFont

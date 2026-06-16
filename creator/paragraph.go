@@ -9,10 +9,10 @@ import (
 	"errors"
 	"strconv"
 
-	"github.com/oliverpool/unipdf/v3/common"
-	"github.com/oliverpool/unipdf/v3/contentstream"
-	"github.com/oliverpool/unipdf/v3/core"
-	"github.com/oliverpool/unipdf/v3/model"
+	"github.com/matisiekpl/unipdf/v3/common"
+	"github.com/matisiekpl/unipdf/v3/contentstream"
+	"github.com/matisiekpl/unipdf/v3/core"
+	"github.com/matisiekpl/unipdf/v3/model"
 )
 
 // Paragraph represents text drawn with a specified font and can wrap across lines and pages.

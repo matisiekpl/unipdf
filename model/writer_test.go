@@ -115,7 +115,7 @@ func (w *erroringWriter) Write(_ []byte) (int, error) {
 }
 
 // TestWriterErrorHandling tests error handling of the writer.
-// https://github.com/oliverpool/unipdf/issues/316
+// https://github.com/matisiekpl/unipdf/issues/316
 func TestWriterErrorHandling(t *testing.T) {
 	w := NewPdfWriter()
 	page := NewPdfPage()

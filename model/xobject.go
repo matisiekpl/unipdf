@@ -8,8 +8,8 @@ package model
 import (
 	"errors"
 
-	"github.com/oliverpool/unipdf/v3/common"
-	"github.com/oliverpool/unipdf/v3/core"
+	"github.com/matisiekpl/unipdf/v3/common"
+	"github.com/matisiekpl/unipdf/v3/core"
 )
 
 // XObjectForm (Table 95 in 8.10.2).

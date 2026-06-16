@@ -8,7 +8,7 @@ package security
 import (
 	"crypto/cipher"
 
-	"github.com/oliverpool/unipdf/v3/common"
+	"github.com/matisiekpl/unipdf/v3/common"
 )
 
 // ecb implements an Electronic Codebook encryption mode.

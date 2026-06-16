@@ -11,8 +11,8 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/oliverpool/unipdf/v3/common"
-	"github.com/oliverpool/unipdf/v3/model"
+	"github.com/matisiekpl/unipdf/v3/common"
+	"github.com/matisiekpl/unipdf/v3/model"
 )
 
 // wordBag is just a list of textWords in a rectangular region. It is needed for efficient

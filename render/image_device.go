@@ -16,8 +16,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/oliverpool/unipdf/v3/model"
-	"github.com/oliverpool/unipdf/v3/render/internal/context/imagerender"
+	"github.com/matisiekpl/unipdf/v3/model"
+	"github.com/matisiekpl/unipdf/v3/render/internal/context/imagerender"
 )
 
 // ImageDevice is used to render PDF pages to image targets.

@@ -14,9 +14,9 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/oliverpool/unipdf/v3/annotator"
-	"github.com/oliverpool/unipdf/v3/fdf"
-	"github.com/oliverpool/unipdf/v3/model"
+	"github.com/matisiekpl/unipdf/v3/annotator"
+	"github.com/matisiekpl/unipdf/v3/fdf"
+	"github.com/matisiekpl/unipdf/v3/model"
 )
 
 // FDF merge tests merge FDF data into template PDF data and flattens to an output PDF file.

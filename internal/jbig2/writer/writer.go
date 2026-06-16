@@ -8,9 +8,9 @@ package writer
 import (
 	"io"
 
-	"github.com/oliverpool/unipdf/v3/common"
+	"github.com/matisiekpl/unipdf/v3/common"
 
-	"github.com/oliverpool/unipdf/v3/internal/jbig2/errors"
+	"github.com/matisiekpl/unipdf/v3/internal/jbig2/errors"
 )
 
 // Writer is the structure used to write bits, bytes into predefined data.

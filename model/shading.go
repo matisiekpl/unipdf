@@ -8,8 +8,8 @@ package model
 import (
 	"errors"
 
-	"github.com/oliverpool/unipdf/v3/common"
-	"github.com/oliverpool/unipdf/v3/core"
+	"github.com/matisiekpl/unipdf/v3/common"
+	"github.com/matisiekpl/unipdf/v3/core"
 )
 
 // PdfShading represents a shading dictionary. There are 7 types of shading,

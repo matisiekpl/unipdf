@@ -1,4 +1,4 @@
-module github.com/oliverpool/unipdf/v3
+module github.com/matisiekpl/unipdf/v3
 
 go 1.11
 

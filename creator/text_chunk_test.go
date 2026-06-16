@@ -8,7 +8,7 @@ package creator
 import (
 	"testing"
 
-	"github.com/oliverpool/unipdf/v3/model"
+	"github.com/matisiekpl/unipdf/v3/model"
 	"github.com/stretchr/testify/require"
 )
 

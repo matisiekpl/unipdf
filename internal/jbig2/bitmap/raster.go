@@ -6,9 +6,9 @@
 package bitmap
 
 import (
-	"github.com/oliverpool/unipdf/v3/common"
+	"github.com/matisiekpl/unipdf/v3/common"
 
-	"github.com/oliverpool/unipdf/v3/internal/jbig2/errors"
+	"github.com/matisiekpl/unipdf/v3/internal/jbig2/errors"
 )
 
 // RasterOperator is the raster operation flag operator.

@@ -10,7 +10,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/oliverpool/unipdf/v3/core"
+	"github.com/matisiekpl/unipdf/v3/core"
 )
 
 // IdentityEncoder represents an 2-byte identity encoding.

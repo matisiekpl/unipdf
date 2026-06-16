@@ -21,9 +21,9 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/oliverpool/unipdf/v3/common"
-	"github.com/oliverpool/unipdf/v3/model"
-	"github.com/oliverpool/unipdf/v3/model/optimize"
+	"github.com/matisiekpl/unipdf/v3/common"
+	"github.com/matisiekpl/unipdf/v3/model"
+	"github.com/matisiekpl/unipdf/v3/model/optimize"
 )
 
 var (

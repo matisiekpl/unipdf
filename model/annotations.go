@@ -9,8 +9,8 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/oliverpool/unipdf/v3/common"
-	"github.com/oliverpool/unipdf/v3/core"
+	"github.com/matisiekpl/unipdf/v3/common"
+	"github.com/matisiekpl/unipdf/v3/core"
 )
 
 // PdfAnnotation represents an annotation in PDF (section 12.5 p. 389).

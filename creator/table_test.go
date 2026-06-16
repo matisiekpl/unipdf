@@ -12,7 +12,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/oliverpool/unipdf/v3/model"
+	"github.com/matisiekpl/unipdf/v3/model"
 )
 
 var (
@@ -558,7 +558,7 @@ func TestTableParagraphLinks(t *testing.T) {
 	cell = table.NewCell()
 	cell.SetBorder(CellBorderSideAll, CellBorderStyleSingle, 1)
 	p = c.NewStyledParagraph()
-	p.AddExternalLink("link to UniPDF", "https://github.com/oliverpool/unipdf")
+	p.AddExternalLink("link to UniPDF", "https://github.com/matisiekpl/unipdf")
 	cell.SetContent(p)
 
 	if err := c.Draw(table); err != nil {

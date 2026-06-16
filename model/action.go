@@ -7,8 +7,8 @@ package model
 
 import (
 	"fmt"
-	"github.com/oliverpool/unipdf/v3/common"
-	"github.com/oliverpool/unipdf/v3/core"
+	"github.com/matisiekpl/unipdf/v3/common"
+	"github.com/matisiekpl/unipdf/v3/core"
 )
 
 // PdfActionType represents an action type in PDF (section 12.6.4 p. 417).
