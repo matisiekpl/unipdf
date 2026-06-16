@@ -6,8 +6,10 @@
 package extractor
 
 import (
+	"regexp"
 	"sort"
 	"strings"
+	"unicode"
 )
 
 // mdBlock is a single piece of page content: either a paragraph of text or a
@@ -62,7 +64,12 @@ func (pt PageText) Markdown() string {
 // order. Adjacent tables with no text between them and the same number of
 // columns are merged into a single table. This reunites tables that span
 // several pages.
-func DocumentMarkdown(pages []*PageText) string {
+//
+// When joinSentences is true, lines that were broken mid-sentence are joined
+// heuristically: if a line does not end with a period and the next line (at
+// most one newline away) starts with a lower case letter or a digit, the two
+// lines are joined.
+func DocumentMarkdown(pages []*PageText, joinSentences bool) string {
 	var blocks []mdBlock
 	for _, pt := range pages {
 		if pt == nil {
@@ -78,7 +85,64 @@ func DocumentMarkdown(pages []*PageText) string {
 			blocks = append(blocks, blk)
 		}
 	}
-	return mdRenderBlocks(blocks)
+	out := mdRenderBlocks(blocks)
+	if joinSentences {
+		out = mdJoinSentences(out)
+	}
+	return out
+}
+
+// mdJoinSentences joins lines that were split mid-sentence. A line is joined
+// with the following one when it does not end with a period and that following
+// line (directly below, with no blank line in between) starts with a lower case
+// letter or a digit. Table rows and bullet list items are left untouched.
+func mdJoinSentences(text string) string {
+	lines := strings.Split(text, "\n")
+	var out []string
+	pendingBlanks := 0
+	for _, line := range lines {
+		if strings.TrimSpace(line) == "" {
+			pendingBlanks++
+			continue
+		}
+		if len(out) > 0 && pendingBlanks <= 1 && mdShouldJoin(out[len(out)-1], line) {
+			out[len(out)-1] = strings.TrimRight(out[len(out)-1], " ") + " " + strings.TrimSpace(line)
+		} else {
+			for k := 0; k < pendingBlanks; k++ {
+				out = append(out, "")
+			}
+			out = append(out, line)
+		}
+		pendingBlanks = 0
+	}
+	for k := 0; k < pendingBlanks; k++ {
+		out = append(out, "")
+	}
+	return strings.Join(out, "\n")
+}
+
+// mdHeadingRegexp matches numbered section headings such as "1. NAZWA",
+// "4.1 Wskazania" or "10. DATA" (a number, optional dotted subnumbers, then an
+// upper case word). Such lines must never be joined to surrounding text.
+var mdHeadingRegexp = regexp.MustCompile(`^\d+(\.\d+)*\.?\s+\p{Lu}`)
+
+func mdShouldJoin(prev, cur string) bool {
+	prev = strings.TrimRight(prev, " ")
+	cur = strings.TrimSpace(cur)
+	if prev == "" || cur == "" {
+		return false
+	}
+	if strings.HasPrefix(prev, "|") || strings.HasPrefix(prev, "- ") {
+		return false
+	}
+	if strings.HasSuffix(prev, ".") {
+		return false
+	}
+	if mdHeadingRegexp.MatchString(prev) || mdHeadingRegexp.MatchString(cur) {
+		return false
+	}
+	first := []rune(cur)[0]
+	return unicode.IsDigit(first) || unicode.IsLower(first)
 }
 
 func mdRenderBlocks(blocks []mdBlock) string {
