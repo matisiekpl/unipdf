@@ -656,7 +656,27 @@ func mdJoinCell(marks []mdCellMark) string {
 	if cur.Len() > 0 {
 		lines = append(lines, strings.TrimSpace(cur.String()))
 	}
+	if mdIsStacked(lines) {
+		return strings.Join(lines, "")
+	}
 	return strings.Join(lines, "<br>")
+}
+
+// mdIsStacked reports whether a cell's lines are vertical/rotated text — many
+// one-character lines, as produced when a rotated chart axis label is parsed as
+// a cell. Such cells are joined into a single run instead of exploding into one
+// <br> per character.
+func mdIsStacked(lines []string) bool {
+	if len(lines) < 6 {
+		return false
+	}
+	single := 0
+	for _, line := range lines {
+		if len([]rune(line)) <= 1 {
+			single++
+		}
+	}
+	return single*2 >= len(lines)
 }
 
 type mdWord struct {
