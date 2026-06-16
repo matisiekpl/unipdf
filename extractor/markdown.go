@@ -522,9 +522,10 @@ func (pt PageText) lineTables(marks []TextMark) (tables []*mdLineTable, consumed
 			continue
 		}
 		gc := mdNearestIndex(xs, rowBorders[r][c])
+		rightX := rowBorders[r][c+1]
 		// Merge upward across rows when no horizontal border separates this cell
 		// from the one above for this column span (rowspan).
-		for r > 0 && !mdHasHBorder(hsegs, ys[r], xs[gc], rowBorders[r][c+1]) {
+		for r > 0 && !mdHasHBorder(hsegs, ys[r], xs[gc], rightX) {
 			r--
 		}
 		markRow[i] = r
