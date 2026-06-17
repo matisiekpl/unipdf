@@ -94,12 +94,13 @@ func (pt PageText) marginLines() []mdMarginLine {
 	return lines
 }
 
-// mdPageNumberRegexp matches a page number, optionally in "N/total" form.
-var mdPageNumberRegexp = regexp.MustCompile(`^(\d{1,4})(/\d{1,4})?$`)
+// mdPageNumberRegexp matches a page number, optionally in "N/total" form and
+// optionally wrapped in dashes (e.g. "7", "2/21" or "- 2 -").
+var mdPageNumberRegexp = regexp.MustCompile(`^[-–—\s]*(\d{1,4})(/\d{1,4})?[-–—\s]*$`)
 
 // mdPageNumberValue returns the (leading) page-number value of a margin line if
-// it is a page number such as "7" or "2/21", and false otherwise. "15.04.2023"
-// or "PT/H/026" do not match.
+// it is a page number such as "7", "2/21" or "- 2 -", and false otherwise.
+// "15.04.2023" or "PT/H/026" do not match.
 func mdPageNumberValue(text string) (int, bool) {
 	m := mdPageNumberRegexp.FindStringSubmatch(text)
 	if m == nil {
@@ -757,9 +758,13 @@ func mdReconstructText(marks []TextMark, strokes []Stroke) string {
 	for i, line := range rendered {
 		content, bullet := mdBulletContent(line)
 		if i > 0 {
+			// A line that starts with a section number (e.g. "6.3. Okres ważności")
+			// is a heading: keep it on its own line and don't fold the following
+			// content into it, even when it doesn't end with a period.
+			heading := mdHeadingRegexp.MatchString(line) || mdHeadingRegexp.MatchString(rendered[i-1])
 			if bullet {
 				b.WriteString("\n")
-			} else if lineYs[i-1]-lineYs[i] > 18 {
+			} else if heading || lineYs[i-1]-lineYs[i] > 18 {
 				b.WriteString("\n\n")
 			} else {
 				b.WriteString(" ")
