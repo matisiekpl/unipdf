@@ -1211,34 +1211,35 @@ func (parser *PdfParser) loadXrefs() (*PdfObjectDictionary, error) {
 		return nil, err
 	}
 
-	// Seek 64 bytes (numBytes) back from EOF marker start.
-	var numBytes int64 = 64
+	// Seek back from the EOF marker start to look for startxref. Read a
+	// generous window so that linearized PDFs which pad the tail with
+	// whitespace between "startxref <offset>" and "%%EOF" are handled.
+	var numBytes int64 = 2048
 	offset := curOffset - numBytes
 	if offset < 0 {
 		offset = 0
 	}
+	readLen := curOffset - offset
 	_, err = parser.rs.Seek(offset, io.SeekStart)
 	if err != nil {
 		return nil, err
 	}
 
-	b2 := make([]byte, numBytes)
-	_, err = parser.rs.Read(b2)
+	b2 := make([]byte, readLen)
+	_, err = io.ReadFull(parser.rs, b2)
 	if err != nil {
 		common.Log.Debug("Failed reading while looking for startxref: %v", err)
 		return nil, err
 	}
 
-	result := reStartXref.FindStringSubmatch(string(b2))
-	if len(result) < 2 {
+	// Use the last startxref occurrence (closest to %%EOF); linearized PDFs
+	// contain more than one.
+	results := reStartXref.FindAllStringSubmatch(string(b2), -1)
+	if len(results) == 0 {
 		common.Log.Debug("Error: startxref not found!")
 		return nil, errors.New("startxref not found")
 	}
-	if len(result) > 2 {
-		common.Log.Debug("ERROR: Multiple startxref (%s)!", b2)
-		return nil, errors.New("multiple startxref entries?")
-	}
-	offsetXref, _ := strconv.ParseInt(result[1], 10, 64)
+	offsetXref, _ := strconv.ParseInt(results[len(results)-1][1], 10, 64)
 	common.Log.Trace("startxref at %d", offsetXref)
 
 	if offsetXref > fSize {
