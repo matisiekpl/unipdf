@@ -151,16 +151,21 @@ func (e *Extractor) fontSiblingPool() map[string][]*model.PdfFont {
 		return e.siblingPool
 	}
 	pool := map[string][]*model.PdfFont{}
-	collectFontSiblings(e.resources, pool, map[*model.PdfPageResources]bool{})
+	collectFontSiblings(e.resources, pool, map[*core.PdfObjectStream]bool{}, 0)
 	e.siblingPool = pool
 	return pool
 }
 
-func collectFontSiblings(resources *model.PdfPageResources, pool map[string][]*model.PdfFont, visited map[*model.PdfPageResources]bool) {
-	if resources == nil || visited[resources] {
+// maxFontSiblingDepth bounds recursion into nested form XObjects while
+// gathering font siblings, guarding against pathological or cyclic XObject
+// graphs (form A referencing form B referencing form A) that would otherwise
+// recurse without end, re-decoding embedded fonts at every level.
+const maxFontSiblingDepth = 50
+
+func collectFontSiblings(resources *model.PdfPageResources, pool map[string][]*model.PdfFont, visited map[*core.PdfObjectStream]bool, depth int) {
+	if resources == nil || depth > maxFontSiblingDepth {
 		return
 	}
-	visited[resources] = true
 
 	if fontDict, ok := core.GetDict(resources.Font); ok {
 		for _, name := range fontDict.Keys() {
@@ -177,11 +182,20 @@ func collectFontSiblings(resources *model.PdfPageResources, pool map[string][]*m
 
 	if xobjectDict, ok := core.GetDict(resources.XObject); ok {
 		for _, name := range xobjectDict.Keys() {
+			// Dedupe by the stable underlying stream object; the resources
+			// pointer is re-parsed (and thus fresh) on every call, so keying
+			// cycle detection on it never matches.
+			if stream, ok := core.GetStream(xobjectDict.Get(name)); ok {
+				if visited[stream] {
+					continue
+				}
+				visited[stream] = true
+			}
 			form, err := resources.GetXObjectFormByName(name)
 			if err != nil || form == nil || form.Resources == nil {
 				continue
 			}
-			collectFontSiblings(form.Resources, pool, visited)
+			collectFontSiblings(form.Resources, pool, visited, depth+1)
 		}
 	}
 }
