@@ -389,6 +389,18 @@ func newPdfFontType0FromPdfObject(d *core.PdfObjectDictionary, base *fontCommon)
 		} else {
 			common.Log.Debug("Unhandled cmap %q", encoderName)
 		}
+	} else if stream, isStream := core.GetStream(d.Get("Encoding")); isStream {
+		// An embedded CMap carries its own codespace ranges, which need not be the two bytes
+		// a composite font is otherwise assumed to use. A "OneByteIdentityH" CMap declares
+		// <00> <FF>, and reading its single-byte codes in pairs merges every two characters
+		// of the page into one.
+		if data, decodeErr := core.DecodeStream(stream); decodeErr != nil {
+			common.Log.Debug("WARN: could not decode embedded CMap: %v", decodeErr)
+		} else if embedded, cmapErr := cmap.LoadCmapFromDataCID(data); cmapErr != nil {
+			common.Log.Debug("WARN: could not parse embedded CMap: %v", cmapErr)
+		} else {
+			font.codeToCID = embedded
+		}
 	}
 
 	if cidToUnicode := df.baseFields().toUnicodeCmap; cidToUnicode != nil {
