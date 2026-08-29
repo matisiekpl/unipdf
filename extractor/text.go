@@ -107,12 +107,7 @@ func (e *Extractor) extractPageText(contents string, resources *model.PdfPageRes
 			case "q": // Push current graphics state to the stack.
 				savedStates.push(&state)
 			case "Q": // Pop graphics state from the stack.
-				if !savedStates.empty() {
-					state = *savedStates.top()
-					if len(savedStates) >= 2 {
-						savedStates.pop()
-					}
-				}
+				savedStates.restore(&state)
 			case "BT": // Begin text
 				// Begin a text object, initializing the text matrix, Tm, and
 				// the text line matrix, Tlm, to the identity matrix. Text
@@ -632,6 +627,21 @@ func (savedStates *stateStack) pop() *textState {
 
 // top returns the last saved state if there is one or nil if there isn't.
 // NOTE: The return is a pointer. Modifying it will modify the stack.
+// restore returns `state` to what it was when the matching "q" saved it. The saved entry is
+// discarded before the current one is read back, because "Tf" writes the font it sets into the
+// top of the stack: reading the top first would restore the state as the q...Q block left it,
+// keeping a font set inside the block in force after it and decoding the text that follows with
+// the wrong font. The bottom entry is never discarded, as it holds the state that an unbalanced
+// "Q" has nothing to restore from.
+func (savedStates *stateStack) restore(state *textState) {
+	if len(*savedStates) >= 2 {
+		savedStates.pop()
+	}
+	if !savedStates.empty() {
+		*state = *savedStates.top()
+	}
+}
+
 func (savedStates *stateStack) top() *textState {
 	if savedStates.empty() {
 		return nil
