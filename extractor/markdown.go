@@ -737,13 +737,64 @@ func mdLineOrder(count int, y func(int) float64, x func(int) float64, tolerance 
 	return order
 }
 
+// mdRunOverlapShare is the share of its own width by which a character must be buried in the one
+// preceding it before the two are read as belonging to separate runs. Kerning overlaps
+// neighbouring glyph boxes slightly; a character drawn over another one is buried by most of
+// itself.
+const mdRunOverlapShare = 0.5
+
+// mdSplitIntoRuns groups the marks of one line, given left to right, into the independent runs of
+// text drawn on it. A cell that carries two runs stacked at the same position - a revision drawn
+// over the text it replaces, or a duplicated layer - otherwise reads as the two interleaved
+// character by character, turning "czynnosci" over "watroby" into "cwzaytnronboys". Within a run
+// each character starts where the previous one ended, so a character that starts before the end of
+// the run's last one belongs to a different run. Marks are placed first-fit, which keeps a run
+// together for as long as it advances.
+func mdSplitIntoRuns(marks []mdCellMark, order []int) []int {
+	ends := []float64{}
+	runs := make([][]int, 0, 2)
+	for _, index := range order {
+		placed := false
+		buried := (marks[index].x1 - marks[index].x0) * mdRunOverlapShare
+		for run := range runs {
+			if marks[index].x0 >= ends[run]-buried {
+				runs[run] = append(runs[run], index)
+				ends[run] = marks[index].x1
+				placed = true
+				break
+			}
+		}
+		if !placed {
+			runs = append(runs, []int{index})
+			ends = append(ends, marks[index].x1)
+		}
+	}
+	if len(runs) < 2 {
+		return order
+	}
+	split := make([]int, 0, len(order))
+	for _, run := range runs {
+		split = append(split, run...)
+	}
+	return split
+}
+
 func mdSortIntoLines(marks []mdCellMark) {
 	order := mdLineOrder(len(marks),
 		func(index int) float64 { return marks[index].y },
 		func(index int) float64 { return marks[index].x0 },
 		mdCellLineTolerance)
+	ordered := make([]int, 0, len(order))
+	for start := 0; start < len(order); {
+		end := start + 1
+		for end < len(order) && mdAbs(marks[order[end]].y-marks[order[start]].y) <= mdCellLineTolerance {
+			end++
+		}
+		ordered = append(ordered, mdSplitIntoRuns(marks, order[start:end])...)
+		start = end
+	}
 	sorted := make([]mdCellMark, len(marks))
-	for index, position := range order {
+	for index, position := range ordered {
 		sorted[index] = marks[position]
 	}
 	copy(marks, sorted)
@@ -1010,17 +1061,40 @@ func mdUnionLen(intervals [][2]float64) float64 {
 	return total + curHi - curLo
 }
 
+// mdCellTolerance is how far outside the ruled grid a mark may sit and still be taken as part of
+// the cell at that edge.
+const mdCellTolerance = 2
+
+// mdFindCell returns the index of the cell of the `borders` grid that `v` falls in, or -1 when it
+// falls outside the grid. The tolerance applies only at the two outer borders. Applying it at
+// every border would make neighbouring cells overlap by twice its width, and the first match would
+// then win, so a word starting just past a border loses its leading characters to the cell on the
+// other side and "rzadko" is stored as "r" in one cell and "zadko" in the next.
 func mdFindCell(borders []float64, v float64, descending bool) int {
-	for i := 0; i+1 < len(borders); i++ {
-		if descending {
-			if v <= borders[i]+2 && v >= borders[i+1]-2 {
+	last := len(borders) - 1
+	if last < 1 {
+		return -1
+	}
+	if descending {
+		if v > borders[0]+mdCellTolerance || v < borders[last]-mdCellTolerance {
+			return -1
+		}
+		for i := 0; i < last-1; i++ {
+			if v > borders[i+1] {
 				return i
 			}
-		} else if v >= borders[i]-2 && v <= borders[i+1]+2 {
+		}
+		return last - 1
+	}
+	if v < borders[0]-mdCellTolerance || v > borders[last]+mdCellTolerance {
+		return -1
+	}
+	for i := 0; i < last-1; i++ {
+		if v < borders[i+1] {
 			return i
 		}
 	}
-	return -1
+	return last - 1
 }
 
 func mdNearAny(xs []float64, x, tol float64) bool {
