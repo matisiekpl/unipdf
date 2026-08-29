@@ -44,11 +44,21 @@ func (pt PageText) cleanStrokes() []Stroke {
 	return out
 }
 
+// mdMarginBandRatio is the share of the page height at the top and at the bottom
+// that counts as margin. A footer typically sits between 8% and 10% of the page
+// height above the edge, so a tighter band leaves the page number in the body.
+const mdMarginBandRatio = 0.11
+
+// mdMarginSegmentGapRatio is the share of the page width that separates a footer's
+// independent parts. It is far wider than any word space, so splitting on it never
+// breaks a running label into pieces.
+const mdMarginSegmentGapRatio = 0.08
+
 // marginBand reports whether device-y `cy` is inside the top or bottom margin
 // band of the page, where running headers and page numbers live.
 func (pt PageText) marginBand(cy float64) bool {
 	pageHeight := pt.pageSize.Ury - pt.pageSize.Lly
-	return cy < pt.pageSize.Lly+pageHeight*0.08 || cy > pt.pageSize.Ury-pageHeight*0.08
+	return cy < pt.pageSize.Lly+pageHeight*mdMarginBandRatio || cy > pt.pageSize.Ury-pageHeight*mdMarginBandRatio
 }
 
 // mdMarginLine is a text line located entirely in a top or bottom margin band,
@@ -85,11 +95,42 @@ func (pt PageText) marginLines() []mdMarginLine {
 			}
 		}
 		sort.Slice(idx, func(a, b int) bool { return marks[idx[a]].BBox.Llx < marks[idx[b]].BBox.Llx })
-		var b strings.Builder
-		for _, j := range idx {
-			b.WriteString(strings.TrimSpace(marks[j].Text))
+		lines = append(lines, mdMarginLine{text: mdMarginText(marks, idx), indices: idx})
+		lines = append(lines, pt.marginSegments(marks, idx)...)
+	}
+	return lines
+}
+
+func mdMarginText(marks []TextMark, idx []int) string {
+	var b strings.Builder
+	for _, j := range idx {
+		b.WriteString(strings.TrimSpace(marks[j].Text))
+	}
+	return b.String()
+}
+
+// marginSegments splits a margin line at the column gaps that separate a footer's
+// independent parts, so that a page number sharing its line with a running label
+// ("NL/H/1575/002/IB/046      7") is still offered as a page number of its own.
+// A single-segment line adds nothing the caller does not already have.
+func (pt PageText) marginSegments(marks []TextMark, idx []int) []mdMarginLine {
+	gap := (pt.pageSize.Urx - pt.pageSize.Llx) * mdMarginSegmentGapRatio
+	var segments [][]int
+	current := []int{idx[0]}
+	for _, j := range idx[1:] {
+		if marks[j].BBox.Llx-marks[current[len(current)-1]].BBox.Urx >= gap {
+			segments = append(segments, current)
+			current = nil
 		}
-		lines = append(lines, mdMarginLine{text: b.String(), indices: idx})
+		current = append(current, j)
+	}
+	segments = append(segments, current)
+	if len(segments) < 2 {
+		return nil
+	}
+	lines := make([]mdMarginLine, 0, len(segments))
+	for _, segment := range segments {
+		lines = append(lines, mdMarginLine{text: mdMarginText(marks, segment), indices: segment})
 	}
 	return lines
 }
@@ -130,7 +171,7 @@ func (pt PageText) contentMarks(stripPageNumbers bool, repeatedLabels map[string
 	strip := make(map[int]bool)
 	for _, line := range pt.marginLines() {
 		_, isPageNumber := mdPageNumberValue(line.text)
-		if (stripPageNumbers && isPageNumber) || repeatedLabels[mdNormalizeLabel(line.text)] {
+		if (stripPageNumbers && isPageNumber) || repeatedLabels[mdNormalizeLabel(line.text)] || repeatedLabels[line.text] {
 			for _, j := range line.indices {
 				strip[j] = true
 			}
@@ -361,7 +402,38 @@ func mdDetectRepeatedLabels(pages []*PageText) map[string]bool {
 			repeated[norm] = true
 		}
 	}
+	for text := range mdDetectConstantMarkers(pages, nonNil) {
+		repeated[text] = true
+	}
 	return repeated
+}
+
+// mdDetectConstantMarkers returns the margin lines, keyed by their literal text, that carry the
+// same bare number on a strong majority of pages. Such a footer numbers nothing, so the
+// incrementing run in mdDetectPageNumbers never confirms it, and mdNormalizeLabel masks it to a
+// single "#" that mdDetectRepeatedLabels discards as too short to be a label.
+func mdDetectConstantMarkers(pages []*PageText, nonNil int) map[string]bool {
+	counts := make(map[string]int)
+	for _, pt := range pages {
+		if pt == nil {
+			continue
+		}
+		seen := make(map[string]bool)
+		for _, line := range pt.marginLines() {
+			if _, isPageNumber := mdPageNumberValue(line.text); !isPageNumber || seen[line.text] {
+				continue
+			}
+			seen[line.text] = true
+			counts[line.text]++
+		}
+	}
+	constant := make(map[string]bool)
+	for text, count := range counts {
+		if count >= 3 && count*3 >= nonNil*2 {
+			constant[text] = true
+		}
+	}
+	return constant
 }
 
 func mdRenderBlocks(blocks []mdBlock) string {
@@ -632,13 +704,53 @@ type mdCellMark struct {
 	s         string
 }
 
-func mdJoinCell(marks []mdCellMark) string {
-	sort.Slice(marks, func(i, j int) bool {
-		if mdAbs(marks[i].y-marks[j].y) > 4 {
-			return marks[i].y > marks[j].y
+// mdCellLineTolerance is the vertical distance below which two marks of a cell belong to the
+// same line of text.
+const mdCellLineTolerance = 4
+
+// mdLineOrder returns the indices of `count` marks ordered top to bottom and then left to
+// right. The marks are grouped into lines before being sorted, because comparing two of them by
+// "same line within a tolerance, otherwise by height" is not a strict weak ordering: three marks
+// can each sit within the tolerance of their neighbour yet span more than it end to end, which
+// leaves sort.Slice free to interleave the characters of adjacent lines, returning "piersiowej"
+// as "piieowrsej".
+func mdLineOrder(count int, y func(int) float64, x func(int) float64, tolerance float64) []int {
+	order := make([]int, count)
+	for index := range order {
+		order[index] = index
+	}
+	sort.SliceStable(order, func(i, j int) bool { return y(order[i]) > y(order[j]) })
+	line := 0
+	lines := make([]int, count)
+	for position, index := range order {
+		if position > 0 && y(order[position-1])-y(index) > tolerance {
+			line++
 		}
-		return marks[i].x0 < marks[j].x0
+		lines[index] = line
+	}
+	sort.SliceStable(order, func(i, j int) bool {
+		if lines[order[i]] != lines[order[j]] {
+			return lines[order[i]] < lines[order[j]]
+		}
+		return x(order[i]) < x(order[j])
 	})
+	return order
+}
+
+func mdSortIntoLines(marks []mdCellMark) {
+	order := mdLineOrder(len(marks),
+		func(index int) float64 { return marks[index].y },
+		func(index int) float64 { return marks[index].x0 },
+		mdCellLineTolerance)
+	sorted := make([]mdCellMark, len(marks))
+	for index, position := range order {
+		sorted[index] = marks[position]
+	}
+	copy(marks, sorted)
+}
+
+func mdJoinCell(marks []mdCellMark) string {
+	mdSortIntoLines(marks)
 	var lines []string
 	var cur strings.Builder
 	var lastY, lastX1 float64
@@ -702,12 +814,15 @@ func mdReconstructText(marks []TextMark, strokes []Stroke) string {
 	if len(lms) == 0 {
 		return ""
 	}
-	sort.Slice(lms, func(i, j int) bool {
-		if mdAbs(lms[i].y-lms[j].y) > 3 {
-			return lms[i].y > lms[j].y
-		}
-		return lms[i].x0 < lms[j].x0
-	})
+	order := mdLineOrder(len(lms),
+		func(index int) float64 { return lms[index].y },
+		func(index int) float64 { return lms[index].x0 },
+		3)
+	ordered := make([]lineMark, len(lms))
+	for index, position := range order {
+		ordered[index] = lms[position]
+	}
+	lms = ordered
 
 	var lines [][]mdWord
 	var lineYs []float64
