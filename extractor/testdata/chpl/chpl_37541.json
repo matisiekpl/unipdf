@@ -1,0 +1,170 @@
+{
+ "document": "chpl_37541",
+ "tables": [
+  {
+   "name": "4.2 dose by creatinine clearance",
+   "rows": [
+    [
+     "Klirens kreatyniny (ml/min)",
+     "Zalecane dawkowanie"
+    ],
+    [
+     "> 60",
+     "zazwyczaj stosowana dawka"
+    ],
+    [
+     "30 - 60",
+     "połowa dawki"
+    ],
+    [
+     "10 - 30",
+     "jedna czwarta dawki"
+    ],
+    [
+     "< 10",
+     "nie należy stosować sotalolu"
+    ]
+   ]
+  },
+  {
+   "name": "4.8 adverse reactions",
+   "rows": [
+    [
+     "Klasyfikacja układów i narządów",
+     "Bardzo często: (≥ 1/10)",
+     "Często (≥ 1/100,< 1/10)",
+     "Niezbyt często: (≥ 1/1000,< 1/100)",
+     "Rzadko (≥ 1/10000, < 1/1000)",
+     "Bardzo rzadko (< 1/10000)",
+     "Częstość nieznana"
+    ],
+    [
+     "Zaburzenia serca:",
+     "",
+     "bradykardia zatokowa, zaburzenia przewodzenia przedsionkowo-komorowego, duszność, ból w klatce piersiowej, kołatanie serca, nieprawidłowy zapis EKG, proarytmia, omdlenie, niewydolność serca, stan przedomdleniowy, , Torsade de Pointes;",
+     "",
+     "",
+     "Drgawki, Nasilenie dławicy piersiowej",
+     ""
+    ],
+    [
+     "Zaburzenia naczyniowe:",
+     "",
+     "niedociśnienie",
+     "",
+     "",
+     "",
+     "Zespół Raynauda, nasilenie istniejącego chromania przestankowego"
+    ],
+    [
+     "Zaburzenia skóry i tkanki podskórnej:",
+     "",
+     "wykwit, wysypka, świąd, nadwrażliwość na światło, nasilone pocenie się",
+     "",
+     "",
+     "",
+     "łysienie, nadpotliwość"
+    ],
+    [
+     "Zaburzenia żołądka i jelit:",
+     "",
+     "nudności, wymioty, biegunka, niestrawność, ból brzucha, wzdęcie, suchość w jamie ustnej",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia mięśniowo-szkieletowe, tkanki łącznej i kości:",
+     "",
+     "kurcze mięśni, ból stawów, ból mięśni",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia układu nerwowego:",
+     "",
+     "zawroty głowy, uczucie pustki w głowie, ból głowy, parestezja, omdlenia, stany przedomdleniowe, zaburzenia smaku;",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia psychiczne:",
+     "",
+     "depresja, niepokój, dezorientacja, zaburzenia snu, wahania nastroju",
+     "",
+     "",
+     "",
+     "halucynacje, zwiększona intensywność snów"
+    ],
+    [
+     "Zaburzenia układu rozrodczego i piersi:",
+     "",
+     "zaburzenia czynności seksualnych",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia oka:",
+     "",
+     "zaburzenia widzenia",
+     "",
+     "",
+     "",
+     "zapalenie rogówki i spojówek, zmniejszenie łzawienia (należy pamiętać w przypadku noszenia soczewek kontaktowych!), zapalenie spojówek,"
+    ],
+    [
+     "Zaburzenia ucha i błędnika:",
+     "",
+     "zaburzenia słuchu",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia układu oddechowego, klatki piersiowej i śródpiersia:",
+     "",
+     "skurcz oskrzeli, duszność, zwłaszcza u pacjentów z obturacyjnymi zaburzeniami oddychania",
+     "",
+     "",
+     "alergiczne zapalenie oskrzeli z włóknieniem",
+     "skurcz oskrzeli"
+    ],
+    [
+     "Zaburzenia krwi i układu chłonnego:",
+     "",
+     "eozynofilia, leukopenia",
+     "",
+     "",
+     "",
+     "małopłytkowość"
+    ],
+    [
+     "Zaburzenia metabolizmu i odżywiania:",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "wzrost poziomu cholesterolu całkowitego i trójglicerydów, Zmniejszenie stężenia cholesterolu HDL, hipoglikemia"
+    ],
+    [
+     "Zaburzenia ogólne i stany w miejscu podania:",
+     "",
+     "ból w klatce piersiowej, gorączka, obrzęk, zmęczenie, astenia, uczucie zimna w kończynach",
+     "",
+     "",
+     "",
+     ""
+    ]
+   ]
+  }
+ ]
+}

@@ -1,0 +1,175 @@
+{
+ "document": "chpl_29663",
+ "tables": [
+  {
+   "name": "4.8 adverse reactions",
+   "rows": [
+    [
+     "MedDRA SOC",
+     "Działania niepożądane",
+     "Częstość występowania"
+    ],
+    [
+     "Zaburzenia krwi i układu chłonnego",
+     "Neutropenia, małopłytkowość, granulocytopenia, w tym agranulocytoza, eozynofilia, leukopenia, niedokrwistość aplastyczna, niedokrwistość hemolityczna",
+     "Rzadko"
+    ],
+    [
+     "Zaburzenia układu immunologicznego",
+     "Reakcje nadwrażliwości, reakcja anafilaktyczna, obrzęk naczynioruchowy",
+     "Rzadko"
+    ],
+    [
+     "Zaburzenia metabolizmu i odżywiania",
+     "Hiperkaliemia",
+     "Rzadko"
+    ],
+    [
+     "Zaburzenia psychiczne",
+     "Bezsenność",
+     "Niezbyt często"
+    ],
+    [
+     "",
+     "Nietypowe sny, depresja, stan splątania, halucynacje, zaburzenia funkcji poznawczych",
+     "Rzadko"
+    ],
+    [
+     "Zaburzenia układu nerwowego",
+     "Zawroty głowy, ból głowy, oszołomienie, senność",
+     "Często"
+    ],
+    [
+     "",
+     "Zaburzenia koncentracji i funkcji poznawczych, senność",
+     "Niezbyt często"
+    ],
+    [
+     "",
+     "Drgawki, parestezje, pozagałkowe zapalenie nerwu wzrokowego, aseptyczne zapalenie opon mózgowych",
+     "Częstość nieznana"
+    ],
+    [
+     "Zaburzenia oka",
+     "Zaburzenia widzenia",
+     "Często"
+    ],
+    [
+     "",
+     "Zmętnienia rogówki, zapalenie i obrzęk tarczy nerwu wzrokowego, pozagałkowe zapalenie nerwu wzrokowego, obrzęk tarczy nerwu wzrokowego",
+     "Bardzo rzadko"
+    ],
+    [
+     "Zaburzenia ucha i błędnika",
+     "Szumy uszne",
+     "Często"
+    ],
+    [
+     "",
+     "Utrata słuchu",
+     "Niezbyt często"
+    ],
+    [
+     "",
+     "Zaburzenia słuchu, w tym niedosłuch, zawroty głowy",
+     "Bardzo rzadko"
+    ],
+    [
+     "Zaburzenia serca",
+     "Kołatanie serca",
+     "Niezbyt często"
+    ],
+    [
+     "",
+     "Niewydolność serca, zastoinowa niewydolność serca",
+     "Rzadko"
+    ],
+    [
+     "Zaburzenia naczyniowe",
+     "Nadciśnienie tętnicze, zapalenie naczyń",
+     "Rzadko"
+    ],
+    [
+     "Zaburzenia układu oddechowego, klatki piersiowej i śródpiersia",
+     "Duszność, astma oskrzelowa",
+     "Niezbyt często"
+    ],
+    [
+     "",
+     "Eozynofilowe zapalenie płuc, obrzęk płuc",
+     "Rzadko"
+    ],
+    [
+     "Zaburzenia wątroby i dróg żółciowych",
+     "Żółtaczka, zapalenie wątroby, nieprawidłowe wyniki badań czynności wątroby",
+     "Rzadko"
+    ],
+    [
+     "Zaburzenia żołądka i jelit",
+     "Zgaga, niestrawność, nudności, biegunka, zaparcia, dyskomfort w jamie brzusznej, zapalenie jamy ustnej",
+     "Często"
+    ],
+    [
+     "",
+     "Krwawienie z przewodu pokarmowego, zapalenie błony śluzowej żołądka, wrzody żołądka, dyskomfort w nadbrzuszu",
+     "Niezbyt często"
+    ],
+    [
+     "",
+     "Zapalenie jelita grubego, perforacja, wymioty, zapalenie przełyku, zapalenie trzustki, hematemeza, wzdęcia, zaostrzenie wrzodziejącego zapalenia jelita grubego i choroby Leśniowskiego-Crohna, niedrożność górnego i dolnego odcinka przewodu pokarmowego, smółka",
+     "Rzadko"
+    ],
+    [
+     "Zaburzenia skóry i tkanki podskórnej",
+     "Świąd, wybroczyny, plamica, wzmożona potliwość",
+     "Często"
+    ],
+    [
+     "",
+     "Pokrzywka, wysypka skórna, w tym utrwalona wysypka polekowa, nadwrażliwość na światło, w tym psuedoporfiria",
+     "Niezbyt często"
+    ],
+    [
+     "",
+     "Rumień wielopostaciowy, zespół Stevensa-Johnsona, rumień guzowaty, liszaj płaski, reakcje pęcherzowe, toczeń rumieniowaty układowy, martwica naskórka, toksyczne martwicze oddzielanie się naskórka, pęcherzowe oddzielenie się naskórka",
+     "Bardzo rzadko"
+    ],
+    [
+     "",
+     "Reakcja polekowa z eozynofilią i objawami ogólnymi (zespół DRESS) (patrz punkt 4.4), utrwalona wysypka polekowa",
+     "Częstość nieznana"
+    ],
+    [
+     "Zaburzenia mięśniowo-szkieletowe i tkanki łącznej",
+     "Bóle, osłabienie mięśni",
+     "Bardzo rzadko"
+    ],
+    [
+     "Zaburzenia nerek i dróg moczowych",
+     "Niewydolność nerek",
+     "Niezbyt często"
+    ],
+    [
+     "",
+     "Krwiomocz",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Kłębuszkowe zapalenie nerek, śródmiąższowe zapalenie nerek, zespół nerczycowy, zwiększone stężenie kreatyniny w surowicy, martwica brodawek nerkowych",
+     "Bardzo rzadko"
+    ],
+    [
+     "Zaburzenia układu rozrodczego",
+     "Zaburzenia płodności u kobiet",
+     "Częstość nieznana"
+    ],
+    [
+     "Zaburzenia ogólne i stany w miejscu podania",
+     "Wzmożone pragnienie, gorączka, uczucie zmęczenia, złe samopoczucie",
+     "Bardzo rzadko"
+    ]
+   ]
+  }
+ ]
+}

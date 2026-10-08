@@ -1,0 +1,186 @@
+{
+ "document": "chpl_2822",
+ "tables": [
+  {
+   "name": "adverse reactions",
+   "rows": [
+    [
+     "Klasyfikacja układów i narządów",
+     "Działanie niepożądane",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "",
+     "Częstość występowania",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "",
+     "Bardzo często",
+     "Często",
+     "Niezbyt często",
+     "Rzadko",
+     "Nieznana"
+    ],
+    [
+     "Zaburzenia krwi i układu chłonnego",
+     "",
+     "",
+     "Leukopenia",
+     "",
+     "Pancytopenia Agranulocytoza Trombocytopenia Neutropenia"
+    ],
+    [
+     "Zaburzenia układu immunologicznego",
+     "",
+     "",
+     "Nadwrażliwość",
+     "",
+     "Reakcja anafilaktyczna"
+    ],
+    [
+     "Zaburzenia endokrynologiczne",
+     "",
+     "",
+     "",
+     "Hiperprolaktynemia",
+     "Zespół nieprawidłowego wydzielania hormonu antydiuretycznego"
+    ],
+    [
+     "Zaburzenia metabolizmu i odżywiania",
+     "",
+     "",
+     "",
+     "",
+     "Hipoglikemia"
+    ],
+    [
+     "Zaburzenia psychiczne",
+     "Pobudzenie Bezsenność",
+     "Zaburzenia psychotyczne Depresja",
+     "Stan splątania Utrata libido Obniżone libido Niepokój",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia układu nerwowego",
+     "Objawy zespołu pozapiramidowego Hiperkinezja Ból głowy",
+     "Dyskinezy późne Akatyzja Bradykinezja Dyskinezy Dystonia Hipokinezja Wzmożone napięcie mięśniowe Zawroty głowy Senność Drżenie mięśni",
+     "Drgawki Parkinsonizm Sedacja Mimowolne skurcze mięśni",
+     "Złośliwy zespół neuroleptyczny Zaburzenia funkcji motorycznej Oczopląs",
+     "Bezruch Skokowa sztywność mięśni Twarz maskowata"
+    ],
+    [
+     "Zaburzenia oka",
+     "",
+     "Napadowe przymusowe patrzenie Zaburzenia widzenia",
+     "Niewyraźne widzenie",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia serca",
+     "",
+     "",
+     "Częstoskurcz",
+     "",
+     "Migotanie komór Torsade de pointes Częstoskurcz komorowy Skurcze dodatkowe"
+    ],
+    [
+     "Zaburzenia naczyniowe",
+     "",
+     "Niedociśnienie tętnicze Niedociśnienie tętnicze ortostatyczne",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia układu oddechowego, klatki piersiowej i śródpiersia",
+     "",
+     "",
+     "Duszności",
+     "Skurcz oskrzeli",
+     "Obrzęk krtani Skurcz krtani"
+    ],
+    [
+     "Zaburzenia żołądka i jelit",
+     "",
+     "Wymioty Nudności Zaparcia Suchość w jamie ustnej Nadmierne wydzielanie śliny",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia wątroby i dróg żółciowych",
+     "",
+     "Nieprawidłowe wyniki testów czynnościowych wątroby",
+     "Zapalenie wątroby Żółtaczka",
+     "",
+     "Ostra niewydolność wątroby Cholestaza"
+    ],
+    [
+     "Zaburzenia skóry i tkanki podskórnej",
+     "",
+     "Wysypka",
+     "Nadwrażliwość na światło Pokrzywka Świąd Nadmierne pocenie się",
+     "",
+     "Obrzęk naczynioruchowy Złuszczające zapalenie skóry Leukocytoklastyczne zapalenie naczyń"
+    ],
+    [
+     "Zaburzenia mięśniowo-szkieletowe i tkanki łącznej",
+     "",
+     "",
+     "Kręcz szyi Sztywność mięśni Skurcze mięśni Zesztywnienie mięśniowo-szkieletowe",
+     "Szczękościsk Drżenie pęczkowe mięśni",
+     "Rabdomioliza"
+    ],
+    [
+     "Zaburzenia nerek i dróg moczowych",
+     "",
+     "Zatrzymanie moczu",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Ciąża, połóg i okres okołoporodowy",
+     "",
+     "",
+     "",
+     "",
+     "Zespół objawów odstawienia u noworodka (patrz punkt 4.6)"
+    ],
+    [
+     "Zaburzenia układu rozrodczego i piersi",
+     "",
+     "Zaburzenia erekcji",
+     "Brak miesiączki Mlekotok Bóle menstruacyjne Ból piersi Tkliwość piersi",
+     "Obfite miesiączkowanie Zaburzenia miesiączkowania Zaburzenia seksualne",
+     "Priapizm Ginekomastia"
+    ],
+    [
+     "Zaburzenia ogólne i stany w miejscu podania",
+     "",
+     "",
+     "Wysoka gorączka Obrzęk Zaburzenia chodu",
+     "",
+     "Nagły zgon Obrzęk twarzy Hipotermia"
+    ],
+    [
+     "Badania diagnostyczne",
+     "",
+     "Zwiększenie masy ciała Zmniejszenie masy ciała",
+     "",
+     "Wydłużenie odstępu QT w EKG",
+     ""
+    ]
+   ]
+  }
+ ]
+}

@@ -1,0 +1,418 @@
+{
+ "document": "chpl_43584",
+ "tables": [
+  {
+   "name": "adverse reactions",
+   "rows": [
+    [
+     "Klasyfikacja układów i narządów",
+     "Produkt leczniczy zawierający telmisartan i amlodypinę",
+     "Telmisartan",
+     "Amlodypina"
+    ],
+    [
+     "Zakażenia i zarażenia pasożytnicze",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Niezbyt często",
+     "",
+     "infekcje górnych dróg oddechowych, w tym zapalenie gardła i zapalenie zatok, infekcje dróg moczowych, w tym zapalenie pęcherza",
+     ""
+    ],
+    [
+     "Rzadko",
+     "zapalenie pęcherza",
+     "posocznica, w tym zakończona zgonem¹",
+     ""
+    ],
+    [
+     "Zaburzenia krwi i układu chłonnego",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Niezbyt często",
+     "",
+     "niedokrwistość",
+     ""
+    ],
+    [
+     "Rzadko",
+     "",
+     "małopłytkowość, eozynofilia",
+     ""
+    ],
+    [
+     "Bardzo rzadko",
+     "",
+     "",
+     "leukopenia, małopłytkowość"
+    ],
+    [
+     "Zaburzenia układu immunologicznego",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Rzadko",
+     "",
+     "nadwrażliwość, reakcje anafilaktyczne",
+     ""
+    ],
+    [
+     "Bardzo rzadko",
+     "",
+     "",
+     "nadwrażliwość"
+    ],
+    [
+     "Zaburzenia metabolizmu i odżywiania",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Niezbyt często",
+     "",
+     "hiperkaliemia",
+     ""
+    ],
+    [
+     "Rzadko",
+     "",
+     "hipoglikemia (u pacjentów z cukrzycą), hiponatremia",
+     ""
+    ],
+    [
+     "Bardzo rzadko",
+     "",
+     "",
+     "hiperglikemia"
+    ],
+    [
+     "Zaburzenia psychiczne",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Niezbyt często",
+     "",
+     "",
+     "zmiany nastroju"
+    ],
+    [
+     "Rzadko",
+     "depresja, niepokój, bezsenność",
+     "",
+     "stan splątania"
+    ],
+    [
+     "Zaburzenia układu nerwowego",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Często",
+     "zawroty głowy",
+     "",
+     ""
+    ],
+    [
+     "Niezbyt często",
+     "senność, migrena, ból głowy, parestezja",
+     "",
+     ""
+    ],
+    [
+     "Rzadko",
+     "omdlenia, neuropatia obwodowa, niedoczulica, zaburzenia odczuwania smaku, drżenie",
+     "",
+     ""
+    ],
+    [
+     "Bardzo rzadko",
+     "",
+     "",
+     "zespół pozapiramidowy, hipertonia mięśniowa"
+    ],
+    [
+     "Zaburzenia oka",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Często",
+     "",
+     "",
+     "zaburzenia widzenia (w tym podwójne widzenie)"
+    ],
+    [
+     "Niezbyt często",
+     "",
+     "",
+     "upośledzenie widzenia"
+    ],
+    [
+     "Rzadko",
+     "",
+     "zaburzenia widzenia",
+     ""
+    ],
+    [
+     "Zaburzenia ucha i błędnika",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Niezbyt często",
+     "zawroty głowy",
+     "",
+     "szumy uszne"
+    ],
+    [
+     "Zaburzenia serca",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Niezbyt często",
+     "bradykardia, kołatanie serca",
+     "",
+     ""
+    ],
+    [
+     "Rzadko",
+     "",
+     "tachykardia",
+     ""
+    ],
+    [
+     "Bardzo rzadko",
+     "",
+     "",
+     "zawał mięśnia sercowego, arytmia, częstoskurcz komorowy, migotanie przedsionków"
+    ],
+    [
+     "Zaburzenia naczyniowe",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Niezbyt często",
+     "niedociśnienie, ortostatyczne niedociśnienie, nagłe zaczerwienienie",
+     "",
+     ""
+    ],
+    [
+     "Bardzo rzadko",
+     "",
+     "",
+     "zapalenie naczyń"
+    ],
+    [
+     "Zaburzenia układu oddechowego, klatki piersiowej i śródpiersia",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Niezbyt często",
+     "kaszel",
+     "duszność",
+     "duszność, zapalenie błony śluzowej nosa"
+    ],
+    [
+     "Bardzo rzadko",
+     "śródmiąższowa choroba płuc³",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia żołądka i jelit",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Często",
+     "",
+     "",
+     "zmiana rytmu wypróżnień (w tym biegunka i zaparcia)"
+    ],
+    [
+     "Niezbyt często",
+     "ból brzucha, biegunka, nudności",
+     "wzdęcia",
+     ""
+    ],
+    [
+     "Rzadko",
+     "wymioty, przerost dziąseł, niestrawność, suchość błony śluzowej jamy ustnej",
+     "dyskomfort w jamie brzusznej",
+     ""
+    ],
+    [
+     "Bardzo rzadko",
+     "",
+     "",
+     "zapalenie trzustki, zapalenie żołądka"
+    ],
+    [
+     "Zaburzenia wątroby i dróg żółciowych",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Rzadko",
+     "",
+     "nieprawidłowa czynność wątroby, zaburzenie czynności wątroby²",
+     ""
+    ],
+    [
+     "Bardzo rzadko",
+     "",
+     "",
+     "zapalenie wątroby, żółtaczka, zwiększenie aktywności enzymów wątrobowych (zwykle związane z zastojem żółci)"
+    ],
+    [
+     "Zaburzenia skóry i tkanki podskórnej",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Niezbyt często",
+     "świąd",
+     "nadmierne pocenie się",
+     "łysienie, plamica, odbarwienie skóry, nadmierne pocenie się"
+    ],
+    [
+     "Rzadko",
+     "wyprysk, rumień, wysypka",
+     "obrzęk naczynioruchowy (w tym zakończony zgonem), wysypka polekowa, toksyczna wysypka, pokrzywka",
+     ""
+    ],
+    [
+     "Bardzo rzadko",
+     "",
+     "",
+     "obrzęk naczynioruchowy, rumień wielopostaciowy, pokrzywka, złuszczające zapalenie skóry, zespół Stevensa-Johnsona, nadwrażliwość na światło"
+    ],
+    [
+     "Częstość nieznana",
+     "",
+     "",
+     "toksyczna nekroliza naskórka"
+    ],
+    [
+     "Zaburzenia mięśniowo-szkieletowe i tkanki łącznej",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Często",
+     "",
+     "",
+     "obrzęk okolic kostek"
+    ],
+    [
+     "Niezbyt często",
+     "bóle stawów, kurcze mięśni, (kurcze mięśni nóg), bóle mięśni",
+     "",
+     ""
+    ],
+    [
+     "Rzadko",
+     "ból pleców, bóle kończyn (ból nóg)",
+     "ból ścięgien (objawy podobne do zapalenia ścięgna)",
+     ""
+    ],
+    [
+     "Zaburzenia nerek i dróg moczowych",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Niezbyt często",
+     "",
+     "zaburzenia czynności nerek w tym ostra niewydolność nerek",
+     "zaburzenia w oddawaniu moczu, częstomocz"
+    ],
+    [
+     "Rzadko",
+     "oddawanie moczu w nocy",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia układu rozrodczego i piersi",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Niezbyt często",
+     "zaburzenia erekcji",
+     "",
+     "ginekomastia"
+    ],
+    [
+     "Zaburzenia ogólne i stany w miejscu podania",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Często",
+     "obrzęk obwodowy",
+     "",
+     ""
+    ],
+    [
+     "Niezbyt często",
+     "osłabienie, ból w klatce piersiowej, zmęczenie, obrzęk",
+     "",
+     "ból"
+    ],
+    [
+     "Rzadko",
+     "złe samopoczucie",
+     "objawy grypopodobne",
+     ""
+    ],
+    [
+     "Badania diagnostyczne",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Niezbyt często",
+     "zwiększenie aktywności enzymów wątrobowych",
+     "zwiększenie stężenia kreatyniny we krwi",
+     "zwiększenie masy ciała, zmniejszenie masy ciała"
+    ],
+    [
+     "Rzadko",
+     "zwiększenie stężenia kwasu moczowego we krwi",
+     "zwiększenie aktywności fosfokinazy kreatynowej, zmniejszenie stężenia hemoglobiny",
+     ""
+    ]
+   ]
+  }
+ ]
+}

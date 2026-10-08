@@ -220,6 +220,14 @@ func (paras paraList) toTextMarks() []TextMark {
 	return marks
 }
 
+func (paras paraList) lineEndHyphens() []TextMark {
+	var hyphens []TextMark
+	for _, para := range paras {
+		hyphens = append(hyphens, para.lineEndHyphens()...)
+	}
+	return hyphens
+}
+
 // sameLine returms true if `para1` and `para2` are on the same line.
 func sameLine(para1, para2 *textPara) bool {
 	return isZero(para1.depth() - para2.depth())

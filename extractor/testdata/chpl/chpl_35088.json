@@ -1,0 +1,87 @@
+{
+ "document": "chpl_35088",
+ "tables": [
+  {
+   "name": "4.8 adverse reactions",
+   "rows": [
+    [
+     "Klasyfikacja układów i narządów MedDRA",
+     "Bardzo często",
+     "Często",
+     "Niezbyt często",
+     "Rzadko"
+    ],
+    [
+     "Zaburzenia układu immunologicznego",
+     "",
+     "",
+     "",
+     "Reakcje alergiczne"
+    ],
+    [
+     "Zaburzenia metabolizmu i odżywiania",
+     "",
+     "Hiperglikemia",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia psychiczne",
+     "",
+     "",
+     "Bezsenność",
+     ""
+    ],
+    [
+     "Zaburzenia układu nerwowego",
+     "",
+     "Ból głowy, zawroty głowy",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia serca",
+     "",
+     "Tachykardia",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia naczyniowe",
+     "",
+     "Niedociśnienie, uderzenia gorąca",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia żołądka i jelit",
+     "Nudności",
+     "Wymioty",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia skóry i tkanki podskórnej",
+     "",
+     "",
+     "Świąd, wysypka",
+     ""
+    ],
+    [
+     "Zaburzenia układu rozrodczego i piersi",
+     "",
+     "",
+     "",
+     "Krwotok maciczny, atonia macicy"
+    ],
+    [
+     "Zaburzenia ogólne i stany w miejscu podania",
+     "",
+     "Reakcja w miejscu wstrzyknięcia",
+     "Gorączka",
+     ""
+    ]
+   ]
+  }
+ ]
+}

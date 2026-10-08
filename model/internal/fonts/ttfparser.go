@@ -58,11 +58,8 @@ func (ttf *TtfType) MakeEncoder() (textencoding.SimpleEncoder, error) {
 		var glyph GlyphName
 		if int(gid) >= 0 && int(gid) < len(ttf.GlyphNames) {
 			glyph = ttf.GlyphNames[gid]
-		} else {
-			r := rune(gid)
-			if g, ok := textencoding.RuneToGlyph(r); ok {
-				glyph = g
-			}
+		} else if g, ok := textencoding.RuneToGlyph(r); ok {
+			glyph = g
 		}
 		if glyph != "" {
 			encoding[code] = glyph

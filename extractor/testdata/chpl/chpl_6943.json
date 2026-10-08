@@ -1,0 +1,115 @@
+{
+ "document": "chpl_6943",
+ "tables": [
+  {
+   "name": "adverse reactions",
+   "rows": [
+    [
+     "Klasyfikacja układów i narządów (SOC)",
+     "Działanie niepożądane",
+     "Częstość"
+    ],
+    [
+     "ZAKAŻENIA I ZARAŻENIA PASOŻYTNICZE",
+     "Zapalenie gardła",
+     "Często"
+    ],
+    [
+     "ZABURZENIA KRWI I UKŁADU CHŁONNEGO",
+     "Powiększenie węzłów chłonnych Trombocytopenia (nadwrażliwość) Pancytopenia Leukopenia Limfopenia Eozynofilia",
+     "Często Nieznana Nieznana Nieznana Nieznana Nieznana"
+    ],
+    [
+     "ZABURZENIA UKŁADU IMMUNOLOGICZNEGO",
+     "Reakcje nadwrażliwości Reakcje anafilaktoidalne Anafilaksja",
+     "Nieznana Bardzo rzadko Nieznana"
+    ],
+    [
+     "ZABURZENIA METABOLIZMU I ODŻYWIANIA",
+     "Zmniejszony apetyt Uczucie odwodnienia",
+     "Często Często"
+    ],
+    [
+     "ZABURZENIA PSYCHICZNE",
+     "Bezsenność Koszmary",
+     "Często Często"
+    ],
+    [
+     "ZABURZENIA UKŁADU NERWOWEGO",
+     "Ból głowy Uczucie pustki w głowie Ospałość/Senność Zawroty głowy Parestezje Przeczulica Omdlenia Niedoczulica Zaburzenia uwagi",
+     "Bardzo często Bardzo często Bardzo często Często Często Często Często Często Często"
+    ],
+    [
+     "",
+     "Drgawki",
+     "Nieznana"
+    ],
+    [
+     "ZABURZENIA OKA",
+     "Zapalenie spojówek Światłowstręt Niewyraźne widzenie Obrzęk wokół oczu",
+     "Często Często Często Nieznana"
+    ],
+    [
+     "ZABURZENIA SERCA",
+     "Kołatanie serca Tachykardia Uniesienie odcinka ST Nieprawidłowy elektrokardiogram",
+     "Często Nieznana Bardzo rzadko Nieznana"
+    ],
+    [
+     "ZABURZENIA NACZYNIOWE",
+     "Nagłe zaczerwienienie twarzy Niedociśnienie tętnicze Nadciśnienie tętnicze Reakcje krążeniowe",
+     "Bardzo często Nieznana Nieznana Bardzo rzadko"
+    ],
+    [
+     "ZABURZENIA UKŁADU ODDECHOWEGO, KLATKI PIERSIOWEJ I ŚRÓDPIERSIA",
+     "Zatkanie nosa Kaszel Ból opłucnowy Suchość w ustach Skurcz oskrzeli Duszność Uczucie dyskomfortu dotyczące krtani Krwawienie z nosa Przyspieszenie częstości oddechów Niewydolność oddechowa Niedotlenienie Zmniejszenie saturacji Krwioplucie",
+     "Często Często Często Często Często Często Często Często Nieznana Nieznana Nieznana Nieznana Nieznana"
+    ],
+    [
+     "ZABURZENIA ŻOŁĄDKA I JELIT",
+     "Ból brzucha/kolka Nudności Biegunka Podrażnienie błon śluzowych¹ Wzdęcia Wymioty Palący ból (zamostkowy lub w nadbrzuszu) Zaparcia Krwawienie z dziąseł Zapalenie jamy ustnej Nieprzyjemny smak",
+     "Bardzo często Bardzo często Bardzo często Często Często Często Często Często Często Nieznana Nieznana"
+    ],
+    [
+     "ZABURZENIA WĄTROBY I DRÓG ŻÓŁCIOWYCH",
+     "Zwiększona aktywność aminotransferaz Zapalenie wątroby Zwiększona aktywność gammaglutamylotransferazy Zwiększona aktywność fosfatazy zasadowej we krwi",
+     "Często Nieznana Nieznana Nieznana"
+    ],
+    [
+     "ZABURZENIA SKÓRY I TKANKI PODSKÓRNEJ",
+     "Wysypka² Swędzenie Zaczerwienienie Tworzenie się pęcherzyków",
+     "Bardzo często Bardzo rzadko Bardzo rzadko Bardzo rzadko"
+    ],
+    [
+     "",
+     "Toksyczna nekroliza naskórka (zespół Lyella) Świąd Nadmierne pocenie się Zespół Stevensa-Johnsona Rumień wielopostaciowy Obrzęk pokrzywkowy Miejscowy obrzęk tkanek Wysypka polekowa * Owrzodzenia i (lub) pęcherze/tworzenie się pęcherzy ** Obrzęk naczynioruchowy Trwałe odczyny polekowe Wysypka spowodowana nadwrażliwością na światło Pokrzywka Uczucie pieczenia Rumień",
+     "Bardzo rzadko Często Często Nieznana Nieznana Bardzo rzadko Bardzo rzadko Nieznana Nieznana Nieznana Nieznana Nieznana Nieznana Nieznana Nieznana"
+    ],
+    [
+     "ZABURZENIA MIĘŚNIOWO SZKIELETOWE I TKANKI ŁĄCZNEJ",
+     "Ból stawów Ból pleców Ból kończyn Ból żuchwy Bóle mięśni Ból kończyn i stawów",
+     "Często Często Często Często Często Bardzo rzadko"
+    ],
+    [
+     "ZABURZENIA NEREK I DRÓG MOCZOWYCH",
+     "Trudności w oddawaniu moczu Ostra niewydolność nerek",
+     "Często Nieznana"
+    ],
+    [
+     "ZABURZENIA OGÓLNE I REAKCJE W MIEJSCU PODANIA",
+     "Reakcje w miejscu infuzji - Świąd w miejscu infuzji - Wysypka w miejscu infuzji - Ból w miejscu infuzji - Rumień w miejscu infuzji - Pokrzywka w miejscu infuzji - Obrzęk w miejscu infuzji Gorączka Objawy grypopodobne Dreszcze Zmęczenie Ból w klatce piersiowej Złe samopoczucie Reakcje w miejscu wstrzyknięcia",
+     "Bardzo często Bardzo często Bardzo często Często Często Często Często Bardzo często Bardzo często Często Często Często Często Rzadko"
+    ],
+    [
+     "",
+     "Osłabienie Reakcje błony śluzowej Brak energii Wyczerpanie Obrzęk twarzy Obrzęk obwodowy Astenia Reakcje w miejscu infuzji****",
+     "Bardzo rzadko Bardzo rzadko Bardzo rzadko Bardzo rzadko Nieznana Nieznana Nieznana Nieznana"
+    ],
+    [
+     "BADANIA DIAGNOSTYCZNE",
+     "Zmniejszenie liczby płytek krwi Zwiększona częstość oddechów Wzrost niektórych prób wątrobowych Objawy rozsianego wykrzepiania wewnątrznaczyniowego w badaniach laboratoryjnych Wydłużony czas protrombinowy Wydłużony czas kaolinowo kefalinowy",
+     "Bardzo rzadko Bardzo rzadko Bardzo rzadko Nieznana Nieznana Nieznana"
+    ]
+   ]
+  }
+ ]
+}

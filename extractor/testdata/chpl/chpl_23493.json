@@ -1,0 +1,136 @@
+{
+ "document": "chpl_23493",
+ "tables": [
+  {
+   "name": "4.8 adverse reactions by frequency",
+   "rows": [
+    [
+     "Klasyfikacja układów i narządów",
+     "Bardzo często",
+     "Często",
+     "Niezbyt często",
+     "Rzadko",
+     "Bardzo rzadko",
+     "Nieznana"
+    ],
+    [
+     "Zakażenia i zarażenia pasożytnicze",
+     "",
+     "Przeziębienie",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia metabolizmu i odżywiania",
+     "",
+     "Jadłowstręt",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia psychiczne",
+     "",
+     "Omamy** Pobudzenie** Agresywne zachowanie** Nietypowe sny i koszmary senne**",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia układu nerwowego",
+     "",
+     "Omdlenie* Zawroty głowy Bezsenność",
+     "Drgawki*",
+     "Objawy pozapiramidowe",
+     "Złośliwy zespół neuroleptyczny",
+     ""
+    ],
+    [
+     "Zaburzenia serca",
+     "",
+     "",
+     "Bradykardia",
+     "Blok zatokowo-przedsionkowy Blok przedsionkowo-komorowy",
+     "",
+     "Polimorficzny częstokurcz komorowy, w tym częstokurcz typu torsade de pointes; wydłużenie odstępu QT w zapisie EKG"
+    ],
+    [
+     "Zaburzenia żołądka i jelit",
+     "Biegunka Nudności",
+     "Wymioty Zaburzenia brzuszne",
+     "Krwawienie z przewodu pokarmowego Wrzody żołądka i dwunastnicy",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia wątroby i dróg żółciowych",
+     "",
+     "",
+     "",
+     "Zaburzenia czynności wątroby, w tym zapalenie wątroby***",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia skóry i tkanki podskórnej",
+     "",
+     "Wysypka Świąd",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia mięśniowo-szkieletowe i tkanki łącznej",
+     "",
+     "Kurcze mięśni",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia nerek i dróg moczowych",
+     "",
+     "Nietrzymanie moczu",
+     "",
+     "",
+     "Rabdomioliza****",
+     ""
+    ],
+    [
+     "Zaburzenia ogólne i stany w miejscu podania",
+     "Ból głowy",
+     "Zmęczenie Ból",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Badania diagnostyczne",
+     "",
+     "",
+     "Nieznaczne zwiększenie stężenia kinazy kreatynowej w surowicy",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Urazy i zatrucia",
+     "",
+     "Wypadki, w tym przewracanie się",
+     "",
+     "",
+     "",
+     ""
+    ]
+   ]
+  }
+ ]
+}

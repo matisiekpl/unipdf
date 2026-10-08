@@ -1,0 +1,170 @@
+{
+ "document": "chpl_864",
+ "tables": [
+  {
+   "name": "Tabela 1 adverse reactions",
+   "rows": [
+    [
+     "Zaburzenia metabolizmu i odżywiania",
+     ""
+    ],
+    [
+     "Częstość nieznana",
+     "zwiększenie masy ciała"
+    ],
+    [
+     "Zaburzenia psychiczne",
+     ""
+    ],
+    [
+     "Bardzo często",
+     "splątanie"
+    ],
+    [
+     "Często",
+     "bezsenność, dezorientacja"
+    ],
+    [
+     "Rzadko",
+     "euforia, pobudzenie, depresja, omamy, koszmary nocne, obniżenie progu drgawkowego i zwiększenie liczby napadów drgawkowych, szczególnie u pacjentów z padaczką"
+    ],
+    [
+     "Zaburzenia układu nerwowego",
+     ""
+    ],
+    [
+     "Bardzo często",
+     "uspokojenie, senność"
+    ],
+    [
+     "Często",
+     "depresja oddechowa, uczucie pustki w głowie, bóle głowy, zawroty głowy, ataksja"
+    ],
+    [
+     "Rzadko",
+     "parestezje, upośledzenie mowy"
+    ],
+    [
+     "Częstość nieznana",
+     "zespół bezdechu sennego*, encefalopatia"
+    ],
+    [
+     "Zaburzenia oka",
+     ""
+    ],
+    [
+     "Często",
+     "zaburzenia widzenia, zaburzenia akomodacji, oczopląs"
+    ],
+    [
+     "Zaburzenia serca",
+     ""
+    ],
+    [
+     "Rzadko",
+     "zmniejszenie pojemności minutowej serca, uczucie duszności, kołatanie serca, bóle w klatce piersiowej"
+    ],
+    [
+     "Zaburzenia naczyniowe",
+     ""
+    ],
+    [
+     "Często",
+     "obniżenie ciśnienia krwi"
+    ],
+    [
+     "Rzadko",
+     "omdlenia, obrzęk kostek"
+    ],
+    [
+     "Zaburzenia układu oddechowego, klatki piersiowej i śródpiersia",
+     ""
+    ],
+    [
+     "Rzadko",
+     "zahamowanie oddechu"
+    ],
+    [
+     "Częstość nieznana",
+     "uczucie zatkania nosa"
+    ],
+    [
+     "Zaburzenia żołądka i jelit",
+     ""
+    ],
+    [
+     "Bardzo często",
+     "nudności"
+    ],
+    [
+     "Często",
+     "suchość w ustach, zaburzenia smaku, jadłowstręt, odruchy wymiotne, wymioty, zaparcia, biegunka"
+    ],
+    [
+     "Rzadko",
+     "bóle brzucha"
+    ],
+    [
+     "Częstość nieznana",
+     "dodatni wynik badania na krew utajoną w kale"
+    ],
+    [
+     "Zaburzenia wątroby i dróg żółciowych",
+     ""
+    ],
+    [
+     "Rzadko",
+     "zaburzenia czynności wątroby"
+    ],
+    [
+     "Zaburzenia skóry i tkanki podskórnej",
+     ""
+    ],
+    [
+     "Często",
+     "wysypka, nadmierna potliwość"
+    ],
+    [
+     "Częstość nieznana",
+     "świąd"
+    ],
+    [
+     "Zaburzenia mięśniowo-szkieletowe i tkanki łącznej",
+     ""
+    ],
+    [
+     "Często",
+     "osłabienie siły mięśniowej, bóle mięśni, drżenie"
+    ],
+    [
+     "Zaburzenia nerek i dróg moczowych",
+     ""
+    ],
+    [
+     "Często",
+     "wielomocz, mimowolne oddawanie moczu, bolesne oddawanie moczu"
+    ],
+    [
+     "Rzadko",
+     "zatrzymanie moczu, moczenie nocne, krwiomocz"
+    ],
+    [
+     "Zaburzenia układu rozrodczego i piersi",
+     ""
+    ],
+    [
+     "Rzadko",
+     "zaburzenia wytrysku, impotencja"
+    ],
+    [
+     "Zaburzenia ogólne i stany w miejscu podania",
+     ""
+    ],
+    [
+     "Często",
+     "osłabienie, zmęczenie, wyczerpanie, hipotermia"
+    ]
+   ]
+  }
+ ]
+}

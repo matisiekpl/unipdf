@@ -1,0 +1,114 @@
+{
+ "document": "chpl_36124",
+ "tables": [
+  {
+   "name": "Tabela I",
+   "rows": [
+    [
+     "Zaburzenia metabolizmu i odżywiania",
+     ""
+    ],
+    [
+     "Niezbyt często",
+     "Odwodnienie"
+    ],
+    [
+     "Zaburzenia układu nerwowego",
+     ""
+    ],
+    [
+     "Bardzo rzadko",
+     "Zawroty głowy"
+    ],
+    [
+     "Niezbyt często",
+     "Parestezje"
+    ],
+    [
+     "Nieznana",
+     "Omdlenie"
+    ],
+    [
+     "Zaburzenia oka",
+     ""
+    ],
+    [
+     "Niezbyt często",
+     "Nieostre widzenie"
+    ],
+    [
+     "Zaburzenia ucha i błędnika",
+     ""
+    ],
+    [
+     "Niezbyt często",
+     "Szum w uszach"
+    ],
+    [
+     "Zaburzenia naczyniowe",
+     ""
+    ],
+    [
+     "Niezbyt często",
+     "Niedociśnienie"
+    ],
+    [
+     "Zaburzenia układu oddechowego, klatki piersiowej i śródpiersia",
+     ""
+    ],
+    [
+     "Niezbyt często",
+     "Kaszel"
+    ],
+    [
+     "Nieznana",
+     "Niekardiogenny obrzęk płuc"
+    ],
+    [
+     "Zaburzenia żołądka i jelit",
+     ""
+    ],
+    [
+     "Bardzo rzadko",
+     "Biegunka"
+    ],
+    [
+     "Zaburzenia mięśniowo-szkieletowe i tkanki łącznej",
+     ""
+    ],
+    [
+     "Niezbyt często",
+     "Bóle mięśni"
+    ],
+    [
+     "Bardzo rzadko",
+     "Bóle stawów"
+    ],
+    [
+     "Zaburzenia nerek i dróg moczowych",
+     ""
+    ],
+    [
+     "Nieznana",
+     "Zaburzona czynność nerek"
+    ],
+    [
+     "Zaburzenia ogólne i stany w miejscu podania",
+     ""
+    ],
+    [
+     "Niezbyt często",
+     "Uczucie zmęczenia"
+    ],
+    [
+     "Badania diagnostyczne",
+     "Zwiększenie stężenia kwasu moczowego w surowicy,"
+    ],
+    [
+     "Nieznana",
+     "zwiększenie stężenia bilirubiny i kreatyniny w surowicy, hipokaliemia, hiponatremia, zwiększenie stężenia azotu mocznikowego we krwi, neutropenia"
+    ]
+   ]
+  }
+ ]
+}

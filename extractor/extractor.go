@@ -8,6 +8,7 @@ package extractor
 import (
 	"fmt"
 
+	"github.com/matisiekpl/unipdf/v3/core"
 	"github.com/matisiekpl/unipdf/v3/model"
 )
 
@@ -20,11 +21,11 @@ type Extractor struct {
 
 	// fontCache is a simple LRU cache that is used to prevent redundant constructions of PdfFonts
 	// from PDF objects. NOTE: This is not a conventional glyph cache. It only caches PdfFonts.
-	fontCache map[string]fontEntry
+	fontCache map[core.PdfObject]fontEntry
 
 	// text results from running extractXYText on forms within the page.
 	// TODO(peterwilliams97): Cache this map accross all pages in a PDF to speed up processing.
-	formResults map[string]textResult
+	formResults map[formKey]textResult
 
 	// accessCount is used to set fontEntry.access to an incrementing number.
 	accessCount int64
@@ -59,8 +60,8 @@ func New(page *model.PdfPage) (*Extractor, error) {
 		contents:    contents,
 		resources:   page.Resources,
 		mediaBox:    *mediaBox,
-		fontCache:   map[string]fontEntry{},
-		formResults: map[string]textResult{},
+		fontCache:   map[core.PdfObject]fontEntry{},
+		formResults: map[formKey]textResult{},
 	}
 	return e, nil
 }
@@ -70,8 +71,8 @@ func NewFromContents(contents string, resources *model.PdfPageResources) (*Extra
 	e := &Extractor{
 		contents:    contents,
 		resources:   resources,
-		fontCache:   map[string]fontEntry{},
-		formResults: map[string]textResult{},
+		fontCache:   map[core.PdfObject]fontEntry{},
+		formResults: map[formKey]textResult{},
 	}
 	return e, nil
 }

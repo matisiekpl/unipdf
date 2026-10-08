@@ -1,0 +1,351 @@
+{
+ "document": "chpl_50603",
+ "tables": [
+  {
+   "name": "Tabela 1 adults adverse reactions",
+   "rows": [
+    [
+     "Klasyfikacja układów i narządów",
+     "Bardzo często",
+     "Często",
+     "Niezbyt często",
+     "Rzadko",
+     "Częstość nieznana"
+    ],
+    [
+     "Zakażenia i zarażenia pasożytnicze",
+     "",
+     "",
+     "Zapalenie nosogardzieli",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia krwi i układu chłonnego",
+     "",
+     "",
+     "Niedokrwistość",
+     "Eozynofilia Leukopenia",
+     "Neutropenia****"
+    ],
+    [
+     "Zaburzenia układu immunolo gicznego",
+     "",
+     "Nadwrażliwość",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia metabolizmu i odżywiania",
+     "",
+     "Zwiększenie masy ciała Zmniejszenie apetytu",
+     "Zwiększenie stężenia glukozy we krwi Hiponatremia",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia psychiczne",
+     "Bez senność",
+     "Pobudzenie Lęk Niepokój psychoruchowy",
+     "Koszmary senne Katatonia Napady paniki",
+     "Zachowania samobójcze",
+     "Zaburzenia snu****"
+    ],
+    [
+     "Zaburzenia układu nerwowego",
+     "Akatyzja",
+     "Senność* Parkinsonizm** Zawroty głowy Dystonia*** Dyskinezy",
+     "Ospałość Dyzartria Późne dyskinezy Omdlenie Drgawki",
+     "Złośliwy zespół neuroleptyczny (NMS) Incydent mózgowo naczyniowy",
+     ""
+    ],
+    [
+     "Zaburzenia oka",
+     "",
+     "",
+     "Nieostre widzenie",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia ucha i błędnika",
+     "",
+     "",
+     "Zawroty głowy",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia serca",
+     "",
+     "Częstoskurcz",
+     "Dławica piersiowa Blok przedsionkowo ‑komorowy I stopnia Rzadkoskurcz",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia naczyniowe",
+     "",
+     "Nadciśnienie tętnicze",
+     "Niedociśnienie Niedociśnienie tętnicze ortostatyczne Uderzenia gorą ca Podwyższenie ciśnienia tętniczego",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia żołądka i jelit",
+     "Nudności",
+     "Biegunka Wymioty Niestrawność Nadmierne wydzielanie śliny Suchość w jamie ustnej Ból w nadbrzuszu Dyskomfort w żołądku",
+     "Wzdęcia Dysfagia Zapalenie żołądka",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia wątroby i dróg żółciowych",
+     "",
+     "",
+     "Wzrost aktywności aminotransferazy alaninowej",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia skóry i tkanki podskórnej",
+     "",
+     "Wysypka Świąd",
+     "Nadmierna potliwość",
+     "Obrzęk naczynioruchowy",
+     "Zespół Stevensa Johnsona"
+    ],
+    [
+     "Zaburzenia mięśniowo- szkieletowe i tkanki łącznej",
+     "",
+     "Ból pleców Sztywność mięśniowo szkieletowa",
+     "Sztywność stawów Ból mięśni Ból szyi",
+     "Rabdomioliza",
+     ""
+    ],
+    [
+     "Zaburzenia nerek i dróg moczowych",
+     "",
+     "Zwiększone stężenie kreatyniny w surowicy",
+     "Dyzuria",
+     "Niewydolność nerek",
+     ""
+    ],
+    [
+     "Ciąża, połóg i okres okołoporodowy",
+     "",
+     "",
+     "",
+     "",
+     "Zespół odstawienia leku u noworodków (patrz punkt 4.6)"
+    ],
+    [
+     "Zaburzenia układu rozrodczego i piersi",
+     "",
+     "",
+     "Zwiększone stężenie prolaktyny we krwi Zaburzenia erekcji Brak miesiączki Bolesne miesiączkowanie",
+     "Bóle piersi Mlekotok",
+     "Powiększeni e piersi****"
+    ],
+    [
+     "Zaburzenia ogólne i stany w miejscu podania",
+     "",
+     "Zmęczenie",
+     "Zaburzenia chodu",
+     "Nagły zgon",
+     ""
+    ],
+    [
+     "Badania",
+     "",
+     "Zwiększone stężenie fosfokinazy kreatynowej we krwi",
+     "",
+     "",
+     ""
+    ]
+   ]
+  },
+  {
+   "name": "Tabela 2 adolescents adverse reactions",
+   "rows": [
+    [
+     "Klasyfikacja układów i narządów",
+     "Bardzo często",
+     "Często",
+     "Niezbyt często",
+     "Rzadko",
+     "Częstość nieznana"
+    ],
+    [
+     "Zakażenia i zarażenia pasożytnicze",
+     "",
+     "",
+     "Zapalenie nosogardzieli Nieżyt nosa Zakażenie górnych dróg oddechowych",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia krwi i układu chłonnego",
+     "",
+     "",
+     "Neutropenia",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia układu immunologicznego",
+     "",
+     "",
+     "Nadwrażliwość",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia endokrynologiczne",
+     "",
+     "Hiperprolaktynemia (w tym zwiększone stężenie prolaktyny we krwi)",
+     "Autoimmunologiczne zapalenie tarczycy Hiperandrogenizm Niedoczynność tarczycy",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia metabolizmu i odżywiania",
+     "",
+     "Zmniejszenie apetytu Zwiększenie apetytu",
+     "Hiperinsulinemia",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia psychiczne",
+     "",
+     "Nietypowe sny Pobudzenie Lęk Depresja Bezsenność Zaburzenia psychotyczne Schizofrenia Napięcie",
+     "Agresja Apatia Stan splątania Nastrój depresyjny Zaburzenia dysocjacyjne Omamy (słuchowe) Omamy (wzrokowe) Myśli o morderstwie Zachowania impulsywne Trudności w zasypianiu Spadek libido Wzrost libido Ospałość Zmiany stanu psychicznego Obsesje Napady paniki Nadpobudliwość psychoruchowa Niepokój ruchowy Zaburzenia snu Myśli samobójcze Zbyt wczesne budzenie się Zaburzenia myślenia",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia układu nerwowego",
+     "Akatyzja Bóle głowy Senność*",
+     "Zaburzenia uwagi Zawroty głowy Dyskineza Dystonia*** Parkinsonizm**",
+     "Posturalne zawroty głowy Zaburzenia smaku Hiperkinezja Zaburzenia pamięci Migrena Parestezje Nadpobudliwość psychoruchowa Zespół niespokojnych nóg Dyskineza późna Napięciowy ból głowy",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia oka",
+     "",
+     "",
+     "Zaburzenia akomodacji oka Nieostre widzenie",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia ucha i błędnika",
+     "",
+     "",
+     "Przeczulica słuchowa",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia serca",
+     "",
+     "Częstoskurcz",
+     "Kołatanie serca Dodatkowe pobudzenia nadkomorowe",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia naczyniowe",
+     "",
+     "",
+     "Hipotensja ortostatyczna Nadciśnienie tętnicze",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia układu oddechowego, klatki piersiowej i śródpiersia",
+     "",
+     "",
+     "Ból jamy ustnej i gardła Duszność",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia żołądka i jelit",
+     "Nudności",
+     "Zaparcia Suchość ust Nadmierne wydzielanie śliny Wymioty",
+     "Dyskomfort w obrębie jamy brzusznej Ból w nadbrzuszu Zaburzenia wydzielania śliny Biegunka Dyspepsja Suchość warg Ból zęba",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia skóry i tkanki podskórnej",
+     "",
+     "Nadmierna potliwość",
+     "Łysienie Nieprawidłowy wzrost włosów Wysypka Pokrzywka",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia mięśniowo-szkieletowe i tkanki łącznej",
+     "",
+     "Sztywność mięśni",
+     "Bóle stawów Zwiększone napięcie mięśni Sztywność mięśniowo szkieletowa Bóle mięśniowe Bóle kończyn Bóle szczęki",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia nerek i dróg moczowych",
+     "",
+     "",
+     "Bilirubinuria Dyzuria Zaburzenia mikcji Wielomocz Białkomocz Zaburzenia dotyczące nerek",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia układu rozrodczego i piersi",
+     "",
+     "Zaburzenia erekcji",
+     "Brak miesiączki Bóle piersi Zaburzenia wytrysku Mlekotok Ginekomastia Nieregularny cykl miesiączkowy Rzadkie miesiączkowanie Zaburzenia czynności seksualnych",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia wrodzone i genetyczne oraz obciążenia rodzinne",
+     "",
+     "",
+     "Zespół Tourette’a",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia ogólne i stany w miejscu podania",
+     "",
+     "Astenia Zmęczenie Drażliwość",
+     "Dreszcze Zaburzenia chodu Złe samopoczucie Niesercowy ból w klatce piersiowej Gorączka",
+     "",
+     ""
+    ],
+    [
+     "Badania",
+     "",
+     "Podwyższona aktywność fosfokinazy kreatynowej we krwi Podwyższone stężenie białka C-reaktywnego Obniżenie masy ciała Zwiększenie masy ciała",
+     "Podwyższona aktywność aminotransferazy alaninowej Wynik pozytywny na przeciwciała przeciwtarczycowe Po Podwyższona aktywność aminotransferazy asparaginianowej Obniżona aktywność fosfatazy alkalicznej we krwi Podwyższona aktywność fosfatazy alkalicznej we krwi Zwiększone stężenie cholesterolu we krwi Zwiększone stężenie glukozy we krwi Zwiększone stężenie insuliny we krwi Zmniejszone stężenie testosteronu we krwi Wzrost stężenia TSH we krwi Zwiększenie stężenia triglicerydów we krwi Skrócenie odstępu PQ w EKG Zmniejszone stężenie hemoglobiny Zmniejszone stężenie HDL Zmniejszone stężenie LDL",
+     "",
+     ""
+    ],
+    [
+     "Urazy, zatrucia oraz powikłania po zabiegach",
+     "",
+     "",
+     "Umyślne przedawkowanie",
+     "",
+     ""
+    ]
+   ]
+  }
+ ]
+}

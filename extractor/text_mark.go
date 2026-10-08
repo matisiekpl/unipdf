@@ -30,6 +30,7 @@ type textMark struct {
 	originaBBox        model.PdfRectangle // Bounding box without orientation correction.
 	fillColor          color.Color        // Text fill color.
 	strokeColor        color.Color        // Text stroke color.
+	clipped            bool
 }
 
 // newTextMark returns a textMark for text `text` rendered with text rendering matrix (TRM) `trm`
@@ -150,6 +151,7 @@ func (tm *textMark) ToTextMark() TextMark {
 		FontSize:    tm.fontsize,
 		FillColor:   tm.fillColor,
 		StrokeColor: tm.strokeColor,
+		orient:      tm.orient,
 	}
 }
 

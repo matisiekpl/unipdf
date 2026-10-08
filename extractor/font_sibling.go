@@ -82,7 +82,7 @@ func repairRune(r rune) (string, bool) {
 		}
 		return "", true
 	}
-	if r >= 0x2E80 && r <= 0xFFFF {
+	if r >= 0x2E80 && r <= 0xFFFF && (r < 0xA640 || r > 0xABFF) {
 		hi, hiOk := latinByteRune(byte(r >> 8))
 		lo, loOk := latinByteRune(byte(r & 0xFF))
 		hiNull := byte(r>>8) == 0

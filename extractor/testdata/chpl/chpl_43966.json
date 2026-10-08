@@ -1,0 +1,103 @@
+{
+ "document": "chpl_43966",
+ "tables": [
+  {
+   "name": "Tabela 2",
+   "rows": [
+    [
+     "Dawka (maksymalna dawka dobowa) (mg)",
+     ""
+    ],
+    [
+     "Dawka początkowa",
+     "Zwiększenie dawki"
+    ],
+    [
+     "Daruph",
+     "Daruph"
+    ],
+    [
+     "32",
+     "40"
+    ],
+    [
+     "48",
+     "55"
+    ],
+    [
+     "55",
+     "71"
+    ],
+    [
+     "79",
+     "95"
+    ]
+   ]
+  },
+  {
+   "name": "Tabela 3",
+   "rows": [
+    [
+     "Dorośli z CML w fazie przewlekłej (dawka początkowa 79 mg raz na dobę)",
+     "ANC < 0,5 x 10⁹/l i (lub) liczba płytek < 50 x 10⁹/l",
+     "1. Przerwać leczenie do czasu uzyskania ANC ≥ 1,0 x 10⁹/l oraz liczby płytek krwi ≥ 50 x 10⁹/l. 2. Ponownie rozpocząć leczenie w pierwotnej dawce. 3. W przypadku spadku liczby płytek krwi < 25 x 10⁹/l oraz (lub) ANC < 0,5 x 10⁹/l utrzymujących się przez > 7 dni, powtórzyć postępowanie podane w punkcie 1 i włączyć leczenie w mniejszej dawce, 63 mg raz na dobę w przypadku drugiego epizodu."
+    ],
+    [
+     "",
+     "",
+     "W przypadku trzeciego epizodu należy zmniejszyć dawkę do 40 mg raz na dobę (u nowo zdiagnozowanych pacjentów) lub zaprzestać leczenia (u pacjentów z opornością lub nietolerancją na wcześniejsze leczenie z zastosowaniem imatynibu)."
+    ],
+    [
+     "Dorośli z CML w fazie akceleracji lub fazie przełomu blastycznego i z Ph+ ALL (dawka początkowa 111 mg raz na dobę)",
+     "ANC < 0,5 x 10⁹/l i (lub) liczba płytek krwi < 10 x 10⁹/l",
+     "1. Sprawdzić, czy cytopenia jest związana z białaczką (aspiracja szpiku kostnego lub biopsja). 2. Jeśli cytopenia nie jest związana z białaczką, należy wstrzymać leczenie aż do czasu, gdy ANC ≥ 1,0 x 10⁹/l i liczba płytek krwi ≥ 20 x 10⁹/l oraz ponownie rozpocząć leczenie w pierwotnej dawce początkowej. 3. W przypadku nawrotu cytopenii, powtórzyć punkt 1 i ponownie rozpocząć leczenie zmniejszoną dawką 79 mg raz na dobę (drugi epizod) lub 63 mg raz na dobę (trzeci epizod). 4. Jeśli cytopenia związana jest z białaczką należy rozważyć zwiększenie dawki do 142 mg raz na dobę."
+    ]
+   ]
+  },
+  {
+   "name": "Tabela 4",
+   "rows": [
+    [
+     "1. Jeśli cytopenia utrzymuje się dłużej niż 3 tygodnie, należy sprawdzić, czy cytopenia nie jest związana z białaczką (aspiracja szpiku kostnego lub biopsja). 2. Jeśli cytopenia nie jest związana z białaczką, należy wstrzymać leczenie aż do czasu, gdy ANC ≥ 1,0 x 10⁹/l i liczba płytek krwi ≥ 75 x 10⁹/l oraz ponownie rozpocząć leczenie w pierwotnej dawce początkowej lub w zmniejszonej dawce. 3. W przypadku nawrotu cytopenii, powtórzyć aspirację szpiku kostnego lub biopsję i ponownie rozpocząć leczenie w zmniejszonej dawce.",
+     "",
+     ""
+    ],
+    [
+     "Dawka (maksymalna dawka dobowa) (mg)",
+     "",
+     ""
+    ],
+    [
+     "Pierwotna dawka początkowa",
+     "Zmniejszenie dawki o jeden poziom",
+     "Zmniejszenie dawki o dwa poziomy"
+    ],
+    [
+     "Daruph",
+     "Daruph",
+     "Daruph"
+    ],
+    [
+     "32",
+     "16",
+     "*"
+    ],
+    [
+     "47",
+     "32",
+     "16"
+    ],
+    [
+     "55",
+     "48",
+     "40"
+    ],
+    [
+     "79",
+     "63",
+     "55"
+    ]
+   ]
+  }
+ ]
+}

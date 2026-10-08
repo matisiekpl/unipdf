@@ -1,0 +1,82 @@
+{
+ "document": "chpl_23447",
+ "tables": [
+  {
+   "name": "4.8 adverse reactions by frequency",
+   "rows": [
+    [
+     "Klasyfikacja układów i narządów (ang. MedDRA SOC)",
+     "Częstośćᵃ",
+     "",
+     ""
+    ],
+    [
+     "",
+     "Niezbyt często (≥1/1 000 do <l/100) lub rzadko (≥1/10 000 do <l/1000)ᵇ",
+     "Bardzo rzadko (<l/10 000)",
+     "Częstość nieznana (częstość nie może być określona na podstawie dostępnych danych)"
+    ],
+    [
+     "Zaburzenia układu immunologicznego",
+     "",
+     "Nadwrażliwość Reakcja anafilaktycza Reakcja anafilaktoidalna Wstrząs anafilaktyczny Wstrząs anafilaktoidalny",
+     ""
+    ],
+    [
+     "Zaburzenia układu",
+     "",
+     "Porażenie wiotkie",
+     ""
+    ],
+    [
+     "Zaburzenia serca",
+     "Tachykardia",
+     "",
+     "Zespół Kounisa"
+    ],
+    [
+     "Zaburzenia naczyniowe",
+     "Niedociśnienie tętnicze",
+     "Zapaść krążeniowa i wstrząs Nagłe zaczerwienie skóry",
+     ""
+    ],
+    [
+     "Zaburzenia układu oddechowego, klatki piersiowej i śródpiersia",
+     "",
+     "Skurcz oskrzeli",
+     ""
+    ],
+    [
+     "Zaburzenia skóry i tkanki podskórnej",
+     "",
+     "Obrzęk naczynioruchowy Pokrzywka Wysypka Wysypka rumieniowa",
+     ""
+    ],
+    [
+     "Zaburzenia mięśniowo szkieletowe i tkanki łącznej",
+     "",
+     "Osłabienie mięśniᶜ Miopatia steroidowaᶜ",
+     ""
+    ],
+    [
+     "Zaburzenia ogólne i stany w miejscu podania",
+     "Brak działania produktu leczniczego Zmniejszenie działania produktu leczniczego/odpowiedzi terapeutycznej Zwiększenie działania produktu leczniczego/odpowiedzi terapeutycznej Ból w miejscu wstrzyknięcia Reakcja w miejscu wstrzyknięcia",
+     "Obrzęk twarzy",
+     ""
+    ],
+    [
+     "Urazy, zatrucia i powikłania po zabiegach",
+     "Przedłużony blok nerwowo mięśniowy Opóźnienie wychodzenia ze znieczulenia",
+     "Powikłania znieczulenia związane z drogami oddechowymi",
+     ""
+    ],
+    [
+     "ᵃ Częstości są oszacowane na podstawie raportów z obserwacji po wprowadzeniu do obrotu oraz danych z piśmiennictwa ogólnego. ᵇ Dane z obserwacji po wprowadzeniu do obrotu nie mogą dostarczyć dokładnych liczb dotyczących częstości występowania. Z tego względu, częstość zgłaszania została podzielona na dwie zamiast na pięć kategorii. ᶜ Po długotrwałym stosowaniu w oddziałach intensywnej opieki medycznej.",
+     "",
+     "",
+     ""
+    ]
+   ]
+  }
+ ]
+}

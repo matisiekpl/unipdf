@@ -1,0 +1,634 @@
+{
+ "document": "chpl_44630",
+ "tables": [
+  {
+   "name": "4.8 adverse reactions amlodipine/perindopril",
+   "rows": [
+    [
+     "Klasyfikacja układowo - narządowa MedDRA",
+     "Działania niepożądane",
+     "Częstość występowania",
+     ""
+    ],
+    [
+     "",
+     "",
+     "Amlodypina",
+     "Peryndopryl"
+    ],
+    [
+     "Zakażenia i zarażenia pasożytnicze",
+     "Zapalenie błony śluzowej nosa",
+     "Niezbyt często",
+     "Bardzo rzadko"
+    ],
+    [
+     "Zaburzenia krwi i układu chłonnego",
+     "Eozynofilia",
+     "-",
+     "Niezbyt często*"
+    ],
+    [
+     "",
+     "Leukopenia/neutropenia (patrz punkt 4.4)",
+     "Bardzo rzadko",
+     "Bardzo rzadko"
+    ],
+    [
+     "",
+     "Agranulocytoza lub pancytopenia (patrz punkt 4.4)",
+     "-",
+     "Bardzo rzadko"
+    ],
+    [
+     "",
+     "Małopłytkowość (patrz punkt 4.4)",
+     "Bardzo rzadko",
+     "Bardzo rzadko"
+    ],
+    [
+     "",
+     "Niedokrwistość hemolityczna u pacjentów z wrodzonym niedoborem dehydrogenazy glukozo-6-fosforanowej (patrz punkt 4.4)",
+     "-",
+     "Bardzo rzadko"
+    ],
+    [
+     "Zaburzenia układu immunologicznego",
+     "Nadwrażliwość",
+     "Bardzo rzadko",
+     "Niezbyt często"
+    ],
+    [
+     "Zaburzenia endokrynologiczne",
+     "Zespół niewłaściwego wydzielania hormonu antydiuretycznego (SIADH)",
+     "-",
+     "Rzadko"
+    ],
+    [
+     "Zaburzenia metabolizmu i odżywiania",
+     "Hipoglikemia (patrz punkty 4.4 i 4.5)",
+     "-",
+     "Niezbyt często*"
+    ],
+    [
+     "",
+     "Hiperkaliemia, przemijająca po przerwaniu leczenia (patrz punkt 4.4)",
+     "-",
+     "Niezbyt często*"
+    ],
+    [
+     "",
+     "Hiponatremia",
+     "-",
+     "Niezbyt często*"
+    ],
+    [
+     "",
+     "Hiperglikemia",
+     "Bardzo rzadko",
+     "-"
+    ],
+    [
+     "Zaburzenia psychiczne",
+     "Bezsenność",
+     "Niezbyt często",
+     "-"
+    ],
+    [
+     "",
+     "Zmiany nastroju (w tym lęk)",
+     "Niezbyt często",
+     "Niezbyt często"
+    ],
+    [
+     "",
+     "Depresja",
+     "Niezbyt często",
+     "Niezbyt często"
+    ],
+    [
+     "",
+     "Zaburzenia snu",
+     "-",
+     "Niezbyt często"
+    ],
+    [
+     "Zaburzenia układu nerwowego",
+     "Senność (zwłaszcza na początku leczenia)",
+     "Często",
+     "-"
+    ],
+    [
+     "",
+     "Zawroty głowy pochodzenia ośrodkowego (zwłaszcza na początku leczenia)",
+     "Często",
+     "Często"
+    ],
+    [
+     "",
+     "Ból głowy (zwłaszcza na początku leczenia)",
+     "Często",
+     "Często"
+    ],
+    [
+     "",
+     "Zaburzenia smaku",
+     "Niezbyt często",
+     "Często"
+    ],
+    [
+     "",
+     "Drżenie",
+     "Niezbyt często",
+     "-"
+    ],
+    [
+     "",
+     "Niedoczulica",
+     "Niezbyt często",
+     "-"
+    ],
+    [
+     "",
+     "Parestezje",
+     "Niezbyt często",
+     "Często"
+    ],
+    [
+     "",
+     "Omdlenie",
+     "Niezbyt często",
+     "Niezbyt często"
+    ],
+    [
+     "",
+     "Stan splątania",
+     "Rzadko",
+     "Bardzo rzadko"
+    ],
+    [
+     "",
+     "Wzmożone napięcie (hipertonia)",
+     "Bardzo rzadko",
+     "-"
+    ],
+    [
+     "",
+     "Neuropatia obwodowa",
+     "Bardzo rzadko",
+     "-"
+    ],
+    [
+     "",
+     "Incydent naczyniowo-mózgowy, prawdopodobnie wtórny do znacznego niedociśnienia u pacjentów z grupy dużego ryzyka (patrz punkt 4.4)",
+     "-",
+     "Bardzo rzadko"
+    ],
+    [
+     "",
+     "Zaburzenia pozapiramidowe",
+     "Nieznana",
+     "-"
+    ],
+    [
+     "Zaburzenia oka",
+     "Zaburzenia widzenia",
+     "Często",
+     "Często"
+    ],
+    [
+     "",
+     "Podwójne widzenie",
+     "Często",
+     "-"
+    ],
+    [
+     "Zaburzenia ucha i błędnika",
+     "Szum uszny",
+     "Niezbyt często",
+     "Często"
+    ],
+    [
+     "",
+     "Zawroty głowy pochodzenia błędnikowego",
+     "-",
+     "Często"
+    ],
+    [
+     "Zaburzenia serca",
+     "Kołatanie serca",
+     "Często",
+     "Niezbyt często*"
+    ],
+    [
+     "",
+     "Tachykardia",
+     "-",
+     "Niezbyt często*"
+    ],
+    [
+     "",
+     "Dławica piersiowa (patrz punkt 4.4)",
+     "-",
+     "Bardzo rzadko"
+    ],
+    [
+     "",
+     "Zawał mięśnia sercowego, prawdopodobnie wtórny do nadmiernego obniżenia ciśnienia u pacjentów z grupy dużego ryzyka (patrz punkt 4.4)",
+     "Bardzo rzadko",
+     "Bardzo rzadko"
+    ],
+    [
+     "",
+     "Zaburzenia rytmu serca (w tym bradykardia, tachykardia komorowa i migotanie przedsionków)",
+     "Niezbyt często",
+     "Bardzo rzadko"
+    ],
+    [
+     "Zaburzenia naczyniowe",
+     "Nagłe zaczerwienienie (zwłaszcza twarzy i szyi)",
+     "Często",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Niedociśnienie (oraz objawy z nim związane)",
+     "Niezbyt często",
+     "Często"
+    ],
+    [
+     "",
+     "Zapalenie naczyń krwionośnych",
+     "Bardzo rzadko",
+     "Niezbyt często*"
+    ],
+    [
+     "",
+     "Objaw Raynauda",
+     "-",
+     "Nieznana"
+    ],
+    [
+     "Zaburzenia układu oddechowego, klatki piersiowej i śródpiersia",
+     "Duszność",
+     "Często",
+     "Często"
+    ],
+    [
+     "",
+     "Kaszel",
+     "Niezbyt często",
+     "Często"
+    ],
+    [
+     "",
+     "Skurcz oskrzeli",
+     "-",
+     "Niezbyt często"
+    ],
+    [
+     "",
+     "Eozynofilowe zapalenie płuc",
+     "-",
+     "Bardzo rzadko"
+    ],
+    [
+     "Zaburzenia żołądka i jelit",
+     "Rozrost dziąseł",
+     "Bardzo rzadko",
+     "-"
+    ],
+    [
+     "",
+     "Bóle brzucha",
+     "Często",
+     "Często"
+    ],
+    [
+     "",
+     "Nudności",
+     "Często",
+     "Często"
+    ],
+    [
+     "",
+     "Wymioty",
+     "Niezbyt często",
+     "Często"
+    ],
+    [
+     "",
+     "Niestrawność",
+     "Często",
+     "Często"
+    ],
+    [
+     "",
+     "Zmiana rytmu wypróżnień",
+     "Często",
+     "-"
+    ],
+    [
+     "",
+     "Suchość błony śluzowej jamy ustnej",
+     "Niezbyt często",
+     "Niezbyt często"
+    ],
+    [
+     "",
+     "Biegunka",
+     "Często",
+     "Często"
+    ],
+    [
+     "",
+     "Zaparcia",
+     "Często",
+     "Często"
+    ],
+    [
+     "",
+     "Zapalenie trzustki",
+     "Bardzo rzadko",
+     "Bardzo rzadko"
+    ],
+    [
+     "",
+     "Zapalenie błony śluzowej żołądka",
+     "Bardzo rzadko",
+     "-"
+    ],
+    [
+     "Zaburzenia wątroby i dróg żółciowych",
+     "Zapalenie wątroby, żółtaczka",
+     "Bardzo rzadko",
+     "-"
+    ],
+    [
+     "",
+     "Cytolityczne lub cholestatyczne zapalenie wątroby (patrz punkt 4.4)",
+     "-",
+     "Bardzo rzadko"
+    ],
+    [
+     "",
+     "Zwiększenie aktywności enzymów wątrobowych (przeważnie związane z cholestazą)",
+     "Bardzo rzadko",
+     "-"
+    ],
+    [
+     "Zaburzenia skóry i tkanki podskórnej",
+     "Obrzęk Quincke’go",
+     "Bardzo rzadko",
+     "-"
+    ],
+    [
+     "",
+     "Obrzęk naczynioruchowy twarzy, kończyn, warg, błon śluzowych, języka, głośni i (lub) krtani (patrz punkt 4.4)",
+     "Bardzo rzadko",
+     "Niezbyt często"
+    ],
+    [
+     "",
+     "Rumień wielopostaciowy",
+     "Bardzo rzadko",
+     "Bardzo rzadko"
+    ],
+    [
+     "",
+     "Łysienie",
+     "Niezbyt często",
+     "-"
+    ],
+    [
+     "",
+     "Plamica",
+     "Niezbyt często",
+     "-"
+    ],
+    [
+     "",
+     "Przebarwienia skóry",
+     "Niezbyt często",
+     "-"
+    ],
+    [
+     "",
+     "Nadmierna potliwość",
+     "Niezbyt często",
+     "Niezbyt często"
+    ],
+    [
+     "",
+     "Świąd",
+     "Niezbyt często",
+     "Często"
+    ],
+    [
+     "",
+     "Wysypka, wykwit",
+     "Niezbyt często",
+     "Często"
+    ],
+    [
+     "",
+     "Pokrzywka (patrz punkt 4.4)",
+     "Niezbyt często",
+     "Niezbyt często"
+    ],
+    [
+     "",
+     "Reakcje nadwrażliwości na światło",
+     "Bardzo rzadko",
+     "Niezbyt często*"
+    ],
+    [
+     "",
+     "Pemfigoid",
+     "-",
+     "Niezbyt często*"
+    ],
+    [
+     "",
+     "Nasilenie łuszczycy",
+     "-",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Zespół Stevensa-Johnsona",
+     "Bardzo rzadko",
+     "-"
+    ],
+    [
+     "",
+     "Zapalenie skóry złuszczające",
+     "Bardzo rzadko",
+     "-"
+    ],
+    [
+     "",
+     "Toksyczne martwicze oddzielanie się naskórka",
+     "Nieznana",
+     "-"
+    ],
+    [
+     "Zaburzenia mięśniowo-szkieletowe i tkanki łącznej",
+     "Obrzęk stawów (obrzęk okolicy kostek)",
+     "Często",
+     "-"
+    ],
+    [
+     "",
+     "Ból stawów",
+     "Niezbyt często",
+     "Niezbyt często*"
+    ],
+    [
+     "",
+     "Ból mięśni",
+     "Niezbyt często",
+     "Niezbyt często*"
+    ],
+    [
+     "",
+     "Kurcze mięśni",
+     "Często",
+     "Często"
+    ],
+    [
+     "",
+     "Ból pleców",
+     "Niezbyt często",
+     "-"
+    ],
+    [
+     "Zaburzenia nerek i dróg moczowych",
+     "Zaburzenia oddawania moczu, oddawanie moczu w nocy, częstsze oddawanie moczu",
+     "Niezbyt często",
+     "-"
+    ],
+    [
+     "",
+     "Niewydolność nerek",
+     "-",
+     "Niezbyt często"
+    ],
+    [
+     "",
+     "Ostra niewydolność nerek",
+     "-",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Bezmocz lub skąpomocz",
+     "-",
+     "Rzadko*"
+    ],
+    [
+     "Zaburzenia układu rozrodczego i piersi",
+     "Zaburzenia erekcji",
+     "Niezbyt często",
+     "Niezbyt często"
+    ],
+    [
+     "",
+     "Ginekomastia",
+     "Niezbyt często",
+     "-"
+    ],
+    [
+     "Zaburzenia ogólne i stany w miejscu podania",
+     "Obrzęk",
+     "Bardzo często",
+     "-"
+    ],
+    [
+     "",
+     "Obrzęk obwodowy",
+     "-",
+     "Niezbyt często*"
+    ],
+    [
+     "",
+     "Zmęczenie",
+     "Często",
+     "-"
+    ],
+    [
+     "",
+     "Ból w klatce piersiowej",
+     "Niezbyt często",
+     "Niezbyt często*"
+    ],
+    [
+     "",
+     "Osłabienie",
+     "Często",
+     "Często"
+    ],
+    [
+     "",
+     "Ból",
+     "Niezbyt często",
+     "-"
+    ],
+    [
+     "",
+     "Złe samopoczucie",
+     "Niezbyt często",
+     "Niezbyt często*"
+    ],
+    [
+     "",
+     "Gorączka",
+     "-",
+     "Niezbyt często*"
+    ],
+    [
+     "Badania diagnostyczne",
+     "Zwiększenie masy ciała, zmniejszenie masy ciała",
+     "Niezbyt często",
+     "-"
+    ],
+    [
+     "",
+     "Zwiększenie stężenia mocznika we krwi",
+     "-",
+     "Niezbyt często*"
+    ],
+    [
+     "",
+     "Zwiększenie stężenia kreatyniny we krwi",
+     "-",
+     "Niezbyt często*"
+    ],
+    [
+     "",
+     "Zwiększenie stężenia bilirubiny we krwi",
+     "-",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Zwiększenie aktywności enzymów wątrobowych",
+     "-",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Zmniejszenie stężenia hemoglobiny i wartości hematokrytu",
+     "-",
+     "Bardzo rzadko"
+    ],
+    [
+     "Urazy, zatrucia i powikłania po zabiegach",
+     "Upadki",
+     "-",
+     "Niezbyt często*"
+    ]
+   ]
+  }
+ ]
+}

@@ -154,6 +154,31 @@ func (p *textPara) toCellTextMarks(offset *int) []TextMark {
 	return marks
 }
 
+func (p *textPara) lineEndHyphens() []TextMark {
+	var hyphens []TextMark
+	if p.table != nil {
+		for y := 0; y < p.table.h; y++ {
+			for x := 0; x < p.table.w; x++ {
+				if cell := p.table.get(x, y); cell != nil {
+					hyphens = append(hyphens, cell.lineEndHyphens()...)
+				}
+			}
+		}
+		return hyphens
+	}
+	for il, line := range p.lines {
+		if !doHyphens || il == len(p.lines)-1 || !line.endsInHyphen() {
+			continue
+		}
+		offset := 0
+		lineMarks := line.toTextMarks(&offset)
+		if last := lineMarks[len(lineMarks)-1]; len([]rune(last.Text)) == 1 {
+			hyphens = append(hyphens, last)
+		}
+	}
+	return hyphens
+}
+
 // removeLastTextMarkRune removes the last rune from `marks`.
 func removeLastTextMarkRune(marks []TextMark, offset *int) []TextMark {
 	tm := marks[len(marks)-1]

@@ -1,0 +1,75 @@
+{
+ "document": "chpl_12325",
+ "tables": [
+  {
+   "name": "4.8 adverse reactions",
+   "rows": [
+    [
+     "Klasyfikacja układów i narządów",
+     "Częstość",
+     "Działanie niepożądane"
+    ],
+    [
+     "Zaburzenia krwi i układu chłonnego",
+     "rzadko",
+     "powiększenie węzłów chłonnych"
+    ],
+    [
+     "Zaburzenia układu immunologicznego",
+     "niezbyt często rzadko",
+     "nadwrażliwość objawy podobne do objawów choroby posurowiczej"
+    ],
+    [
+     "Zaburzenia układu nerwowego",
+     "niezbyt często rzadko",
+     "parastezje ból głowy"
+    ],
+    [
+     "Zaburzenia oka",
+     "często",
+     "świąd oka"
+    ],
+    [
+     "",
+     "niezbyt często",
+     "zapalenie spojówek"
+    ],
+    [
+     "Zaburzenia ucha i błędnika",
+     "często",
+     "świąd ucha"
+    ],
+    [
+     "Zaburzenia układu oddechowego, klatki piersiowej i śródpiersia",
+     "często niezbyt często",
+     "podrażnienie gardła, obrzęk gardła, pęcherze jamy ustno-gardłowej, nieżyt nosa, kaszel astma, duszność, dysfonia, zapalenie części nosowej gardła"
+    ],
+    [
+     "Zaburzenia żołądka i jelit",
+     "często",
+     "obrzęk warg, obrzęk języka, świąd jamy ustnej, obrzęk jamy ustnej, parestezje jamy ustnej, dyskomfort w jamie ustno-gardłowej, zapalenie jamy ustnej, zaburzenia gruczołów ślinowych, nudności, wymioty, ból brzucha, biegunka"
+    ],
+    [
+     "",
+     "niezbyt często",
+     "ból jamy ustnej, zapalenie żołądka, skurcz przełyku"
+    ],
+    [
+     "Zaburzenia skóry i tkanki podskórnej",
+     "często niezbyt często rzadko",
+     "świąd, rumień pokrzywka egzema"
+    ],
+    [
+     "Zaburzenia mięśniowo-szkieletowe i tkanki łącznej",
+     "rzadko",
+     "ból stawów, ból mięśni"
+    ],
+    [
+     "Zaburzenia ogólne i stany w miejscu podania",
+     "rzadko",
+     "osłabienie, gorączka"
+    ]
+   ]
+  }
+ ]
+}

@@ -1,0 +1,96 @@
+{
+ "document": "chpl_34598",
+ "tables": [
+  {
+   "name": "Tabela 2 - dwa razy w tygodniu (cykle 1-4)",
+   "rows": [
+    [
+     "Tydzień",
+     "1",
+     "",
+     "",
+     "",
+     "2",
+     "",
+     "3",
+     "4",
+     "",
+     "5",
+     "",
+     "6"
+    ],
+    [
+     "B (1,3 mg/m² pc.)",
+     "D 1.",
+     "--",
+     "--",
+     "D 4.",
+     "D 8.",
+     "D 11.",
+     "przerw a w stoso waniu",
+     "D 22 .",
+     "D 25 .",
+     "D 29 .",
+     "D 32.",
+     "przerwa w stoso waniu"
+    ],
+    [
+     "M (9 mg/m² pc.) P (60 mg/m² pc.)",
+     "D 1.",
+     "D 2.",
+     "D 3.",
+     "D 4.",
+     "--",
+     "--",
+     "przerw a w stoso waniu",
+     "--",
+     "--",
+     "--",
+     "--",
+     "przerwa w stoso waniu"
+    ]
+   ]
+  },
+  {
+   "name": "Tabela 2 - raz w tygodniu (cykle 5-9)",
+   "rows": [
+    [
+     "Tydzień",
+     "1",
+     "",
+     "",
+     "",
+     "2",
+     "3",
+     "4",
+     "5",
+     "6"
+    ],
+    [
+     "B (1,3 mg/m²",
+     "D1.",
+     "--",
+     "--",
+     "--",
+     "D 8.",
+     "przerwa w stosowani",
+     "D 22.",
+     "D 29.",
+     "przerwa w stosowani"
+    ],
+    [
+     "pc M. (9) mg/m² pc.) P (60 2",
+     "D 1.",
+     "D 2.",
+     "D 3.",
+     "D 4.",
+     "--",
+     "przerwa w stosowani u",
+     "--",
+     "",
+     "przerwa w stosowani u"
+    ]
+   ]
+  }
+ ]
+}

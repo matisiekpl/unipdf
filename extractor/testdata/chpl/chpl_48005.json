@@ -1,0 +1,145 @@
+{
+ "document": "chpl_48005",
+ "tables": [
+  {
+   "name": "Tabela 3",
+   "rows": [
+    [
+     "Klasyfikacja układów i narządów",
+     "Częstość",
+     "Objaw niepożądany"
+    ],
+    [
+     "Zakażenia i zarażenia pasożytnicze",
+     "Bardzo często",
+     "Zakażenia górnych dróg oddechowychᵃ"
+    ],
+    [
+     "",
+     "Często",
+     "Zapalenie oskrzeli"
+    ],
+    [
+     "",
+     "",
+     "Zapalenia w obrębie nosogardzieli*"
+    ],
+    [
+     "Zaburzenia układu immunologicznego",
+     "Niezbyt często",
+     "Nadwrażliwość"
+    ],
+    [
+     "Zaburzenia metabolizmu i odżywiania",
+     "Często",
+     "Zmniejszony apetyt*"
+    ],
+    [
+     "Zaburzenia psychiczne",
+     "Często",
+     "Bezsenność"
+    ],
+    [
+     "",
+     "",
+     "Depresja"
+    ],
+    [
+     "",
+     "Niezbyt często",
+     "Myśli i zachowania samobójcze, lęk, zmiany nastroju"
+    ],
+    [
+     "Zaburzenia układu nerwowego",
+     "Bardzo często",
+     "Ból głowy*, ᵃ"
+    ],
+    [
+     "",
+     "Często",
+     "Migrena*"
+    ],
+    [
+     "",
+     "",
+     "Napięciowy ból głowy*"
+    ],
+    [
+     "Zaburzenia układu oddechowego, klatki piersiowej i śródpiersia",
+     "Często",
+     "Kaszel"
+    ],
+    [
+     "Zaburzenia żołądka i jelit",
+     "Bardzo często",
+     "Biegunka*"
+    ],
+    [
+     "",
+     "",
+     "Nudności*"
+    ],
+    [
+     "",
+     "Często",
+     "Wymioty*"
+    ],
+    [
+     "",
+     "",
+     "Niestrawność"
+    ],
+    [
+     "",
+     "",
+     "Przyspieszone ruchy jelit"
+    ],
+    [
+     "",
+     "",
+     "Ból w górnej części brzucha*"
+    ],
+    [
+     "",
+     "",
+     "Refluks żołądkowo-przełykowy"
+    ],
+    [
+     "",
+     "Niezbyt często",
+     "Krwotok z przewodu pokarmowego"
+    ],
+    [
+     "Zaburzenia skóry i tkanki podskórnej",
+     "Niezbyt często",
+     "Wysypka"
+    ],
+    [
+     "",
+     "",
+     "Pokrzywka"
+    ],
+    [
+     "",
+     "Częstość nieznana",
+     "Obrzęk naczynioruchowy"
+    ],
+    [
+     "Zaburzenia mięśniowo szkieletowe i tkanki łącznej",
+     "Często",
+     "Ból pleców*"
+    ],
+    [
+     "Zaburzenia ogólne i stany w miejscu podania",
+     "Często",
+     "Zmęczenie"
+    ],
+    [
+     "Badania diagnostyczne",
+     "Niezbyt często",
+     "Zmniejszenie masy ciała"
+    ]
+   ]
+  }
+ ]
+}

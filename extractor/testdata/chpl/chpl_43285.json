@@ -1,0 +1,1327 @@
+{
+ "document": "chpl_43285",
+ "tables": [
+  {
+   "name": "Tabela 1",
+   "rows": [
+    [
+     "Klasyfikacja układów i narządów MedDRA",
+     "Działania niepożądane",
+     "Częstość występowania",
+     "",
+     "",
+     ""
+    ],
+    [
+     "",
+     "",
+     "Amolisa",
+     "Olmesartan",
+     "Amlodypina",
+     "Hydrochlorotiazyd"
+    ],
+    [
+     "",
+     "",
+     "HCT",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Zakażenia i zarażenia pasożytnicze",
+     "Zakażenie górnych dróg oddechowych",
+     "Często",
+     "",
+     "",
+     ""
+    ],
+    [
+     "",
+     "Zapalenie błony śluzowej nosa i gardła",
+     "Często",
+     "",
+     "",
+     ""
+    ],
+    [
+     "",
+     "Zakażenie układu moczowego",
+     "Często",
+     "Często",
+     "",
+     ""
+    ],
+    [
+     "",
+     "Zapalenie ślinianek",
+     "",
+     "",
+     "",
+     "Rzadko"
+    ],
+    [
+     "Nowotwory łagodne, złośliwe i nieokreślone (w tym torbiele i polipy)",
+     "Nieczerniakowe nowotwory złośliwe skóry (rak podstawnokomórkowy i rak kolczystokomórkowy skóry)",
+     "",
+     "",
+     "",
+     "Częstość nieznana"
+    ],
+    [
+     "Zaburzenia krwi i układu chłonnego",
+     "Leukopenia",
+     "",
+     "",
+     "Bardzo rzadko",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Małopłytkowość",
+     "",
+     "Niezbyt często",
+     "Bardzo rzadko",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Zahamowanie czynności szpiku kostnego",
+     "",
+     "",
+     "",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Neutropenia/agranulocytoza",
+     "",
+     "",
+     "",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Niedokrwistość hemolityczna",
+     "",
+     "",
+     "",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Niedokrwistość aplastyczna",
+     "",
+     "",
+     "",
+     "Rzadko"
+    ],
+    [
+     "Zaburzenia układu immunologicznego",
+     "Reakcje anafilaktyczne",
+     "",
+     "Niezbyt często",
+     "",
+     ""
+    ],
+    [
+     "",
+     "Nadwrażliwość na lek",
+     "",
+     "",
+     "Bardzo rzadko",
+     ""
+    ],
+    [
+     "Zaburzenia metabolizmu i odżywiania",
+     "Hiperkaliemia",
+     "Niezbyt często",
+     "Rzadko",
+     "",
+     ""
+    ],
+    [
+     "",
+     "Hipokaliemia",
+     "Niezbyt często",
+     "",
+     "",
+     "Często"
+    ],
+    [
+     "",
+     "Anoreksja",
+     "",
+     "",
+     "",
+     "Niezbyt często"
+    ],
+    [
+     "",
+     "Glikozuria",
+     "",
+     "",
+     "",
+     "Często"
+    ],
+    [
+     "",
+     "Hiperkalcemia",
+     "",
+     "",
+     "",
+     "Często"
+    ],
+    [
+     "",
+     "Hiperglikemia",
+     "",
+     "",
+     "Bardzo rzadko",
+     "Często"
+    ],
+    [
+     "",
+     "Hipomagnezemia",
+     "",
+     "",
+     "",
+     "Często"
+    ],
+    [
+     "",
+     "Hiponatremia",
+     "",
+     "",
+     "",
+     "Często"
+    ],
+    [
+     "",
+     "Hipochloremia",
+     "",
+     "",
+     "",
+     "Często"
+    ],
+    [
+     "",
+     "Hipertriglicerydemia",
+     "",
+     "Często",
+     "",
+     "Bardzo często"
+    ],
+    [
+     "",
+     "Hipercholesterolemia",
+     "",
+     "",
+     "",
+     "Bardzo często"
+    ],
+    [
+     "",
+     "Hiperurykemia",
+     "",
+     "Często",
+     "",
+     "Bardzo często"
+    ],
+    [
+     "",
+     "Zasadowica hipochloremiczna",
+     "",
+     "",
+     "",
+     "Bardzo rzadko"
+    ],
+    [
+     "",
+     "Hiperamylazemia",
+     "",
+     "",
+     "",
+     "Często"
+    ],
+    [
+     "Zaburzenia psychiczne",
+     "Splątanie",
+     "",
+     "",
+     "Rzadko",
+     "Często"
+    ],
+    [
+     "",
+     "Depresja",
+     "",
+     "",
+     "Niezbyt często",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Apatia",
+     "",
+     "",
+     "",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Drażliwość",
+     "",
+     "",
+     "Niezbyt często",
+     ""
+    ],
+    [
+     "",
+     "Niepokój",
+     "",
+     "",
+     "",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Zmiany nastroju (w tym lęk)",
+     "",
+     "",
+     "Niezbyt często",
+     ""
+    ],
+    [
+     "",
+     "Zaburzenia snu (w tym bezsenność)",
+     "",
+     "",
+     "Niezbyt często",
+     "Rzadko"
+    ],
+    [
+     "Zaburzenia układu nerwowego",
+     "Zawroty głowy pochodzenia ośrodkowego",
+     "Często",
+     "Często",
+     "Często",
+     "Często"
+    ],
+    [
+     "",
+     "Ból głowy",
+     "Często",
+     "Często",
+     "Często",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Zawroty głowy ortostatyczne",
+     "Niezbyt często",
+     "",
+     "",
+     ""
+    ],
+    [
+     "",
+     "Stan przedomdleniowy",
+     "Niezbyt często",
+     "",
+     "",
+     ""
+    ],
+    [
+     "",
+     "Zaburzenia smaku",
+     "",
+     "",
+     "Niezbyt często",
+     ""
+    ],
+    [
+     "",
+     "Zwiększenie napięcia mięśni",
+     "",
+     "",
+     "Bardzo rzadko",
+     ""
+    ],
+    [
+     "",
+     "Osłabienie czucia",
+     "",
+     "",
+     "Niezbyt często",
+     ""
+    ],
+    [
+     "",
+     "Parestezja",
+     "",
+     "",
+     "Niezbyt często",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Neuropatia obwodowa",
+     "",
+     "",
+     "Bardzo rzadko",
+     ""
+    ],
+    [
+     "",
+     "Senność",
+     "",
+     "",
+     "Często",
+     ""
+    ],
+    [
+     "",
+     "Omdlenie",
+     "",
+     "",
+     "Niezbyt często",
+     ""
+    ],
+    [
+     "",
+     "Drgawki",
+     "",
+     "",
+     "",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Utrata apetytu",
+     "",
+     "",
+     "",
+     "Niezbyt często"
+    ],
+    [
+     "",
+     "Drżenie",
+     "",
+     "",
+     "Niezbyt często",
+     ""
+    ],
+    [
+     "",
+     "Zaburzenia pozapiramidowe",
+     "",
+     "",
+     "Częstość nieznana",
+     ""
+    ],
+    [
+     "Zaburzenia oka",
+     "Zaburzenia widzenia (w tym widzenie podwójne, niewyraźne widzenie)",
+     "",
+     "",
+     "Często",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Zmniejszone wytwarzanie łez",
+     "",
+     "",
+     "",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Pogorszenie krótkowzroczności",
+     "",
+     "",
+     "",
+     "Niezbyt często"
+    ],
+    [
+     "",
+     "Widzenie na żółto",
+     "",
+     "",
+     "",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Ostra krótkowzroczność i wtórna jaskra zamkniętego kąta, nadmierne nagromadzenie płynu między naczyniówką a twardówką (patrz punkt 4.4)",
+     "",
+     "",
+     "",
+     "Częstość nieznana"
+    ],
+    [
+     "Zaburzenia ucha i błędnika",
+     "Zawroty głowy pochodzenia błędnikowego",
+     "Niezbyt często",
+     "Niezbyt często",
+     "",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Szum uszny",
+     "",
+     "",
+     "Niezbyt często",
+     ""
+    ],
+    [
+     "Zaburzenia serca",
+     "Kołatanie serca",
+     "Często",
+     "",
+     "Często",
+     ""
+    ],
+    [
+     "",
+     "Tachykardia",
+     "Niezbyt często",
+     "",
+     "",
+     ""
+    ],
+    [
+     "",
+     "Zawał mięśnia sercowego",
+     "",
+     "",
+     "Bardzo rzadko",
+     ""
+    ],
+    [
+     "",
+     "Arytmia (w tym bradykardia, tachykardia komorowa i migotanie przedsionków)",
+     "",
+     "",
+     "Niezbyt często",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Dławica piersiowa",
+     "",
+     "Niezbyt często",
+     "Niezbyt często (w tym zaostrzenie dławicy piersiowej",
+     ""
+    ],
+    [
+     "Zaburzenia naczyniowe",
+     "Niedociśnienie",
+     "Często",
+     "Rzadko",
+     "Niezbyt często",
+     ""
+    ],
+    [
+     "",
+     "Nagłe zaczerwienienie (zwłaszcza twarzy)",
+     "Niezbyt często",
+     "",
+     "Często",
+     ""
+    ],
+    [
+     "",
+     "Niedociśnienie ortostatyczne",
+     "",
+     "",
+     "",
+     "Niezbyt często"
+    ],
+    [
+     "",
+     "Zapalenie naczyń krwionośnych (w tym martwicze zapalenie naczyń)",
+     "",
+     "",
+     "Bardzo rzadko",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Zakrzepica",
+     "",
+     "",
+     "",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Zatorowość",
+     "",
+     "",
+     "",
+     "Rzadko"
+    ],
+    [
+     "Zaburzenia układu oddechowego, klatki piersiowej i śródpiersia",
+     "Kaszel",
+     "Niezbyt często",
+     "Często",
+     "Niezbyt często",
+     ""
+    ],
+    [
+     "",
+     "Zapalenie oskrzeli",
+     "",
+     "Często",
+     "",
+     ""
+    ],
+    [
+     "",
+     "Duszność",
+     "",
+     "",
+     "Często",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Zapalenie gardła",
+     "",
+     "Często",
+     "",
+     ""
+    ],
+    [
+     "",
+     "Nieżyt błony śluzowej nosa",
+     "",
+     "Często",
+     "Niezbyt często",
+     ""
+    ],
+    [
+     "",
+     "Ciężkie śródmiąższowe zapalenie płuc",
+     "",
+     "",
+     "",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Zespół ostrej niewydolności oddechowej (ARDS) (patrz punkt 4.4)",
+     "",
+     "",
+     "",
+     "Bardzo rzadko"
+    ],
+    [
+     "Zaburzenia żołądka i jelit",
+     "Biegunka",
+     "Często",
+     "Często",
+     "",
+     "Często"
+    ],
+    [
+     "",
+     "Nudności",
+     "Często",
+     "Często",
+     "Często",
+     "Często"
+    ],
+    [
+     "",
+     "Zaparcie",
+     "Często",
+     "",
+     "",
+     "Często"
+    ],
+    [
+     "",
+     "Suchość błony śluzowej jamy ustnej",
+     "Niezbyt często",
+     "",
+     "Niezbyt często",
+     ""
+    ],
+    [
+     "",
+     "Ból brzucha",
+     "",
+     "Często",
+     "Często",
+     "Często"
+    ],
+    [
+     "",
+     "Zmiana rytmu wypróżnień (w tym biegunka i zaparcie)",
+     "",
+     "",
+     "Często",
+     ""
+    ],
+    [
+     "",
+     "Wzdęcie",
+     "",
+     "",
+     "",
+     "Często"
+    ],
+    [
+     "",
+     "Niestrawność",
+     "",
+     "Często",
+     "Często",
+     ""
+    ],
+    [
+     "",
+     "Nieżyt żołądka",
+     "",
+     "",
+     "Bardzo rzadko",
+     ""
+    ],
+    [
+     "",
+     "Podrażnienie żołądka",
+     "",
+     "",
+     "",
+     "Często"
+    ],
+    [
+     "",
+     "Zapalenie żołądka i jelit",
+     "",
+     "Często",
+     "",
+     ""
+    ],
+    [
+     "",
+     "Rozrost dziąseł",
+     "",
+     "",
+     "Bardzo rzadko",
+     ""
+    ],
+    [
+     "",
+     "Porażenna niedrożność jelit",
+     "",
+     "",
+     "",
+     "Bardzo rzadko"
+    ],
+    [
+     "",
+     "Zapalenie trzustki",
+     "",
+     "",
+     "Bardzo rzadko",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Wymioty",
+     "",
+     "Niezbyt często",
+     "Niezbyt często",
+     "Często"
+    ],
+    [
+     "",
+     "Enteropatia typu celiakii (patrz punkt 4.4)",
+     "",
+     "Bardzo rzadko",
+     "",
+     ""
+    ],
+    [
+     "",
+     "Obrzęk naczynioruchowy jelit",
+     "",
+     "Rzadko",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia wątroby i dróg żółciowych",
+     "Zapalenie wątroby",
+     "",
+     "",
+     "Bardzo rzadko",
+     ""
+    ],
+    [
+     "",
+     "Żółtaczka (wewnątrzwątrobowa żółtaczka cholestatyczna)",
+     "",
+     "",
+     "Bardzo rzadko",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Ostre zapalenie pęcherzyka żółciowego",
+     "",
+     "",
+     "",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Autoimmunologiczne zapalenie wątroby*",
+     "",
+     "Częstość nieznana",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia skóry i tkanki podskórnej",
+     "Łysienie",
+     "",
+     "",
+     "Niezbyt często",
+     ""
+    ],
+    [
+     "",
+     "Obrzęk naczynioruchowy",
+     "",
+     "Rzadko",
+     "Bardzo rzadko",
+     ""
+    ],
+    [
+     "",
+     "Alergiczne zapalenie skóry",
+     "",
+     "Niezbyt często",
+     "",
+     ""
+    ],
+    [
+     "",
+     "Rumień wielopostaciowy",
+     "",
+     "",
+     "Bardzo rzadko",
+     ""
+    ],
+    [
+     "",
+     "Rumień",
+     "",
+     "",
+     "",
+     "Niezbyt często"
+    ],
+    [
+     "",
+     "Reakcje o typie tocznia rumieniowatego skórnego",
+     "",
+     "",
+     "",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Osutka",
+     "",
+     "Niezbyt często",
+     "Niezbyt często",
+     ""
+    ],
+    [
+     "",
+     "Złuszczające zapalenie skóry",
+     "",
+     "",
+     "Bardzo rzadko",
+     ""
+    ],
+    [
+     "",
+     "Zwiększona potliwość",
+     "",
+     "",
+     "Niezbyt często",
+     ""
+    ],
+    [
+     "",
+     "Nadwrażliwość na światło",
+     "",
+     "",
+     "Bardzo rzadko",
+     "Niezbyt często"
+    ],
+    [
+     "",
+     "Świąd",
+     "",
+     "Niezbyt często",
+     "Niezbyt często",
+     "Niezbyt często"
+    ],
+    [
+     "",
+     "Plamica",
+     "",
+     "",
+     "Niezbyt często",
+     "Niezbyt często"
+    ],
+    [
+     "",
+     "Obrzęk Quinckego",
+     "",
+     "",
+     "Bardzo rzadko",
+     ""
+    ],
+    [
+     "",
+     "Wysypka",
+     "",
+     "Niezbyt często",
+     "Niezbyt często",
+     "Niezbyt często"
+    ],
+    [
+     "",
+     "Reaktywacja tocznia rumieniowatego skórnego",
+     "",
+     "",
+     "",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Toksyczne martwicze oddzielanie się naskórka",
+     "",
+     "",
+     "Częstość nieznana",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Przebarwienie skóry",
+     "",
+     "",
+     "Niezbyt często",
+     ""
+    ],
+    [
+     "",
+     "Zespół Stevensa-Johnsona",
+     "",
+     "",
+     "Bardzo rzadko",
+     ""
+    ],
+    [
+     "",
+     "Pokrzywka",
+     "",
+     "Niezbyt często",
+     "Niezbyt często",
+     "Niezbyt często"
+    ],
+    [
+     "Zaburzenia mięśniowo-szkieletowe i tkanki podskórnej",
+     "Kurcze mięśni",
+     "Często",
+     "Rzadko",
+     "Często",
+     ""
+    ],
+    [
+     "",
+     "Obrzęk stawów",
+     "Często",
+     "",
+     "",
+     ""
+    ],
+    [
+     "",
+     "Osłabienie mięśni",
+     "Niezbyt często",
+     "",
+     "",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Obrzęk okolicy kostek",
+     "",
+     "",
+     "Często",
+     ""
+    ],
+    [
+     "",
+     "Ból stawów",
+     "",
+     "",
+     "Niezbyt często",
+     ""
+    ],
+    [
+     "",
+     "Zapalenie stawów",
+     "",
+     "Często",
+     "",
+     ""
+    ],
+    [
+     "",
+     "Ból pleców",
+     "",
+     "Często",
+     "Niezbyt często",
+     ""
+    ],
+    [
+     "",
+     "Niedowład",
+     "",
+     "",
+     "",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Ból mięśni",
+     "",
+     "Niezbyt często",
+     "Niezbyt często",
+     ""
+    ],
+    [
+     "",
+     "Ból kości",
+     "",
+     "Często",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia nerek i dróg moczowych",
+     "Częstomocz",
+     "Często",
+     "",
+     "",
+     ""
+    ],
+    [
+     "",
+     "Częstsze oddawanie moczu",
+     "",
+     "",
+     "Niezbyt często",
+     ""
+    ],
+    [
+     "",
+     "Ostra niewydolność nerek",
+     "",
+     "Rzadko",
+     "",
+     ""
+    ],
+    [
+     "",
+     "Krwiomocz",
+     "",
+     "Często",
+     "",
+     ""
+    ],
+    [
+     "",
+     "Zaburzenia oddawania moczu",
+     "",
+     "",
+     "Niezbyt często",
+     ""
+    ],
+    [
+     "",
+     "Oddawanie moczu w nocy",
+     "",
+     "",
+     "Niezbyt często",
+     ""
+    ],
+    [
+     "",
+     "Śródmiąższowe zapalenie nerek",
+     "",
+     "",
+     "",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Niewydolność nerek",
+     "",
+     "Rzadko",
+     "",
+     "Rzadko"
+    ],
+    [
+     "Zaburzenia układu rozrodczego i piersi",
+     "Zaburzenia erekcji/impotencja",
+     "Niezbyt często",
+     "",
+     "Niezbyt często",
+     "Niezbyt często"
+    ],
+    [
+     "",
+     "Ginekomastia",
+     "",
+     "",
+     "Niezbyt często",
+     ""
+    ],
+    [
+     "Zaburzenia ogólne i stany w miejscu podania",
+     "Osłabienie",
+     "Często",
+     "Niezbyt często",
+     "Często",
+     ""
+    ],
+    [
+     "",
+     "Obrzęki obwodowe",
+     "Często",
+     "Często",
+     "",
+     ""
+    ],
+    [
+     "",
+     "Zmęczenie",
+     "Często",
+     "Często",
+     "Często",
+     ""
+    ],
+    [
+     "",
+     "Ból w klatce piersiowej",
+     "",
+     "Często",
+     "Niezbyt często",
+     ""
+    ],
+    [
+     "",
+     "Gorączka",
+     "",
+     "",
+     "",
+     "Rzadko"
+    ],
+    [
+     "",
+     "Objawy grypopodobne",
+     "",
+     "Często",
+     "",
+     ""
+    ],
+    [
+     "",
+     "Letarg",
+     "",
+     "Rzadko",
+     "",
+     ""
+    ],
+    [
+     "",
+     "Złe samopoczucie",
+     "",
+     "Niezbyt często",
+     "Niezbyt często",
+     ""
+    ],
+    [
+     "",
+     "Obrzęk",
+     "",
+     "",
+     "Bardzo często",
+     ""
+    ],
+    [
+     "",
+     "Ból",
+     "",
+     "Często",
+     "Niezbyt często",
+     ""
+    ],
+    [
+     "",
+     "Obrzęk twarzy",
+     "",
+     "Niezbyt często",
+     "",
+     ""
+    ],
+    [
+     "Badania diagnostyczne",
+     "Zwiększenie stężenia kreatyniny we krwi",
+     "Często",
+     "Rzadko",
+     "",
+     "Często"
+    ],
+    [
+     "",
+     "Zwiększenie stężenia mocznika we krwi",
+     "Często",
+     "Często",
+     "",
+     "Często"
+    ],
+    [
+     "",
+     "Zwiększenie stężenia kwasu moczowego we krwi",
+     "Często",
+     "",
+     "",
+     ""
+    ],
+    [
+     "",
+     "Zmniejszenie stężenia potasu we krwi",
+     "Niezbyt często",
+     "",
+     "",
+     ""
+    ],
+    [
+     "",
+     "Zwiększenie stężenia transferazy gamma glutamylowej",
+     "Niezbyt często",
+     "",
+     "",
+     ""
+    ],
+    [
+     "",
+     "Zwiększenie aktywności aminotransferazy alaninowej",
+     "Niezbyt często",
+     "",
+     "",
+     ""
+    ],
+    [
+     "",
+     "Zwiększenie aktywności aminotransferazy asparaginianowej",
+     "Niezbyt często",
+     "",
+     "",
+     ""
+    ],
+    [
+     "",
+     "Zwiększenie aktywności enzymów wątrobowych",
+     "",
+     "Często",
+     "Bardzo rzadko (zwykle współistnieje z cholestazą)",
+     ""
+    ],
+    [
+     "",
+     "Zwiększenie stężenia fosfokinazy kreatynowej we krwi",
+     "",
+     "Często",
+     "",
+     ""
+    ],
+    [
+     "",
+     "Zmniejszenie masy ciała",
+     "",
+     "",
+     "Niezbyt często",
+     ""
+    ],
+    [
+     "",
+     "Zwiększenie masy ciała",
+     "",
+     "",
+     "Niezbyt często",
+     ""
+    ]
+   ]
+  },
+  {
+   "name": "Tabela 2",
+   "rows": [
+    [
+     "Tabela 2: Skojarzenie olmesartanu medoksomilu i amlodypiny",
+     "",
+     ""
+    ],
+    [
+     "Klasyfikacja układów i narządów",
+     "Częstość występowania",
+     "Działania niepożądane"
+    ],
+    [
+     "Zaburzenia układu immunologicznego",
+     "Rzadko",
+     "Nadwrażliwość na lek"
+    ],
+    [
+     "Zaburzenia żołądka i jelit",
+     "Niezbyt często",
+     "Ból w nadbrzuszu"
+    ],
+    [
+     "Zaburzenia mięśniowo-szkieletowe oraz tkanki łącznej",
+     "Niezbyt często",
+     "Ból kończyn"
+    ],
+    [
+     "Zaburzenia układu rozrodczego i piersi",
+     "Niezbyt często",
+     "Osłabienie libido"
+    ],
+    [
+     "Zaburzenia ogólne i stany w miejscu podania",
+     "Często",
+     "Obrzęk ciastowaty"
+    ],
+    [
+     "",
+     "Niezbyt często",
+     "Letarg"
+    ]
+   ]
+  }
+ ]
+}

@@ -1,0 +1,163 @@
+{
+ "document": "chpl_44090",
+ "tables": [
+  {
+   "name": "4.8 adverse reactions by frequency",
+   "rows": [
+    [
+     "",
+     "Częstość występowania działania niepożądanego",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Klasyfikacja układów i narządów",
+     "Bardzo często (≥1/10)",
+     "Często (≥1/100 do <1/10)",
+     "Niezbyt często (≥1/1 000 do <1/100)",
+     "Rzadko (≥1/10 000 do <1/1 000)",
+     "Bardzo rzadko (≤1/10 000)",
+     "Nieznana (nie może być ustalona na podstawie dostępnych danych)"
+    ],
+    [
+     "Zakażenia i zarażenia pasożytnicze",
+     "",
+     "",
+     "Kandydoza pochwy",
+     "Zapalenie sromu i pochwy",
+     "",
+     ""
+    ],
+    [
+     "Nowotwory łagodne, złośliwe i nieokreślone (w tym torbiele i polipy)",
+     "",
+     "",
+     "Gruczolakowłókniaki w piersi",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia układu immunologicznego",
+     "",
+     "",
+     "Nadwrażliwość na lek (w tym skórne reakcje alergiczne)",
+     "",
+     "",
+     "Nasilenie objawów dziedzicznego i nabytego obrzęku naczynioruchowego"
+    ],
+    [
+     "Zaburzenia metabolizmu i odżywiania",
+     "",
+     "",
+     "Zmiany lipidów we krwi w tym hipertriglicerydemia",
+     "Zwiększone łaknienie",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia psychiczne",
+     "",
+     "Obniżony nastrój, nerwowość, drażliwość",
+     "Zmniejszenie libido",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia układu nerwowego",
+     "",
+     "Zawroty głowy, migrena (i (lub) nasilenie migreny)",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia oka",
+     "",
+     "Zaburzenia widzenia",
+     "",
+     "Zapalenie spojówek, nietolerancja soczewek kontaktowych",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia ucha i błędnika",
+     "",
+     "",
+     "",
+     "Nagła utrata słuchu, szum w uszach",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia naczyniowe",
+     "",
+     "",
+     "",
+     "Nadciśnienie tętnicze, niedociśnienie tętnicze, zapaść sercowo-naczyniowa, żylaki, zakrzepica żył, żylna choroba zakrzepowo-zatorowa (VTE), tętnicze zaburzenia zakrzepowo-zatorowe (ATE)",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia żołądka i jelit",
+     "Nudności",
+     "Wymioty",
+     "Ból brzucha, wzdęcia, biegunka",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia skóry i tkanki podskórnej",
+     "",
+     "Trądzik",
+     "Zaburzenia pigmentacji, ostuda, łysienie, suchość skóry, nadmierna potliwość",
+     "Pokrzywka, wyprysk, rumień, świąd, nasilenie łuszczycy, nadmierne owłosienie",
+     "Rumień guzowaty",
+     ""
+    ],
+    [
+     "Zaburzenia mięśniowo-szkieletowe i tkanki łącznej",
+     "",
+     "Uczucie ciężkości",
+     "Ból pleców, zaburzenia mięśni",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia układu rozrodczego i piersi",
+     "Wydzielina z pochwy, bolesne miesiączkowanie, brak miesiączki",
+     "Ból w podbrzuszu",
+     "Mlekotok,",
+     "Powiększenie piersi, krwotok miesiączkowy, zespół napięcia przedmiesiączkowego",
+     "",
+     ""
+    ],
+    [
+     "Zaburzenia ogólne i stany w miejscu podania",
+     "",
+     "Zmęczenie, obrzęk, zwiększenie masy ciała",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Badania diagnostyczne",
+     "",
+     "Zwiększenie wartości ciśnienia tętniczego",
+     "",
+     "",
+     "",
+     ""
+    ]
+   ]
+  }
+ ]
+}

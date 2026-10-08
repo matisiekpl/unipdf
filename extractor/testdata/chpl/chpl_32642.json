@@ -1,0 +1,250 @@
+{
+ "document": "chpl_32642",
+ "tables": [
+  {
+   "name": "4.8 amlodipine adverse reactions",
+   "rows": [
+    [
+     "Klasyfikacja układów i narządów",
+     "Częstość",
+     "Działania niepożądane"
+    ],
+    [
+     "Zaburzenia krwi i układu chłonnego",
+     "Bardzo rzadko",
+     "Leukopenia, trombocytopenia"
+    ],
+    [
+     "Zaburzenia układu immunologicznego",
+     "Bardzo rzadko",
+     "Reakcje alergiczne"
+    ],
+    [
+     "Zaburzenia metabolizmu i odżywiania",
+     "Bardzo rzadko",
+     "Hiperglikemia"
+    ],
+    [
+     "Zaburzenia psychiczne",
+     "Niezbyt często",
+     "Depresja, zmiany nastroju (w tym lęk), bezsenność"
+    ],
+    [
+     "",
+     "Rzadko",
+     "Splątanie"
+    ],
+    [
+     "Zaburzenia układu nerwowego",
+     "Często",
+     "Senność, zawroty głowy, ból głowy (zwłaszcza na początku leczenia)"
+    ],
+    [
+     "",
+     "Niezbyt często",
+     "Drżenie, zaburzenie smaku, omdlenie, niedoczulica, parestezja"
+    ],
+    [
+     "",
+     "Bardzo rzadko",
+     "Wzmożone napięcie mięśniowe, neuropatia obwodowa"
+    ],
+    [
+     "",
+     "Częstość nieznana",
+     "Zaburzenia pozapiramidowe"
+    ],
+    [
+     "Zaburzenia oka",
+     "Często",
+     "Zaburzenia widzenia (w tym podwójne widzenie)"
+    ],
+    [
+     "Zaburzenia ucha i błędnika",
+     "Niezbyt często",
+     "Szumy uszne"
+    ],
+    [
+     "Zaburzenia serca",
+     "Często",
+     "Kołatanie serca"
+    ],
+    [
+     "",
+     "Niezbyt często",
+     "Zaburzenia rytmu serca (w tym bradykardia, tachykardia komorowa i migotanie przedsionków)"
+    ],
+    [
+     "",
+     "Bardzo rzadko",
+     "Zawał mięśnia sercowego"
+    ],
+    [
+     "Zaburzenia naczyniowe",
+     "Często",
+     "Zaczerwienienie twarzy"
+    ],
+    [
+     "",
+     "Niezbyt często",
+     "Niedociśnienie"
+    ],
+    [
+     "",
+     "Bardzo rzadko",
+     "Zapalenie naczyń"
+    ],
+    [
+     "Zaburzenia układu oddechowego, klatki piersiowej i śródpiersia",
+     "Często",
+     "Duszność"
+    ],
+    [
+     "",
+     "Niezbyt często",
+     "Kaszel, zapalenie błony śluzowej nosa"
+    ],
+    [
+     "Zaburzenia żołądka i jelit",
+     "Często",
+     "Ból brzucha, nudności, niestrawność, zmiany rytmu wypróżnień (w tym biegunka i zaparcie)"
+    ],
+    [
+     "",
+     "Niezbyt często",
+     "Wymioty, suchość błony śluzowej jamy ustnej"
+    ],
+    [
+     "",
+     "Bardzo rzadko",
+     "Zapalenie trzustki, zapalenie błony śluzowej żołądka, przerost dziąseł"
+    ],
+    [
+     "Zaburzenia wątroby i dróg żółciowych",
+     "Bardzo rzadko",
+     "Zapalenie wątroby, żółtaczka, zwiększenie aktywności enzymów wątrobowych*"
+    ],
+    [
+     "Zaburzenia skóry i tkanki podskórnej",
+     "Niezbyt często",
+     "Łysienie, plamica, odbarwienie skóry, nadmierne pocenie, świąd, wysypka, osutka, pokrzywka"
+    ],
+    [
+     "",
+     "Bardzo rzadko",
+     "Obrzęk naczynioruchowy, rumień wielopostaciowy, złuszczające zapalenie skóry, zespół Stevensa-Johnsona, obrzęk Quinckego, nadwrażliwość na światło"
+    ],
+    [
+     "",
+     "Częstość nieznana",
+     "Toksyczne martwicze oddzielanie się naskórka"
+    ],
+    [
+     "Zaburzenia mięśniowo szkieletowe i tkanki łącznej",
+     "Często",
+     "Obrzęk okolicy kostek, bolesne skurcze mięśni"
+    ],
+    [
+     "",
+     "Niezbyt często",
+     "Bóle stawów, bóle mięśni, bóle pleców"
+    ],
+    [
+     "Zaburzenia nerek i dróg moczowych",
+     "Niezbyt często",
+     "Zaburzenia mikcji, nokturia, zwiększona częstość oddawania moczu"
+    ],
+    [
+     "Zaburzenia układu rozrodczego i piersi",
+     "Niezbyt często",
+     "Impotencja, ginekomastia"
+    ],
+    [
+     "Zaburzenia ogólne i stany w miejscu podania",
+     "Bardzo często",
+     "Obrzęk"
+    ],
+    [
+     "",
+     "Często",
+     "Uczucie zmęczenia, osłabienie"
+    ],
+    [
+     "",
+     "Niezbyt często",
+     "Ból w klatce piersiowej, ból, złe samopoczucie"
+    ],
+    [
+     "Badania diagnostyczne",
+     "Niezbyt często",
+     "Zwiększenie masy ciała, zmniejszenie masy ciała"
+    ]
+   ]
+  },
+  {
+   "name": "4.8 candesartan adverse reactions",
+   "rows": [
+    [
+     "Klasyfikacja układów i narządów",
+     "Częstość",
+     "Działanie niepożądane"
+    ],
+    [
+     "Zakażenia i zarażenia pasożytnicze",
+     "Często",
+     "Zakażenia dróg oddechowych"
+    ],
+    [
+     "Zaburzenia krwi i układu chłonnego",
+     "Bardzo rzadko",
+     "Leukopenia, neutropenia i agranulocytoza"
+    ],
+    [
+     "Zaburzenia metabolizmu i odżywiania",
+     "Bardzo rzadko",
+     "Hiperkaliemia, hyponatremia"
+    ],
+    [
+     "Zaburzenia układu nerwowego",
+     "Często",
+     "Zawroty głowy pochodzenia ośrodkowego i (lub) zawroty głowy pochodzenia błędnikowego, ból głowy"
+    ],
+    [
+     "Zaburzenia żołądka i jelit",
+     "Bardzo rzadko",
+     "Nudności, obrzęk naczynioruchowy jelit"
+    ],
+    [
+     "",
+     "Częstość nieznana",
+     "Biegunka"
+    ],
+    [
+     "Zaburzenia układu oddechowego, klatki piersiowej i śródpiersia",
+     "Bardzo rzadko",
+     "Kaszel"
+    ],
+    [
+     "Zaburzenia wątroby i dróg żółciowych",
+     "Bardzo rzadko",
+     "Zwiększenie aktywności enzymów wątrobowych, zaburzenia czynności wątroby lub zapalenie wątroby"
+    ],
+    [
+     "Zaburzenia skóry i tkanki podskórnej",
+     "Bardzo rzadko",
+     "Obrzęk naczynioruchowy, wysypka, pokrzywka, świąd"
+    ],
+    [
+     "Zaburzenia mięśniowo-szkieletowe i tkanki łącznej",
+     "Bardzo rzadko",
+     "Ból pleców, bóle stawów, bóle mięśni"
+    ],
+    [
+     "Zaburzenia nerek i dróg moczowych",
+     "Bardzo rzadko",
+     "Zaburzenia czynności nerek, w tym niewydolność nerek u predysponowanych pacjentów (patrz punkt 4.4)"
+    ]
+   ]
+  }
+ ]
+}

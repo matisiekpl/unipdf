@@ -54,9 +54,44 @@ func (e *Extractor) ExtractPageText() (*PageText, int, int, error) {
 	if err != nil {
 		return nil, numChars, numMisses, err
 	}
+	pt.dropOverprintedClippedMarks()
 	pt.computeViews()
 
 	return pt, numChars, numMisses, err
+}
+
+const overprintShare = 0.3
+
+func (pt *PageText) dropOverprintedClippedMarks() {
+	var visible []*textMark
+	for _, mark := range pt.marks {
+		if !mark.clipped && strings.TrimSpace(mark.text) != "" {
+			visible = append(visible, mark)
+		}
+	}
+	kept := pt.marks[:0]
+	for _, mark := range pt.marks {
+		if !mark.clipped || !mark.overprinted(visible) {
+			kept = append(kept, mark)
+		}
+	}
+	pt.marks = kept
+}
+
+func (tm *textMark) overprinted(visible []*textMark) bool {
+	box := tm.originaBBox
+	area := (box.Urx - box.Llx) * (box.Ury - box.Lly)
+	if area <= 0 {
+		return false
+	}
+	for _, other := range visible {
+		width := math.Min(box.Urx, other.originaBBox.Urx) - math.Max(box.Llx, other.originaBBox.Llx)
+		height := math.Min(box.Ury, other.originaBBox.Ury) - math.Max(box.Lly, other.originaBBox.Lly)
+		if width > 0 && height > 0 && width*height > overprintShare*area {
+			return true
+		}
+	}
+	return false
 }
 
 // extractPageText returns the text contents of content stream `e` and resouces `resources` as a
@@ -93,6 +128,11 @@ func (e *Extractor) extractPageText(contents string, resources *model.PdfPageRes
 	processor := contentstream.NewContentStreamProcessor(*operations)
 
 	var paths pathBuilder
+	paint := func(stroke, fill, fillVisible bool) {
+		if clip, clipping := paths.endPath(stroke, fill, fillVisible); clipping {
+			state.clipTo(clip)
+		}
+	}
 
 	processor.AddHandler(contentstream.HandlerConditionEnumAllOperands, "",
 		func(op *contentstream.ContentStreamOperation, gs contentstream.GraphicsState,
@@ -323,7 +363,8 @@ func (e *Extractor) extractPageText(contents string, resources *model.PdfPageRes
 					break
 				}
 				// Only process each form once.
-				formResult, ok := e.formResults[name.String()]
+				key := formKey{resources: resources, name: name.String(), ctm: parentCTM.Mult(gs.CTM)}
+				formResult, ok := e.formResults[key]
 				if !ok {
 					xform, err := resources.GetXObjectFormByName(*name)
 					if err != nil {
@@ -347,12 +388,21 @@ func (e *Extractor) extractPageText(contents string, resources *model.PdfPageRes
 						return err
 					}
 					formResult = textResult{*tList, numChars, numMisses}
-					e.formResults[name.String()] = formResult
+					e.formResults[key] = formResult
 				}
 
-				pageText.marks = append(pageText.marks, formResult.pageText.marks...)
+				for _, mark := range formResult.pageText.marks {
+					if !mark.clipped && state.hides(mark.originaBBox) {
+						hidden := *mark
+						hidden.clipped = true
+						mark = &hidden
+					}
+					pageText.marks = append(pageText.marks, mark)
+				}
 				pageText.strokes = append(pageText.strokes, formResult.pageText.strokes...)
 				pageText.rects = append(pageText.rects, formResult.pageText.rects...)
+				pageText.cellRects = append(pageText.cellRects, formResult.pageText.cellRects...)
+				pageText.whiteCellRects = append(pageText.whiteCellRects, formResult.pageText.whiteCellRects...)
 				state.numChars += formResult.numChars
 				state.numMisses += formResult.numMisses
 			case "rg", "g", "k", "cs", "sc", "scn":
@@ -365,18 +415,34 @@ func (e *Extractor) extractPageText(contents string, resources *model.PdfPageRes
 				to.gs.ColorStroking = gs.ColorStroking
 			case "m": // Begin new subpath.
 				if f, err := core.GetNumbersAsFloat(op.Params); err == nil && len(f) == 2 {
-					paths.moveTo(gs.CTM, f[0], f[1])
+					paths.moveTo(parentCTM.Mult(gs.CTM), f[0], f[1])
 				}
 			case "l": // Append straight line segment.
 				if f, err := core.GetNumbersAsFloat(op.Params); err == nil && len(f) == 2 {
-					paths.lineTo(gs.CTM, f[0], f[1])
+					paths.lineTo(parentCTM.Mult(gs.CTM), f[0], f[1])
 				}
 			case "re": // Append rectangle.
 				if f, err := core.GetNumbersAsFloat(op.Params); err == nil && len(f) == 4 {
-					paths.rect(gs.CTM, f[0], f[1], f[2], f[3])
+					paths.rect(parentCTM.Mult(gs.CTM), f[0], f[1], f[2], f[3])
 				}
 			case "h": // Close subpath.
 				paths.closePath()
+			case "W", "W*":
+				paths.clip()
+			case "S":
+				paint(true, false, false)
+			case "s":
+				paths.closePath()
+				paint(true, false, false)
+			case "f", "F", "f*":
+				paint(false, true, !isWhite(gs.ColorNonStroking))
+			case "B", "B*":
+				paint(true, true, !isWhite(gs.ColorNonStroking))
+			case "b", "b*":
+				paths.closePath()
+				paint(true, true, !isWhite(gs.ColorNonStroking))
+			case "n":
+				paint(false, false, false)
 			}
 			return nil
 		})
@@ -387,6 +453,8 @@ func (e *Extractor) extractPageText(contents string, resources *model.PdfPageRes
 	}
 	pageText.strokes = append(pageText.strokes, paths.strokes...)
 	pageText.rects = append(pageText.rects, paths.rects...)
+	pageText.cellRects = append(pageText.cellRects, paths.cellRects...)
+	pageText.whiteCellRects = append(pageText.whiteCellRects, paths.whiteCellRects...)
 	return pageText, state.numChars, state.numMisses, err
 }
 
@@ -512,11 +580,6 @@ func (to *textObject) setFont(name string, size float64) error {
 		return err
 	}
 	to.state.tfont = font
-	if to.savedStates.empty() {
-		to.savedStates.push(to.state)
-	} else {
-		to.savedStates.top().tfont = to.state.tfont
-	}
 
 	return nil
 }
@@ -625,38 +688,23 @@ func (savedStates *stateStack) pop() *textState {
 	return &state
 }
 
-// top returns the last saved state if there is one or nil if there isn't.
-// NOTE: The return is a pointer. Modifying it will modify the stack.
-// restore returns `state` to what it was when the matching "q" saved it. The saved entry is
-// discarded before the current one is read back, because "Tf" writes the font it sets into the
-// top of the stack: reading the top first would restore the state as the q...Q block left it,
-// keeping a font set inside the block in force after it and decoding the text that follows with
-// the wrong font. The bottom entry is never discarded, as it holds the state that an unbalanced
-// "Q" has nothing to restore from.
 func (savedStates *stateStack) restore(state *textState) {
-	if len(*savedStates) >= 2 {
-		savedStates.pop()
+	saved := savedStates.pop()
+	if saved == nil {
+		return
 	}
-	if !savedStates.empty() {
-		*state = *savedStates.top()
+	if saved.tfont == nil {
+		saved.tfont = state.tfont
+		saved.tfs = state.tfs
 	}
-}
-
-func (savedStates *stateStack) top() *textState {
-	if savedStates.empty() {
-		return nil
-	}
-	return (*savedStates)[savedStates.size()-1]
+	saved.numChars = state.numChars
+	saved.numMisses = state.numMisses
+	*state = *saved
 }
 
 // empty returns true if the textState stack is empty.
 func (savedStates *stateStack) empty() bool {
 	return len(*savedStates) == 0
-}
-
-// size returns the number of elements in the textState stack.
-func (savedStates *stateStack) size() int {
-	return len(*savedStates)
 }
 
 // 9.3 Text State Parameters and Operators (page 243)
@@ -674,6 +722,7 @@ type textState struct {
 	tmode    RenderMode     // Text rendering mode.
 	trise    float64        // Text rise. Unscaled text space units. Set by Ts.
 	tfont    *model.PdfFont // Text font.
+	clip     *Rect
 	mediaBox model.PdfRectangle
 	// For debugging
 	numChars  int
@@ -688,6 +737,30 @@ func (state *textState) String() string {
 	}
 	return fmt.Sprintf("tc=%.2f tw=%.2f tfs=%.2f font=%q",
 		state.tc, state.tw, state.tfs, fontName)
+}
+
+func (state *textState) clipTo(region Rect) {
+	if state.clip != nil {
+		region = Rect{
+			Llx: mdMax(region.Llx, state.clip.Llx),
+			Lly: mdMax(region.Lly, state.clip.Lly),
+			Urx: mdMin(region.Urx, state.clip.Urx),
+			Ury: mdMin(region.Ury, state.clip.Ury),
+		}
+	}
+	state.clip = &region
+}
+
+const clipTolerance = 1.0
+
+func (state *textState) hides(box model.PdfRectangle) bool {
+	if state.clip == nil {
+		return false
+	}
+	x := (box.Llx + box.Urx) / 2
+	y := (box.Lly + box.Ury) / 2
+	return x < state.clip.Llx-clipTolerance || x > state.clip.Urx+clipTolerance ||
+		y < state.clip.Lly-clipTolerance || y > state.clip.Ury+clipTolerance
 }
 
 // 9.4.1 General (page 248)
@@ -896,6 +969,7 @@ func (to *textObject) renderText(data []byte) error {
 			}
 		}
 		common.Log.Trace("i=%d code=%d mark=%s trm=%s", i, code, mark, trm)
+		mark.clipped = to.state.hides(mark.originaBBox)
 		to.marks = append(to.marks, &mark)
 
 		// update the text matrix by the displacement of the text location.
@@ -930,13 +1004,16 @@ func (to *textObject) moveTo(tx, ty float64) {
 
 // PageText represents the layout of text on a device page.
 type PageText struct {
-	marks      []*textMark        // Texts and their positions on a PDF page.
-	viewText   string             // Extracted page text.
-	viewMarks  []TextMark         // Public view of text marks.
-	viewTables []TextTable        // Public view of text tables.
-	pageSize   model.PdfRectangle // Page size. Used to calculate depth.
-	strokes    []Stroke           // Axis aligned line segments drawn on the page (device coords).
-	rects      []Rect             // Axis aligned rectangles drawn on the page (device coords).
+	marks          []*textMark        // Texts and their positions on a PDF page.
+	viewText       string             // Extracted page text.
+	viewMarks      []TextMark         // Public view of text marks.
+	viewTables     []TextTable        // Public view of text tables.
+	pageSize       model.PdfRectangle // Page size. Used to calculate depth.
+	strokes        []Stroke           // Axis aligned line segments drawn on the page (device coords).
+	rects          []Rect             // Axis aligned rectangles drawn on the page (device coords).
+	cellRects      []Rect
+	whiteCellRects []Rect
+	lineEndHyphens []TextMark
 }
 
 // Strokes returns the axis aligned line segments (ruling lines) drawn on the page in device
@@ -1013,6 +1090,7 @@ func (pt *PageText) computeViews() {
 	pt.viewText = b.String()
 	pt.viewMarks = paras.toTextMarks()
 	pt.viewTables = paras.tables()
+	pt.lineEndHyphens = paras.lineEndHyphens()
 }
 
 // TextMarkArray is a collection of TextMarks.
@@ -1157,6 +1235,7 @@ type TextMark struct {
 	// StrokeColor is the stroke color of the text.
 	// The color is nil for spaces and line breaks (i.e. the Meta field is true).
 	StrokeColor color.Color
+	orient      int
 }
 
 // String returns a string describing `tm`.
@@ -1203,13 +1282,8 @@ type TableCell struct {
 	Marks TextMarkArray
 }
 
-// getCurrentFont returns the font on top of the font stack, or DefaultFont if the font stack is
-// empty.
 func (to *textObject) getCurrentFont() *model.PdfFont {
-	var font *model.PdfFont
-	if !to.savedStates.empty() {
-		font = to.savedStates.top().tfont
-	}
+	font := to.state.tfont
 	if font == nil {
 		common.Log.Debug("ERROR: No font defined. Using default.")
 		return model.DefaultFont()
@@ -1220,9 +1294,14 @@ func (to *textObject) getCurrentFont() *model.PdfFont {
 // getFont returns the font named `name` if it exists in the page's resources or an error if it
 // doesn't. It caches the returned fonts.
 func (to *textObject) getFont(name string) (*model.PdfFont, error) {
+	fontObj, err := to.getFontDict(name)
+	if err != nil {
+		return nil, err
+	}
+	key := core.ResolveReference(fontObj)
 	if to.e.fontCache != nil {
 		to.e.accessCount++
-		entry, ok := to.e.fontCache[name]
+		entry, ok := to.e.fontCache[key]
 		if ok {
 			entry.access = to.e.accessCount
 			return entry.font, nil
@@ -1230,8 +1309,9 @@ func (to *textObject) getFont(name string) (*model.PdfFont, error) {
 	}
 
 	// Font not in cache. Load it.
-	font, err := to.getFontDirect(name)
+	font, err := model.NewPdfFontFromPdfObject(key)
 	if err != nil {
+		common.Log.Debug("getFont: NewPdfFontFromPdfObject failed. name=%#q err=%v", name, err)
 		return nil, err
 	}
 
@@ -1240,19 +1320,25 @@ func (to *textObject) getFont(name string) (*model.PdfFont, error) {
 
 		// Eject a victim if the cache is full.
 		if len(to.e.fontCache) >= maxFontCache {
-			var names []string
-			for name := range to.e.fontCache {
-				names = append(names, name)
+			var keys []core.PdfObject
+			for cached := range to.e.fontCache {
+				keys = append(keys, cached)
 			}
-			sort.Slice(names, func(i, j int) bool {
-				return to.e.fontCache[names[i]].access < to.e.fontCache[names[j]].access
+			sort.Slice(keys, func(i, j int) bool {
+				return to.e.fontCache[keys[i]].access < to.e.fontCache[keys[j]].access
 			})
-			delete(to.e.fontCache, names[0])
+			delete(to.e.fontCache, keys[0])
 		}
-		to.e.fontCache[name] = entry
+		to.e.fontCache[key] = entry
 	}
 
 	return font, nil
+}
+
+type formKey struct {
+	resources *model.PdfPageResources
+	name      string
+	ctm       transform.Matrix
 }
 
 // fontEntry is a entry in the font cache.
@@ -1262,21 +1348,7 @@ type fontEntry struct {
 }
 
 // maxFontCache is the maximum number of PdfFont's in fontCache.
-const maxFontCache = 10
-
-// getFontDirect returns the font named `name` if it exists in the page's resources or an error if
-// it doesn't. Accesses page resources directly (not cached).
-func (to *textObject) getFontDirect(name string) (*model.PdfFont, error) {
-	fontObj, err := to.getFontDict(name)
-	if err != nil {
-		return nil, err
-	}
-	font, err := model.NewPdfFontFromPdfObject(fontObj)
-	if err != nil {
-		common.Log.Debug("getFontDirect: NewPdfFontFromPdfObject failed. name=%#q err=%v", name, err)
-	}
-	return font, err
-}
+const maxFontCache = 64
 
 // getFontDict returns the font dict with key `name` if it exists in the page's or form's Font
 // resources or an error if it doesn't.

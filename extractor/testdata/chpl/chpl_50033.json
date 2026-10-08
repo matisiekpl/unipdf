@@ -1,0 +1,231 @@
+{
+ "document": "chpl_50033",
+ "tables": [
+  {
+   "name": "Interakcje - unikać",
+   "rows": [
+    [
+     "Należy unikać stosowania flurbiprofenu w połączeniu z poniższymi produktami leczniczymi:",
+     ""
+    ],
+    [
+     "Inne NLPZ, w tym selektywne inhibitory cyklooksygenazy-2",
+     "Należy unikać równoczesnego stosowania dwóch lub więcej NLPZ, ponieważ może to zwiększać ryzyko wystąpienia działań niepożądanych (szczególnie w obrębie przewodu pokarmowego takich jak wrzody i krwawienia) (patrz punkt 4.4)."
+    ],
+    [
+     "Kwas acetylosalicylowy (małe dawki)",
+     "O ile lekarz nie zalecił stosowania kwasu acetylosalicylowego w małych dawkach (nie większych niż 75 mg na dobę), ponieważ może to zwiększać ryzyko wystąpienia działań niepożądanych (patrz punkt 4.4)."
+    ],
+    [
+     "Flurbiprofen powinien być stosowany z zachowaniem ostrożności w połączeniu z następującymi produktami leczniczymi:",
+     ""
+    ],
+    [
+     "Leki przeciwzakrzepowe",
+     "NLPZ mogą nasilać efekt działania leków przeciwzakrzepowych, takich jak warfaryna (patrz punkt 4.4)."
+    ],
+    [
+     "Leki przeciwpłytkowe",
+     "Zwiększone ryzyko owrzodzenia lub krwawienia z przewodu pokarmowego (patrz punkt 4.4)."
+    ],
+    [
+     "Leki przeciwnadciśnieniowe (leki moczopędne, inhibitory konwertazy angiotensyny, antagoniści angiotensyny II)",
+     "NLPZ mogą zmniejszać działanie leków moczopędnych, a inne leki przeciwnadciśnieniowe mogą nasilać nefrotoksyczność spowodowaną hamowaniem cyklooksygenazy, szczególnie u pacjentów z zaburzeniami czynności nerek (pacjenci powinni być odpowiednio nawadniani)."
+    ],
+    [
+     "Alkohol",
+     "Alkohol może zwiększać ryzyko reakcji niepożądanych, szczególnie w obrębie przewodu pokarmowego."
+    ],
+    [
+     "Gliozydy nasercowe",
+     "NLPZ mogą nasilać niewydolność serca, zmniejszać wskaźnik filtracji kłębuszkowej (GFR) i zwiększać stężenie glikozydów w osoczu, toteż zaleca się odpowiednie monitorowanie i, w razie konieczności, modyfikację dawki."
+    ],
+    [
+     "Cyklosporyna",
+     "Zwiększenie ryzyka nefrotoksyczności."
+    ],
+    [
+     "Kortykosteroidy",
+     "Zwiększone ryzyko owrzodzenia lub krwawienia z przewodu pokarmowego (patrz punkt 4.4)."
+    ],
+    [
+     "Lit",
+     "Możliwe zwiększenie stężenia litu w surowicy, toteż zaleca się odpowiednie monitorowanie i, w razie konieczności, modyfikację dawki."
+    ],
+    [
+     "Metotreksat",
+     "Podanie NLPZ przed lub po podaniu metotreksatu może prowadzić do zwiększenia stężenia metotreksatu i nasilenia jego działania toksycznego."
+    ],
+    [
+     "Mifepriston",
+     "Nie należy stosować NLPZ w okresie 8 – 12 dni po podaniu mifepristonu, ponieważ mogą one osłabiać jego działanie."
+    ],
+    [
+     "Doustne leki przeciwcukrzycowe",
+     "Zgłaszano zmiany stężenia glukozy we krwi (zalecane częstsze badania)."
+    ],
+    [
+     "Fenytoina",
+     "Możliwość zwiększenia stężenia fenytoiny w surowicy, toteż zaleca się odpowiednie monitorowanie i, w razie konieczności, modyfikację dawki."
+    ],
+    [
+     "Diuretyki oszczędzające potas",
+     "Równoczesne stosowanie może prowadzić do hiperkaliemii (zaleca się badanie stężenia potasu w surowicy)."
+    ],
+    [
+     "Probenecyd i sulfinpirazon",
+     "Produkty lecznicze zawierające probenecyd lub sulfinpirazon mogą opóźniać wydalanie flurbiprofenu."
+    ],
+    [
+     "Antybiotyki z grupy chinolonów",
+     "Dane uzyskane w badaniach na zwierzętach i ludziach wskazują, że NLPZ mogą zwiększać ryzyko drgawek związanych ze stosowaniem antybiotyków z grupy chinolonów. Pacjenci przyjmujący NLPZ i chinolony mogą być narażeni na zwiększone ryzyko wystąpienia drgawek."
+    ],
+    [
+     "Antybiotyki",
+     "Skojarzone z antybiotykami chinolonowymi. Pacjenci przyjmujący NLPZ i chinolony mogą być narażeni na zwiększone ryzyko wystąpienia drgawek."
+    ],
+    [
+     "Selektywne inhibitory zwrotnego wychwytu serotoninny (SSRI)",
+     "Zwiększone ryzyko owrzodzenia lub krwawienia z przewodu pokarmowego (patrz punkt 4.4)."
+    ],
+    [
+     "Takrolimus",
+     "Stosowanie NLPZ jednocześnie z takrolimusem może zwiększać ryzyko działania nefrotoksycznego."
+    ],
+    [
+     "Zydowudyna",
+     "Podczas stosowania NLPZ jednocześnie z zydowudyną zwiększa się ryzyko toksycznego działania na układ krwiotwórczy."
+    ],
+    [
+     "Flukonazol",
+     "Może zwiększać stężenie flurbiprofenu w surowicy."
+    ],
+    [
+     "Leki zobojętniające kwas żołądkowy",
+     "Mogą zwiększać szybkość wchłaniania flurbiprofenu - istotność kliniczna nie jest znana."
+    ],
+    [
+     "Pokarm",
+     "Jednoczesne podawanie z pokarmem może opóźnić osiągnięcie skuteczności."
+    ],
+    [
+     "Acetazolamid",
+     "Flurbiprofen może powodować niewielkie zwiększenie pozornej objętości dystrybucji acetazolamidu w stanie stacjonarnym. Istotność kliniczna nie jest znana."
+    ]
+   ]
+  },
+  {
+   "name": "Interakcje - ostrożność",
+   "rows": [
+    [
+     "Należy unikać stosowania flurbiprofenu w połączeniu z poniższymi produktami leczniczymi:",
+     ""
+    ],
+    [
+     "Inne NLPZ, w tym selektywne inhibitory cyklooksygenazy-2",
+     "Należy unikać równoczesnego stosowania dwóch lub więcej NLPZ, ponieważ może to zwiększać ryzyko wystąpienia działań niepożądanych (szczególnie w obrębie przewodu pokarmowego takich jak wrzody i krwawienia) (patrz punkt 4.4)."
+    ],
+    [
+     "Kwas acetylosalicylowy (małe dawki)",
+     "O ile lekarz nie zalecił stosowania kwasu acetylosalicylowego w małych dawkach (nie większych niż 75 mg na dobę), ponieważ może to zwiększać ryzyko wystąpienia działań niepożądanych (patrz punkt 4.4)."
+    ],
+    [
+     "Flurbiprofen powinien być stosowany z zachowaniem ostrożności w połączeniu z następującymi produktami leczniczymi:",
+     ""
+    ],
+    [
+     "Leki przeciwzakrzepowe",
+     "NLPZ mogą nasilać efekt działania leków przeciwzakrzepowych, takich jak warfaryna (patrz punkt 4.4)."
+    ],
+    [
+     "Leki przeciwpłytkowe",
+     "Zwiększone ryzyko owrzodzenia lub krwawienia z przewodu pokarmowego (patrz punkt 4.4)."
+    ],
+    [
+     "Leki przeciwnadciśnieniowe (leki moczopędne, inhibitory konwertazy angiotensyny, antagoniści angiotensyny II)",
+     "NLPZ mogą zmniejszać działanie leków moczopędnych, a inne leki przeciwnadciśnieniowe mogą nasilać nefrotoksyczność spowodowaną hamowaniem cyklooksygenazy, szczególnie u pacjentów z zaburzeniami czynności nerek (pacjenci powinni być odpowiednio nawadniani)."
+    ],
+    [
+     "Alkohol",
+     "Alkohol może zwiększać ryzyko reakcji niepożądanych, szczególnie w obrębie przewodu pokarmowego."
+    ],
+    [
+     "Gliozydy nasercowe",
+     "NLPZ mogą nasilać niewydolność serca, zmniejszać wskaźnik filtracji kłębuszkowej (GFR) i zwiększać stężenie glikozydów w osoczu, toteż zaleca się odpowiednie monitorowanie i, w razie konieczności, modyfikację dawki."
+    ],
+    [
+     "Cyklosporyna",
+     "Zwiększenie ryzyka nefrotoksyczności."
+    ],
+    [
+     "Kortykosteroidy",
+     "Zwiększone ryzyko owrzodzenia lub krwawienia z przewodu pokarmowego (patrz punkt 4.4)."
+    ],
+    [
+     "Lit",
+     "Możliwe zwiększenie stężenia litu w surowicy, toteż zaleca się odpowiednie monitorowanie i, w razie konieczności, modyfikację dawki."
+    ],
+    [
+     "Metotreksat",
+     "Podanie NLPZ przed lub po podaniu metotreksatu może prowadzić do zwiększenia stężenia metotreksatu i nasilenia jego działania toksycznego."
+    ],
+    [
+     "Mifepriston",
+     "Nie należy stosować NLPZ w okresie 8 – 12 dni po podaniu mifepristonu, ponieważ mogą one osłabiać jego działanie."
+    ],
+    [
+     "Doustne leki przeciwcukrzycowe",
+     "Zgłaszano zmiany stężenia glukozy we krwi (zalecane częstsze badania)."
+    ],
+    [
+     "Fenytoina",
+     "Możliwość zwiększenia stężenia fenytoiny w surowicy, toteż zaleca się odpowiednie monitorowanie i, w razie konieczności, modyfikację dawki."
+    ],
+    [
+     "Diuretyki oszczędzające potas",
+     "Równoczesne stosowanie może prowadzić do hiperkaliemii (zaleca się badanie stężenia potasu w surowicy)."
+    ],
+    [
+     "Probenecyd i sulfinpirazon",
+     "Produkty lecznicze zawierające probenecyd lub sulfinpirazon mogą opóźniać wydalanie flurbiprofenu."
+    ],
+    [
+     "Antybiotyki z grupy chinolonów",
+     "Dane uzyskane w badaniach na zwierzętach i ludziach wskazują, że NLPZ mogą zwiększać ryzyko drgawek związanych ze stosowaniem antybiotyków z grupy chinolonów. Pacjenci przyjmujący NLPZ i chinolony mogą być narażeni na zwiększone ryzyko wystąpienia drgawek."
+    ],
+    [
+     "Antybiotyki",
+     "Skojarzone z antybiotykami chinolonowymi. Pacjenci przyjmujący NLPZ i chinolony mogą być narażeni na zwiększone ryzyko wystąpienia drgawek."
+    ],
+    [
+     "Selektywne inhibitory zwrotnego wychwytu serotoninny (SSRI)",
+     "Zwiększone ryzyko owrzodzenia lub krwawienia z przewodu pokarmowego (patrz punkt 4.4)."
+    ],
+    [
+     "Takrolimus",
+     "Stosowanie NLPZ jednocześnie z takrolimusem może zwiększać ryzyko działania nefrotoksycznego."
+    ],
+    [
+     "Zydowudyna",
+     "Podczas stosowania NLPZ jednocześnie z zydowudyną zwiększa się ryzyko toksycznego działania na układ krwiotwórczy."
+    ],
+    [
+     "Flukonazol",
+     "Może zwiększać stężenie flurbiprofenu w surowicy."
+    ],
+    [
+     "Leki zobojętniające kwas żołądkowy",
+     "Mogą zwiększać szybkość wchłaniania flurbiprofenu - istotność kliniczna nie jest znana."
+    ],
+    [
+     "Pokarm",
+     "Jednoczesne podawanie z pokarmem może opóźnić osiągnięcie skuteczności."
+    ],
+    [
+     "Acetazolamid",
+     "Flurbiprofen może powodować niewielkie zwiększenie pozornej objętości dystrybucji acetazolamidu w stanie stacjonarnym. Istotność kliniczna nie jest znana."
+    ]
+   ]
+  }
+ ]
+}

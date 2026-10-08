@@ -1,0 +1,80 @@
+{
+ "document": "chpl_34541",
+ "tables": [
+  {
+   "name": "Tabela 1 neuropathy dose modification",
+   "rows": [
+    [
+     "Stopień neuropatii",
+     "Modyfikacja dawkowania"
+    ],
+    [
+     "Stopnia 1. (bezobjawowa; zniesienie odruchów głębokich ze ścięgien lub parestezje) bez występowania bólu lub utraty funkcji",
+     "Brak"
+    ],
+    [
+     "Stopnia 1. z bólem lub Stopnia 2. (objawy umiarkowane; ograniczające złożone czynności życia codziennego (ADL))**",
+     "Redukcja dawki Bortezomib Adamed do 1,0 mg/m² lub zmiana schematu leczenia Bortezomib Adamed na 1,3 mg/m² raz w tygodniu"
+    ],
+    [
+     "Stopnia 2. z bólem lub Stopnia 3. (ciężkie objawy; ograniczające czynności życia codziennego (ADL) w zakresie samoopieki ***)",
+     "Należy przerwać leczenie Bortezomib Adamed do momentu ustąpienia objawów toksycznych. Po ustąpieniu objawów toksyczności leczenie produktem Bortezomib Adamed należy rozpocząć ponownie w zredukowanej do 0,7 mg/m² dawce, raz w tygodniu."
+    ],
+    [
+     "Stopnia 4. (następstwa zagrażające życiu; wskazana jest nagła interwencja) i (lub) ciężka neuropatia autonomiczna",
+     "Należy odstawić produkt Bortezomib Adamed"
+    ]
+   ]
+  },
+  {
+   "name": "Tabela 3 dose modifications with melphalan and prednisone",
+   "rows": [
+    [
+     "Toksyczność",
+     "Modyfikacja lub opóźnione dawkowanie leku"
+    ],
+    [
+     "Toksyczność hematologiczna w trakcie cyklu • Jeżeli w poprzednim cyklu obserwowano wydłużoną w czasie neutropenię stopnia 4., małopłytkowość lub małopłytkowość, której towarzyszyło krwawienie",
+     "W kolejnym cyklu należy rozważyć zmniejszenie dawki melfalanu o 25%"
+    ],
+    [
+     "• Jeżeli liczba płytek krwi w badaniu morfologicznym wynosi < 30 x 10⁹/l lub bezwzględna liczba neutrofili wynosi < 0,75 x 10⁹/l w dniu podania dawki produktu Bortezomib Adamed (innym niż dzień 1.)",
+     "Należy wstrzymać terapię produktem Bortezomib Adamed"
+    ],
+    [
+     "• Jeżeli kilka dawek produktu Bortezomib Adamed w cyklu zostanie wstrzymanych (> 3 dawek przy schemacie stosowania leku dwa razy w tygodniu lub > 2 dawki przy schemacie stosowania leku raz w tygodniu)",
+     "Dawkę produktu Bortezomib Adamed należy zmniejszyć o 1 poziom dawkowania (z 1,3 mg/m² na 1 mg/m² lub z 1 mg/m² na 0,7 mg/m²)"
+    ],
+    [
+     "Stopień toksyczności niehematologicznej ≥ 3",
+     "Terapię produktem Bortezomib Adamed należy wstrzymać do czasu, aż objawy toksyczności zmniejsza się do stopnia 1. lub osiągną stopień wyjściowy. Następnie produkt Bortezomib Adamed można ponownie zacząć podawać ze zmniejszeniem dawki o jeden poziom dawkowania (z 1,3 mg/m² na 1 mg/m² lub z 1 mg/m² na 0,7 mg/m²). W przypadku bólów neuropatycznych i (lub) neuropatii obwodowej związanej/związanych z podawaniem produktu Bortezomib Adamed należy utrzymać i (lub) zmodyfikować dawkowanie produktu Bortezomib Adamed według schematu przedstawionego w Tabeli 1."
+    ]
+   ]
+  },
+  {
+   "name": "Tabela 5 dose modifications in mantle cell lymphoma",
+   "rows": [
+    [
+     "Toksyczność",
+     "Modyfikacja lub opóźnione dawkowanie leku"
+    ],
+    [
+     "Toksyczność hematologiczna",
+     ""
+    ],
+    [
+     "• neutropenia stopnia ≥ 3. z gorączką, neutropenia stopnia 4. trwająca dłużej niż 7 dni, liczba płytek krwi < 10 000 /μl",
+     "Należy wstrzymać terapię produktem Bortezomib Adameddo 2 tygodni, aż bezwzględna liczba neutrofili wyniesie ≥ 750 /μl a liczba płytek krwi ≥ 25 000 /μl. • Jeśli po wstrzymaniu stosowania produktu Bortezomib Adamed, toksyczność nie ustąpi j.w. należy odstawić trwale produkt Bortezomib Adamed. • Jeśli toksyczność ustąpi np. pacjent ma bezwzględną liczbę neutrofili ≥ 750 /μl a liczbę płytek krwi ≥ 25 000 /μl, produkt Bortezomib Adamed można ponownie zacząć podawać ze zmniejszeniem dawki o jeden poziom dawkowania (z 1,3 mg/m² na 1 mg/m² lub z 1 mg/m² na 0,7 mg/m²)."
+    ],
+    [
+     "• Jeżeli liczba płytek krwi w badaniu morfologicznym wynosi <25 000 μl lub bezwzględna liczba neutrofili wynosi < 750 μl w dniu podania dawki produktu Bortezomib Adamed (innym niż dzień 1.)",
+     "Należy wstrzymać terapię produktem Bortezomib Adamed"
+    ],
+    [
+     "Stopień toksyczności niehematologicznej ≥ 3 uznany za związany z produktem Bortezomib Adamed",
+     "Terapię produktem Bortezomib Adamed należy wstrzymać do czasu, aż objawy toksyczności osłabną do stopnia 2. lub niższego. Następnie produkt Bortezomib Adamed można ponownie zacząć podawać ze zmniejszeniem dawki o jeden poziom dawkowania (z 1,3 mg/m² na 1 mg/m² lub z 1 mg/m² na 0,7 mg/m²). W przypadku bólów neuropatycznych i (lub) neuropatii obwodowej związanej/związanych z podawaniem produktu Bortezomib Adamed należy utrzymać i (lub) zmodyfikować dawkowanie produktu Bortezomib Adamed według schematu przedstawionego w Tabeli 1."
+    ]
+   ]
+  }
+ ]
+}
