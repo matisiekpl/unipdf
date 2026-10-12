@@ -1076,7 +1076,35 @@ func (pt PageText) pageBlocks(marks []TextMark, carry *mdLineTable) []mdBlock {
 // drawn with ruling lines are reconstructed as Markdown tables (cell line
 // breaks are encoded as <br>).
 func (pt PageText) Markdown() string {
-	return mdRenderBlocks(pt.blocks(0, nil, nil))
+	return mdApplyCellSpans(mdRenderBlocks(pt.blocks(0, nil, nil)), false)
+}
+
+// MarkdownOptions tunes DocumentMarkdownWithOptions.
+type MarkdownOptions struct {
+	// JoinSentences joins lines that were broken mid-sentence, as in DocumentMarkdown.
+	JoinSentences bool
+	// CellSpans marks cells covered by a merged cell of a ruled table in the
+	// markdown-it-multimd-table syntax: `^^` continues the cell above and an empty
+	// `||` cell continues the cell to the left. Without it covered cells are empty.
+	CellSpans bool
+}
+
+// Cells covered by a merged cell carry these placeholders until the document is
+// rendered. They are white space, so every emptiness check treats them as empty.
+const (
+	mdRowSpanCell    = "\u2028"
+	mdColumnSpanCell = "\u2029"
+)
+
+func mdBlank(cell string) bool {
+	return strings.TrimSpace(cell) == ""
+}
+
+func mdApplyCellSpans(markdown string, cellSpans bool) string {
+	if !cellSpans {
+		return strings.NewReplacer(mdRowSpanCell, "", mdColumnSpanCell, "").Replace(markdown)
+	}
+	return strings.NewReplacer("| "+mdColumnSpanCell+" ", "|", mdRowSpanCell, "^^").Replace(markdown)
 }
 
 // DocumentMarkdown returns the Markdown for a whole document given its pages in
@@ -1089,6 +1117,11 @@ func (pt PageText) Markdown() string {
 // most one newline away) starts with a lower case letter or a digit, the two
 // lines are joined.
 func DocumentMarkdown(pages []*PageText, joinSentences bool) string {
+	return DocumentMarkdownWithOptions(pages, MarkdownOptions{JoinSentences: joinSentences})
+}
+
+// DocumentMarkdownWithOptions is DocumentMarkdown with the options spelled out.
+func DocumentMarkdownWithOptions(pages []*PageText, options MarkdownOptions) string {
 	offset, numbered := mdDetectPageNumbers(pages)
 	repeatedLabels := mdDetectRepeatedLabels(pages)
 	var blocks []mdBlock
@@ -1120,10 +1153,10 @@ func DocumentMarkdown(pages []*PageText, joinSentences bool) string {
 		}
 	}
 	out := mdRenderBlocks(blocks)
-	if joinSentences {
+	if options.JoinSentences {
 		out = mdJoinSentences(out)
 	}
-	return strings.ReplaceAll(mdJoinBrokenWords(out), "</u> <u>", " ")
+	return mdApplyCellSpans(strings.ReplaceAll(mdJoinBrokenWords(out), "</u> <u>", " "), options.CellSpans)
 }
 
 var mdWordRegexp = regexp.MustCompile(`(?:\d+-)?\pL+(?:-\pL+)*`)
@@ -1284,13 +1317,13 @@ var mdFrequencyCellRegexp = regexp.MustCompile(`(?i)^\s*((?:bardzo |niezbyt )?(?
 func (t *mdLineTable) splitFrequencyLabels() {
 	labelled := false
 	for _, row := range t.cells {
-		labelled = labelled || len(row) > 1 && row[1] != "" && mdFrequencyLabelRegexp.MatchString(row[0]) && mdFrequencyCellRegexp.FindStringSubmatch(row[0]) == nil
+		labelled = labelled || len(row) > 1 && !mdBlank(row[1]) && mdFrequencyLabelRegexp.MatchString(row[0]) && mdFrequencyCellRegexp.FindStringSubmatch(row[0]) == nil
 	}
 	if !labelled {
 		return
 	}
 	for _, row := range t.cells {
-		if len(row) < 2 || row[1] != "" {
+		if len(row) < 2 || !mdBlank(row[1]) {
 			continue
 		}
 		if label := mdFrequencyCellRegexp.FindStringSubmatch(row[0]); label != nil && !strings.Contains(row[0], "<br>") {
@@ -1467,15 +1500,15 @@ func (t *mdLineTable) formula() (string, bool) {
 	}
 	numerator, denominator := t.cells[0], ""
 	for _, cell := range t.cells[1] {
-		if cell != "" && denominator != "" {
+		if !mdBlank(cell) && denominator != "" {
 			return "", false
 		}
-		if cell != "" {
+		if !mdBlank(cell) {
 			denominator = cell
 		}
 	}
 	result := len(numerator) - 1
-	for result > 0 && numerator[result] == "" {
+	for result > 0 && mdBlank(numerator[result]) {
 		result--
 	}
 	multiplied := false
@@ -1493,7 +1526,7 @@ func (t *mdLineTable) formula() (string, bool) {
 			left, terms = strings.Join(terms, " ")+" = ", nil
 		case mdMultiplicationCells[cell]:
 			terms = append(terms, "×")
-		case cell != "":
+		case !mdBlank(cell):
 			terms = append(terms, cell)
 		}
 	}
@@ -1565,12 +1598,27 @@ func (t *mdLineTable) bottom() float64 { return t.ys[len(t.ys)-1] }
 func (t *mdLineTable) markdown() string {
 	var b strings.Builder
 	for r, row := range t.cells {
+		if r <= 1 {
+			row = mdWithoutRowSpans(row)
+		}
 		b.WriteString("| " + strings.Join(row, " | ") + " |\n")
 		if r == 0 {
 			b.WriteString("|" + strings.Repeat(" --- |", len(row)) + "\n")
 		}
 	}
 	return b.String()
+}
+
+// mdWithoutRowSpans clears row span placeholders in the header row and the row
+// right below it, since a span cannot cross the header separator.
+func mdWithoutRowSpans(row []string) []string {
+	cleared := make([]string, len(row))
+	for column, cell := range row {
+		if cell != mdRowSpanCell {
+			cleared[column] = cell
+		}
+	}
+	return cleared
 }
 
 func (t *mdLineTable) absorb(next *mdLineTable) bool {
@@ -1587,7 +1635,7 @@ func (t *mdLineTable) absorb(next *mdLineTable) bool {
 		return false
 	}
 	rows = rows[t.repeatedHeaderRows(rows):]
-	if open := len(t.cells) - t.openRows; t.openRows > 0 && open >= 0 && len(rows) > 1 && rows[0][0] != "" && rows[1][0] == "" && t.cells[open][0] == "" {
+	if open := len(t.cells) - t.openRows; t.openRows > 0 && open >= 0 && len(rows) > 1 && !mdBlank(rows[0][0]) && mdBlank(rows[1][0]) && mdBlank(t.cells[open][0]) {
 		t.cells[open][0], rows[0][0] = rows[0][0], ""
 	}
 	t.openRows = next.openRows
@@ -1811,11 +1859,11 @@ func (t *mdLineTable) attachGroupHeading(marks []TextMark, used []bool) {
 	for _, row := range t.cells {
 		filled := 0
 		for _, cell := range row {
-			if cell != "" {
+			if !mdBlank(cell) {
 				filled++
 			}
 		}
-		if len(row) > 1 && filled == 1 && row[0] != "" {
+		if len(row) > 1 && filled == 1 && !mdBlank(row[0]) {
 			groups[strings.Fields(row[0])[0]] = true
 		}
 	}
@@ -2369,6 +2417,7 @@ func (pt PageText) ruledTables(marks []TextMark, columnRules []mdVSeg, vsegs []m
 	for r := range fullCells {
 		fullCells[r] = mdSplitCellRow(cellMarks, r, cols, !mdVisibleRowBorder(pt.strokes, ys[r], ys[r+1]), spanning[r])
 	}
+	mdMarkCoveredCells(fullCells, xs, ys, rowBorders, verticalCount, hsegs)
 
 	// A row band with fewer than two crossing column verticals has no tabular
 	// structure: it is absorbed prose (a footnote, caption or paragraph that sits
@@ -2396,7 +2445,7 @@ func (pt PageText) ruledTables(marks []TextMark, columnRules []mdVSeg, vsegs []m
 				break
 			}
 			for _, row := range fullCells[k] {
-				if strings.Join(row, "") != "" {
+				if !mdBlank(strings.Join(row, "")) {
 					openRows++
 				}
 			}
@@ -2422,6 +2471,35 @@ func (pt PageText) ruledTables(marks []TextMark, columnRules []mdVSeg, vsegs []m
 		}
 	}
 	return tables, consumed
+}
+
+// mdMarkCoveredCells fills empty grid cells covered by a merged cell with the
+// span placeholders: columns inside a band's cell span continue it to the left,
+// a span with no horizontal rule above continues the cell of the band above, and
+// a split sub-row continues the text the same column had in the sub-row above.
+func mdMarkCoveredCells(fullCells [][][]string, xs, ys []float64, rowBorders [][]float64, verticalCount []int, hsegs []mdHSeg) {
+	for r, band := range fullCells {
+		if verticalCount[r] < 2 {
+			continue
+		}
+		for span := 0; span+1 < len(rowBorders[r]); span++ {
+			first := mdNearestIndex(xs, rowBorders[r][span])
+			last := mdNearestIndex(xs, rowBorders[r][span+1])
+			continuesAbove := r > 0 && verticalCount[r-1] >= 2 && !mdHasHBorder(hsegs, ys[r], xs[first], rowBorders[r][span+1])
+			for sub, cells := range band {
+				for column := first; column < last && column < len(cells); column++ {
+					if !mdBlank(cells[column]) {
+						continue
+					}
+					if column > first {
+						cells[column] = mdColumnSpanCell
+					} else if continuesAbove || sub > 0 && (band[sub-1][column] == mdRowSpanCell || !mdBlank(band[sub-1][column])) {
+						cells[column] = mdRowSpanCell
+					}
+				}
+			}
+		}
+	}
 }
 
 // dropEmptyRows removes rows whose cells are all empty. Such rows come from
