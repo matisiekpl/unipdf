@@ -1014,6 +1014,8 @@ type PageText struct {
 	cellRects      []Rect
 	whiteCellRects []Rect
 	lineEndHyphens []TextMark
+	// markdownEmphasis makes Markdown rendering mark bold and italic runs.
+	markdownEmphasis bool
 }
 
 // Strokes returns the axis aligned line segments (ruling lines) drawn on the page in device

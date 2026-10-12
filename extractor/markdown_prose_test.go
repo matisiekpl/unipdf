@@ -22,7 +22,7 @@ func renderProse(right float64, lines ...[]mdWord) string {
 	for index := range lines {
 		lineYs[index] = 700 - 13*float64(index)
 	}
-	return mdRenderProse(lines, lineYs, nil, right)
+	return mdRenderProse(lines, lineYs, nil, right, false)
 }
 
 func TestShortLineEndsParagraph(t *testing.T) {
@@ -155,7 +155,7 @@ func TestFullyUnderlinedLineEndsParagraph(t *testing.T) {
 		body[index].baseline = 687
 	}
 
-	got := mdRenderProse([][]mdWord{heading, body}, []float64{700, 687}, strokes, heading[len(heading)-1].x1)
+	got := mdRenderProse([][]mdWord{heading, body}, []float64{700, 687}, strokes, heading[len(heading)-1].x1, false)
 
 	if !strings.Contains(got, "</u>\n\nPo leczeniu") {
 		t.Errorf("got %q, want the underlined heading on its own", got)
@@ -173,7 +173,7 @@ func TestRuleBetweenLinesEndsParagraph(t *testing.T) {
 	}
 	strokes := []Stroke{{X1: 65, Y1: 692, X2: 470, Y2: 692}}
 
-	got := mdRenderProse([][]mdWord{intro, row}, []float64{704, 684}, strokes, intro[len(intro)-1].x1)
+	got := mdRenderProse([][]mdWord{intro, row}, []float64{704, 684}, strokes, intro[len(intro)-1].x1, false)
 
 	if !strings.Contains(got, "następująco:\n\nBardzo często") {
 		t.Errorf("got %q, want the boxed row separated by the rule", got)
@@ -227,7 +227,7 @@ func TestDoubleSpacedParagraphStaysTogether(t *testing.T) {
 		line[len(line)-1].x1 = right
 	}
 
-	got := mdRenderProse(lines, []float64{421.5, 400.7, 380.1, 359.3}, nil, right)
+	got := mdRenderProse(lines, []float64{421.5, 400.7, 380.1, 359.3}, nil, right, false)
 
 	if strings.Contains(got, "\n") {
 		t.Errorf("got %q, want one double-spaced paragraph", got)
@@ -246,7 +246,7 @@ func TestLargerGapThanLineSpacingStillEndsParagraph(t *testing.T) {
 		line[len(line)-1].x1 = right
 	}
 
-	got := mdRenderProse(lines, []float64{700, 687, 674, 650}, nil, right)
+	got := mdRenderProse(lines, []float64{700, 687, 674, 650}, nil, right, false)
 
 	if !strings.Contains(got, "pierwszego.\n\nDrugi akapit") {
 		t.Errorf("got %q, want a paragraph break at the larger gap", got)
@@ -320,7 +320,7 @@ func TestUnderlinedSubheadingAfterSentenceStartsParagraph(t *testing.T) {
 	strokes := []Stroke{{X1: 70, Y1: 685.5, X2: heading[len(heading)-1].x1, Y2: 685.5}}
 	right := sentence[len(sentence)-1].x1
 
-	got := mdRenderProse([][]mdWord{sentence, heading}, []float64{704, 691}, strokes, right)
+	got := mdRenderProse([][]mdWord{sentence, heading}, []float64{704, 691}, strokes, right, false)
 
 	if !strings.Contains(got, "pudełku.\n\n<u>Wielkość opakowań:</u>") {
 		t.Errorf("got %q, want the underlined sub-heading on its own", got)
@@ -370,7 +370,7 @@ func TestItalicSubheadingWrappedToMarginStartsOwnParagraph(t *testing.T) {
 	body := proseLine(70, "Kontynuowanie podawania lenalidomidu w dawce 25 mg raz na dobę zaleca się do progresji.")
 	right := heading[len(heading)-1].x1
 
-	got := mdRenderProse([][]mdWord{heading, body}, []float64{700, 687}, nil, right)
+	got := mdRenderProse([][]mdWord{heading, body}, []float64{700, 687}, nil, right, false)
 
 	if !strings.Contains(got, "progresji\n\nKontynuowanie") {
 		t.Errorf("got %q, want the italic sub-heading separated", got)
@@ -382,7 +382,7 @@ func TestWrappedItalicHeadingContinuesInItalic(t *testing.T) {
 	second := styledLine(70, "Z glimepirydem (CAROLINA)", italicStyle)
 	right := first[len(first)-1].x1
 
-	got := mdRenderProse([][]mdWord{first, second}, []float64{700, 687}, nil, right)
+	got := mdRenderProse([][]mdWord{first, second}, []float64{700, 687}, nil, right, false)
 
 	if strings.Contains(got, "\n") {
 		t.Errorf("got %q, want one wrapped italic heading", got)
@@ -395,7 +395,7 @@ func TestBoldWordsInsidePlainLineDoNotBreak(t *testing.T) {
 	second := proseLine(70, "Szczególnie u osób w podeszłym wieku.")
 	right := first[len(first)-1].x1
 
-	got := mdRenderProse([][]mdWord{first, second}, []float64{700, 687}, nil, right)
+	got := mdRenderProse([][]mdWord{first, second}, []float64{700, 687}, nil, right, false)
 
 	if strings.Contains(got, "\n") {
 		t.Errorf("got %q, want no break caused by a single bold word", got)
@@ -413,7 +413,7 @@ func TestOneLineParagraphsSeparatedByGapsStaySeparate(t *testing.T) {
 		line[len(line)-1].x1 = 520
 	}
 
-	got := mdRenderProse(lines, []float64{629.0, 603.7, 591.0, 565.8}, nil, 520)
+	got := mdRenderProse(lines, []float64{629.0, 603.7, 591.0, 565.8}, nil, 520, false)
 
 	if !strings.Contains(got, "cytrynianu.\n\nPełny wykaz") {
 		t.Errorf("got %q, want the paragraph gap kept", got)

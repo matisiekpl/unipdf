@@ -1027,7 +1027,7 @@ func (pt PageText) pageBlocks(marks []TextMark, carry *mdLineTable) []mdBlock {
 				rest = append(rest, mark)
 			}
 		}
-		return append(continued, mdReconstructBlocks(rest, strokes, right)...)
+		return append(continued, mdReconstructBlocks(rest, strokes, right, pt.markdownEmphasis)...)
 	}
 
 	var leftover []TextMark
@@ -1061,7 +1061,7 @@ func (pt PageText) pageBlocks(marks []TextMark, carry *mdLineTable) []mdBlock {
 				used[i] = true
 			}
 		}
-		blocks = append(blocks, mdReconstructBlocks(ms, strokes, right)...)
+		blocks = append(blocks, mdReconstructBlocks(ms, strokes, right, pt.markdownEmphasis)...)
 	}
 	for _, table := range tables {
 		collect(table.top(), true)
@@ -1083,6 +1083,9 @@ func (pt PageText) Markdown() string {
 type MarkdownOptions struct {
 	// JoinSentences joins lines that were broken mid-sentence, as in DocumentMarkdown.
 	JoinSentences bool
+	// Emphasis marks runs set in a bold font as **bold** and in an italic font as
+	// *italic* in prose. Without it only underlined runs are marked.
+	Emphasis bool
 	// CellSpans marks cells covered by a merged cell of a ruled table in the
 	// markdown-it-multimd-table syntax: `^^` continues the cell above and an empty
 	// `||` cell continues the cell to the left. Without it covered cells are empty.
@@ -1137,7 +1140,9 @@ func DocumentMarkdownWithOptions(pages []*PageText, options MarkdownOptions) str
 		if len(blocks) > 0 {
 			carry = blocks[len(blocks)-1].table
 		}
-		for index, blk := range pt.blocks(pageNumber, repeatedLabels, carry) {
+		page := *pt
+		page.markdownEmphasis = options.Emphasis
+		for index, blk := range page.blocks(pageNumber, repeatedLabels, carry) {
 			if len(blocks) > 0 {
 				prev := &blocks[len(blocks)-1]
 				if blk.table != nil && prev.table != nil && prev.table.absorb(blk.table) {
@@ -2906,12 +2911,12 @@ func mdLineStyle(line []mdWord) int {
 	return style
 }
 
-func mdReconstructBlocks(marks []TextMark, strokes []Stroke, right float64) []mdBlock {
+func mdReconstructBlocks(marks []TextMark, strokes []Stroke, right float64, emphasis bool) []mdBlock {
 	lines, lineYs := mdLines(marks)
 	if len(lines) == 0 {
 		return nil
 	}
-	return mdLineBlocks(lines, lineYs, strokes, right)
+	return mdLineBlocks(lines, lineYs, strokes, right, emphasis)
 }
 
 func mdLines(marks []TextMark) ([][]mdWord, []float64) {
@@ -3067,7 +3072,7 @@ func mdJunkSegment(segment []mdWord, margin float64) bool {
 	return true
 }
 
-func mdLineBlocks(lines [][]mdWord, lineYs []float64, strokes []Stroke, right float64) []mdBlock {
+func mdLineBlocks(lines [][]mdWord, lineYs []float64, strokes []Stroke, right float64, emphasis bool) []mdBlock {
 	var blocks []mdBlock
 	prose := 0
 	for from := 0; from < len(lines); {
@@ -3077,7 +3082,7 @@ func mdLineBlocks(lines [][]mdWord, lineYs []float64, strokes []Stroke, right fl
 		}
 		fractionStart, fractionEnd, formula := mdNextFraction(lines, lineYs, from, strokes)
 		if formula != "" && (table == nil || fractionStart < end) {
-			if text := mdRenderProse(lines[prose:fractionStart], lineYs[prose:fractionStart], strokes, right); text != "" {
+			if text := mdRenderProse(lines[prose:fractionStart], lineYs[prose:fractionStart], strokes, right, emphasis); text != "" {
 				blocks = append(blocks, mdProseBlock(text, lines[prose:fractionStart], right))
 			}
 			blocks = append(blocks, mdProseBlock(formula, lines[fractionStart:fractionEnd], right))
@@ -3087,13 +3092,13 @@ func mdLineBlocks(lines [][]mdWord, lineYs []float64, strokes []Stroke, right fl
 		if table == nil {
 			break
 		}
-		if text := mdRenderProse(lines[prose:start], lineYs[prose:start], strokes, right); text != "" {
+		if text := mdRenderProse(lines[prose:start], lineYs[prose:start], strokes, right, emphasis); text != "" {
 			blocks = append(blocks, mdProseBlock(text, lines[prose:start], right))
 		}
 		blocks = append(blocks, mdBlock{table: table})
 		prose, from = end, end
 	}
-	if text := mdRenderProse(lines[prose:], lineYs[prose:], strokes, right); text != "" {
+	if text := mdRenderProse(lines[prose:], lineYs[prose:], strokes, right, emphasis); text != "" {
 		blocks = append(blocks, mdProseBlock(text, lines[prose:], right))
 	}
 	return blocks
@@ -3159,10 +3164,10 @@ func mdProseBlock(text string, lines [][]mdWord, right float64) mdBlock {
 
 const hangingLabelDrop = 6.0
 
-func mdRenderProse(lines [][]mdWord, lineYs []float64, strokes []Stroke, right float64) string {
+func mdRenderProse(lines [][]mdWord, lineYs []float64, strokes []Stroke, right float64, emphasis bool) string {
 	rendered := make([]string, len(lines))
 	for i, lineWords := range lines {
-		rendered[i] = mdRenderLine(lineWords, strokes)
+		rendered[i] = mdRenderStyledLine(lineWords, strokes, emphasis)
 	}
 
 	paragraphGap := mdParagraphGap(lineYs)
@@ -3942,6 +3947,12 @@ func mdMeetsRule(horizontal Stroke, strokes []Stroke) bool {
 // mdRenderLine renders a single line, coalescing consecutive words that share
 // the same styling into a single run (e.g. "Sposób podawania" -> one <u></u>).
 func mdRenderLine(lineWords []mdWord, strokes []Stroke) string {
+	return mdRenderStyledLine(lineWords, strokes, false)
+}
+
+// mdRenderStyledLine is mdRenderLine that, with emphasis, also wraps runs set in a
+// bold or italic font in Markdown emphasis inside the underline.
+func mdRenderStyledLine(lineWords []mdWord, strokes []Stroke, emphasis bool) string {
 	var underlineStrokes []Stroke
 	for _, stroke := range strokes {
 		low, high := mdMinMax(stroke.X1, stroke.X2)
@@ -3962,15 +3973,19 @@ func mdRenderLine(lineWords []mdWord, strokes []Stroke) string {
 			b.WriteString(" ")
 		}
 		underlined := underlines[j]
+		style := 0
+		if emphasis {
+			style = lineWords[j].style
+		}
 		k := j + 1
-		for k < len(lineWords) && underlines[k] == underlined {
+		for k < len(lineWords) && underlines[k] == underlined && (!emphasis || lineWords[k].style == style) {
 			k++
 		}
 		var parts []string
 		for _, w := range lineWords[j:k] {
 			parts = append(parts, w.s)
 		}
-		run := strings.Join(parts, " ")
+		run := mdEmphasize(strings.Join(parts, " "), style)
 		if underlined {
 			b.WriteString("<u>" + run + "</u>")
 		} else {
@@ -3979,6 +3994,19 @@ func mdRenderLine(lineWords []mdWord, strokes []Stroke) string {
 		j = k
 	}
 	return b.String()
+}
+
+var mdEmphasisMarkers = map[int]string{boldStyle: "**", italicStyle: "*", boldStyle | italicStyle: "***"}
+
+// mdEmphasize wraps a run in Markdown emphasis for its font style. Runs without a
+// letter or already holding emphasis characters stay plain, so footnote stars and
+// lone punctuation do not turn into broken markup.
+func mdEmphasize(run string, style int) string {
+	marker := mdEmphasisMarkers[style]
+	if marker == "" || strings.ContainsAny(run, "*_") || strings.IndexFunc(run, unicode.IsLetter) < 0 {
+		return run
+	}
+	return marker + run + marker
 }
 
 func mdUnderlined(w mdWord, strokes []Stroke) bool {

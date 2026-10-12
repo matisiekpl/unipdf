@@ -147,7 +147,7 @@ func TestFractionBarBuildsFormulaFromStackedText(t *testing.T) {
 func TestFractionBlockSitsBetweenProse(t *testing.T) {
 	lines, lineYs, strokes := generalFormula()
 
-	blocks := mdLineBlocks(lines, lineYs, strokes, 500)
+	blocks := mdLineBlocks(lines, lineYs, strokes, 500, false)
 
 	if len(blocks) != 3 || blocks[0].text != "w następujący sposób:" || !strings.HasPrefix(blocks[1].text, "Szybkość ciągłej infuzji (ml/h) = (") || !strings.HasPrefix(blocks[2].text, "*Współczynnik") {
 		t.Errorf("got %+v, want prose, formula, prose", blocks)

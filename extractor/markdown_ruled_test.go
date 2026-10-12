@@ -77,7 +77,7 @@ func TestRuledTableWithCenteredColumnsAndWrappedCells(t *testing.T) {
 func TestRuledTableKeepsSurroundingProse(t *testing.T) {
 	lines, lineYs, strokes := dosingTable()
 
-	blocks := mdLineBlocks(lines, lineYs, strokes, 500)
+	blocks := mdLineBlocks(lines, lineYs, strokes, 500, false)
 
 	if len(blocks) != 3 || !strings.HasPrefix(blocks[0].text, "U pacjentów") || blocks[1].table == nil || blocks[2].text != "Podawanie co 3 do 4 tygodni." {
 		t.Errorf("got %+v, want prose, table, prose", blocks)
@@ -234,7 +234,7 @@ func TestRuledTableSplitByRulesStartsRowAtEachRule(t *testing.T) {
 func TestBorderlessTableWinsUnlessRuledTableCoversIt(t *testing.T) {
 	lines, lineYs, strokes := dosingTable()
 
-	blocks := mdLineBlocks(lines, lineYs, strokes, 500)
+	blocks := mdLineBlocks(lines, lineYs, strokes, 500, false)
 
 	tables := 0
 	for _, block := range blocks {

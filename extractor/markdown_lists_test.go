@@ -69,7 +69,7 @@ func TestParagraphBreakEndsNesting(t *testing.T) {
 		markerLine(88, "-", 106, "nowa lista po akapicie."),
 	}
 
-	got := mdRenderProse(lines, []float64{700, 687, 640, 620}, nil, 500)
+	got := mdRenderProse(lines, []float64{700, 687, 640, 620}, nil, 500, false)
 
 	if !strings.Contains(got, "\n  - podpunkt;") || !strings.Contains(got, "\n- nowa lista") {
 		t.Errorf("got %q, want the list after a paragraph to start at the top level", got)
@@ -190,7 +190,7 @@ func TestRaisedLegendLabelJoinsTheLineBelow(t *testing.T) {
 		wordMark("W", 105.36, 745.08, 756.12, 11), wordMark("tym", 118.54, 745.08, 756.12, 11), wordMark("krwawienia", 140, 745.08, 756.12, 11),
 	}
 
-	blocks := mdReconstructBlocks(marks, nil, 200)
+	blocks := mdReconstructBlocks(marks, nil, 200, false)
 
 	if len(blocks) != 1 || blocks[0].text != "§ Patrz także\n\na W tym zakażenia\n\nb W tym krwawienia" {
 		t.Errorf("got %+v, want each raised label in front of its entry", blocks)
@@ -206,7 +206,7 @@ func TestRaisedLabelFarAboveOrRightOfTextIsNotAttached(t *testing.T) {
 			wordMark("W", 105.36, 745.08, 756.12, 11), wordMark("tym", 118.54, 745.08, 756.12, 11), wordMark("krwawienia", 140, 745.08, 756.12, 11),
 		}
 
-		blocks := mdReconstructBlocks(marks, nil, 200)
+		blocks := mdReconstructBlocks(marks, nil, 200, false)
 
 		if len(blocks) != 1 || strings.Contains(blocks[0].text, "\n\nb W tym") {
 			t.Errorf("label at %.1f,%.1f: got %+v, want no legend built from a detached label", label.BBox.Llx, label.BBox.Lly, blocks)
